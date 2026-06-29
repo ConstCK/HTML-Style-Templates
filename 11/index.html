@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalist — UI Kit 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #171717;
+      --muted: #737373;
+      --line: #e5e5e5;
+      --line-dark: #d4d4d4;
+      --accent: #171717;
+    }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 0.9375rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 32px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 32px 48px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      max-width: 480px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 440px;
+      font-weight: 400;
+    }
+
+    .widget-kit {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px 96px;
+    }
+
+    .widget-kit > h2 {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .widget-kit > p { color: var(--muted); margin-bottom: 40px; }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px 24px;
+    }
+
+    .widget-group--wide { flex: 1 1 100%; }
+
+    .widget-group h3 {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* Alerts — left accent line only */
+    .wk-alert {
+      padding: 14px 0 14px 16px;
+      margin-bottom: 1px;
+      border-left: 2px solid var(--line-dark);
+      background: transparent;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+
+    .wk-alert:last-child { margin-bottom: 0; }
+    .wk-alert--success { border-left-color: var(--text); }
+    .wk-alert--warning { border-left-color: var(--muted); color: var(--muted); }
+    .wk-alert--error { border-left-color: #722F37; color: #722F37; }
+    .wk-alert--info { border-left-color: var(--line-dark); color: var(--muted); }
+
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .wk-badge {
+      padding: 4px 10px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: transparent;
+    }
+
+    .wk-badge--dark { color: var(--text); border-color: var(--text); }
+
+    .wk-input, .wk-textarea {
+      width: 100%;
+      padding: 12px 0;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      color: var(--text);
+      outline: none;
+      border-radius: 0;
+      transition: border-color 0.2s;
+    }
+
+    .wk-input::placeholder, .wk-textarea::placeholder { color: #a3a3a3; }
+
+    .wk-input:focus, .wk-textarea:focus { border-bottom-color: var(--text); }
+
+    .wk-textarea { min-height: 72px; resize: vertical; margin-top: 24px; }
+
+    /* Minimal select — underline + thin chevron zone */
+    .wk-select {
+      position: relative;
+      display: block;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .wk-select:focus-within { border-bottom-color: var(--text); }
+
+    .wk-select select {
+      width: 100%;
+      padding: 12px 28px 12px 0;
+      border: none;
+      background-color: transparent;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      color-scheme: light;
+    }
+
+    .wk-select select option {
+      background-color: #ffffff;
+      color: #171717;
+    }
+
+    .wk-select-chevron {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.625rem;
+      pointer-events: none;
+    }
+
+    .wk-check-group, .wk-radio-group { display: flex; flex-direction: column; gap: 16px; }
+
+    .wk-check, .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+
+    .wk-check input, .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    /* Circle outline checkbox */
+    .wk-check-mark {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid var(--line-dark);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .wk-check input:checked + .wk-check-mark {
+      border-color: var(--text);
+      background: var(--text);
+    }
+
+    .wk-check input:checked + .wk-check-mark::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--surface);
+    }
+
+    /* Ring radio */
+    .wk-radio-ring {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid var(--line-dark);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s;
+    }
+
+    .wk-radio input:checked + .wk-radio-ring { border-color: var(--text); }
+
+    .wk-radio input:checked + .wk-radio-ring::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text);
+    }
+
+    .wk-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .wk-toggle {
+      position: relative;
+      width: 40px;
+      height: 22px;
+      border: 1px solid var(--line-dark);
+      border-radius: 999px;
+      background: transparent;
+    }
+
+    .wk-toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+
+    .wk-toggle-dot {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--line-dark);
+      transition: left 0.2s, background 0.2s;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-dot {
+      left: calc(100% - 17px);
+      background: var(--text);
+    }
+
+    .wk-range {
+      width: 100%;
+      height: 1px;
+      appearance: none;
+      background: var(--line);
+      outline: none;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--text);
+      border: none;
+      cursor: pointer;
+    }
+
+    .wk-progress {
+      height: 1px;
+      background: var(--line);
+      position: relative;
+    }
+
+    .wk-progress-fill {
+      height: 1px;
+      width: 55%;
+      background: var(--text);
+      position: relative;
+      top: 0;
+    }
+
+    .wk-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .wk-tab-labels {
+      display: flex;
+      gap: 24px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 16px;
+    }
+
+    .wk-tab-labels label {
+      padding: 0 0 12px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    #mn-tab1:checked ~ .wk-tab-labels label[for="mn-tab1"],
+    #mn-tab2:checked ~ .wk-tab-labels label[for="mn-tab2"],
+    #mn-tab3:checked ~ .wk-tab-labels label[for="mn-tab3"] {
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }
+
+    .wk-tab-panel { display: none; font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+    #mn-tab1:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    #mn-tab2:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    #mn-tab3:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) { display: block; }
+
+    .wk-pagination { display: flex; gap: 16px; align-items: center; }
+
+    .wk-page {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .wk-page:hover { color: var(--text); }
+    .wk-page--active { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
+
+    .wk-tooltip-wrap { position: relative; display: inline-block; }
+
+    .wk-tooltip-trigger {
+      padding: 0;
+      background: none;
+      border: none;
+      border-bottom: 1px dashed var(--line-dark);
+      font-family: inherit;
+      font-size: 0.875rem;
+      color: var(--text);
+      cursor: help;
+    }
+
+    .wk-tooltip-wrap::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      padding: 8px 12px;
+      background: var(--text);
+      color: var(--surface);
+      font-size: 0.75rem;
+      font-weight: 400;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .wk-tooltip-wrap:hover::after { opacity: 1; }
+
+    .wk-btn {
+      padding: 12px 24px;
+      background: var(--text);
+      color: var(--surface);
+      border: none;
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .wk-btn:hover { opacity: 0.85; }
+
+    .wk-btn--ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line-dark);
+    }
+
+    .wk-btn--ghost:hover { opacity: 1; background: var(--bg); }
+
+    .modal::backdrop { background: rgba(0, 0, 0, 0.25); }
+
+    .modal {
+      border: none;
+      padding: 0;
+      max-width: 400px;
+      width: calc(100% - 32px);
+      background: var(--surface);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+    }
+
+    .modal-inner { padding: 40px; position: relative; }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .modal-close:hover { color: var(--text); }
+
+    .modal h2 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 32px;
+      border-top: 1px solid var(--line);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Minimal</div>
+    <span style="font-size:0.8125rem;color:var(--muted);">UI Kit</span>
+  </header>
+
+  <section class="hero">
+    <h1>Минималистичный дизайн</h1>
+    <p>Много воздуха, тонкие линии, нейтральная палитра. Ничего лишнего — только суть интерфейса.</p>
+  </section>
+
+  <section class="widget-kit">
+    <h2>Components</h2>
+    <p>Полный набор виджетов в минималистичном стиле</p>
+
+    <div class="widget-grid">
+      <div class="widget-group widget-group--wide">
+        <h3>Alerts</h3>
+        <div class="wk-alert wk-alert--success">Изменения сохранены</div>
+        <div class="wk-alert wk-alert--warning">Проверьте данные перед отправкой</div>
+        <div class="wk-alert wk-alert--error">Ошибка сохранения — повторите попытку</div>
+        <div class="wk-alert wk-alert--info">Новая версия доступна для загрузки</div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Badges</h3>
+        <div class="wk-badges">
+          <span class="wk-badge">Draft</span>
+          <span class="wk-badge wk-badge--dark">Live</span>
+          <span class="wk-badge">Beta</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Tooltip</h3>
+        <div class="wk-tooltip-wrap" data-tip="Краткая подсказка">
+          <button type="button" class="wk-tooltip-trigger">Наведите</button>
+        </div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Inputs</h3>
+        <input type="text" class="wk-input" placeholder="Email">
+        <textarea class="wk-textarea" placeholder="Сообщение"></textarea>
+      </div>
+
+      <div class="widget-group">
+        <h3>Select</h3>
+        <div class="wk-select">
+          <select>
+            <option>Essential</option>
+            <option>Standard</option>
+            <option>Premium</option>
+          </select>
+          <span class="wk-select-chevron">▼</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Checkboxes</h3>
+        <div class="wk-check-group">
+          <label class="wk-check"><input type="checkbox" checked><span class="wk-check-mark"></span>Email-уведомления</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-mark"></span>Еженедельный отчёт</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-mark"></span>Маркетинг</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Radio</h3>
+        <div class="wk-radio-group">
+          <label class="wk-radio"><input type="radio" name="mn-plan" checked><span class="wk-radio-ring"></span>Monthly</label>
+          <label class="wk-radio"><input type="radio" name="mn-plan"><span class="wk-radio-ring"></span>Yearly</label>
+          <label class="wk-radio"><input type="radio" name="mn-plan"><span class="wk-radio-ring"></span>Lifetime</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Toggle</h3>
+        <div class="wk-toggle-row">
+          <span>Dark mode</span>
+          <label class="wk-toggle"><input type="checkbox"><span class="wk-toggle-dot"></span></label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Range</h3>
+        <input type="range" class="wk-range" min="0" max="100" value="40">
+      </div>
+
+      <div class="widget-group">
+        <h3>Progress</h3>
+        <div class="wk-progress"><div class="wk-progress-fill"></div></div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Tabs</h3>
+        <div class="wk-tabs">
+          <input type="radio" name="mn-tabs" id="mn-tab1" checked>
+          <input type="radio" name="mn-tabs" id="mn-tab2">
+          <input type="radio" name="mn-tabs" id="mn-tab3">
+          <div class="wk-tab-labels">
+            <label for="mn-tab1">Overview</label>
+            <label for="mn-tab2">Details</label>
+            <label for="mn-tab3">Settings</label>
+          </div>
+          <div class="wk-tab-panels">
+            <div class="wk-tab-panel">Краткий обзор проекта и текущего статуса.</div>
+            <div class="wk-tab-panel">Детальная информация о параметрах и метриках.</div>
+            <div class="wk-tab-panel">Настройки аккаунта и предпочтений.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Pagination</h3>
+        <div class="wk-pagination">
+          <a href="#" class="wk-page">←</a>
+          <a href="#" class="wk-page wk-page--active">1</a>
+          <a href="#" class="wk-page">2</a>
+          <a href="#" class="wk-page">3</a>
+          <a href="#" class="wk-page">→</a>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Modal</h3>
+        <button type="button" class="wk-btn" data-open-modal="mn-modal">Открыть</button>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="modal" id="mn-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>Подтверждение</h2>
+      <div class="wk-select" style="margin-bottom:24px;">
+        <select>
+          <option>Вариант A</option>
+          <option>Вариант B</option>
+        </select>
+        <span class="wk-select-chevron">▼</span>
+      </div>
+      <div class="wk-check-group" style="margin-bottom:24px;">
+        <label class="wk-check"><input type="checkbox" checked><span class="wk-check-mark"></span>Согласен с условиями</label>
+      </div>
+      <button type="button" class="wk-btn">Подтвердить</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">© 2025 Minimal UI Template</footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() { document.getElementById(btn.dataset.openModal).showModal(); });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { btn.closest('dialog').close(); });
+    });
+    document.querySelectorAll('.wk-select').forEach(function(wrap) {
+      var sel = wrap.querySelector('select');
+      wrap.addEventListener('click', function(e) {
+        if (e.target === sel) return;
+        sel.focus();
+        if (typeof sel.showPicker === 'function') sel.showPicker();
+        else sel.click();
+      });
+    });
+  </script>
+</body>
+</html>

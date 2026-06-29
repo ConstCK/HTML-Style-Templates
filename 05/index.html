@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bento Grid — Landing 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f4f5;
+      --surface: #ffffff;
+      --text: #18181b;
+      --muted: #71717a;
+      --accent: #6366f1;
+      --accent-soft: #eef2ff;
+      --green: #10b981;
+      --orange: #f97316;
+      --radius: 24px;
+      --radius-sm: 16px;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav a:hover { background: var(--surface); color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(24, 24, 27, 0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #e4e4e7;
+      color: var(--text);
+    }
+
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid #e4e4e7;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero-badge span {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      max-width: 720px;
+      margin-bottom: 20px;
+    }
+
+    .hero-text {
+      color: var(--muted);
+      font-size: 1.125rem;
+      max-width: 540px;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+
+    /* Bento layout */
+    .bento {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .bento-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid #e4e4e7;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    .bento-card--hero { flex: 1 1 calc(58.333% - 8px); min-height: 320px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: #fff; border: none; }
+    .bento-card--stats { flex: 1 1 calc(41.667% - 8px); }
+    .bento-card--feature { flex: 1 1 calc(33.333% - 11px); min-width: 240px; }
+    .bento-card--chart { flex: 1 1 calc(41.667% - 8px); min-width: 280px; }
+    .bento-card--testimonial { flex: 1 1 calc(25% - 12px); min-width: 220px; background: #18181b; color: #fff; border: none; }
+    .bento-card--cta { flex: 1 1 calc(41.667% - 8px); min-width: 280px; background: var(--accent-soft); border-color: #c7d2fe; }
+    .bento-card--pricing { flex: 1 1 calc(33.333% - 11px); min-width: 240px; }
+
+    .card-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .card-desc { font-size: 0.9375rem; opacity: 0.85; }
+
+    .stat-value {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .stat-label { color: var(--muted); font-size: 0.875rem; margin-top: 8px; }
+
+    .mini-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 80px;
+      margin-top: 16px;
+    }
+
+    .mini-chart span {
+      flex: 1;
+      background: linear-gradient(to top, var(--accent), #a5b4fc);
+      border-radius: 8px 8px 4px 4px;
+    }
+
+    .mini-chart span:nth-child(1) { height: 40%; }
+    .mini-chart span:nth-child(2) { height: 65%; }
+    .mini-chart span:nth-child(3) { height: 50%; }
+    .mini-chart span:nth-child(4) { height: 85%; }
+    .mini-chart span:nth-child(5) { height: 70%; }
+
+    .avatar-row { display: flex; margin-top: 16px; }
+    .avatar-row img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--surface);
+      margin-left: -10px;
+      object-fit: cover;
+    }
+    .avatar-row img:first-child { margin-left: 0; }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .price small { font-size: 1rem; font-weight: 500; color: var(--muted); }
+
+    .feature-list {
+      list-style: none;
+      margin-top: 16px;
+    }
+
+    .feature-list li {
+      padding: 6px 0;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 700;
+      margin-right: 8px;
+    }
+
+    .form-inline {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .form-inline input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1.5px solid #e4e4e7;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      outline: none;
+    }
+
+    .form-inline input:focus { border-color: var(--accent); }
+
+    .footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      border-top: 1px solid #e4e4e7;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    /* Widget Kit — iOS / Material hybrid */
+    .widget-kit {
+      margin-top: 48px;
+      background: var(--surface);
+      border: 1px solid #e4e4e7;
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+
+    .widget-kit > h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .widget-kit > p {
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .widget-group {
+      flex: 1 1 280px;
+      max-width: 100%;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      border: 1px solid #e4e4e7;
+    }
+
+    .widget-group-title {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .wk-alert {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      margin-bottom: 10px;
+    }
+
+    .wk-alert:last-child { margin-bottom: 0; }
+
+    .wk-alert strong { display: block; font-weight: 600; margin-bottom: 2px; }
+
+    .wk-alert--success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .wk-alert--warning { background: #fff7ed; color: #9a3412; border: 1px solid #fed7aa; }
+    .wk-alert--error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .wk-alert--info { background: var(--accent-soft); color: #3730a3; border: 1px solid #c7d2fe; }
+
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+    .wk-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--text);
+      color: #fff;
+    }
+
+    .wk-badge--soft { background: var(--accent-soft); color: var(--accent); }
+    .wk-badge--green { background: #d1fae5; color: #047857; }
+
+    .wk-tag {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: var(--surface);
+      border: 1px solid #e4e4e7;
+      color: var(--muted);
+    }
+
+    .wk-label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .wk-input,
+    .wk-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #e4e4e7;
+      border-radius: 14px;
+      background: var(--surface);
+      font-family: inherit;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .wk-textarea { min-height: 88px; resize: vertical; margin-top: 10px; }
+
+    .wk-input:focus,
+    .wk-textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+    }
+
+    .wk-select {
+      display: flex;
+      align-items: stretch;
+      border: 1.5px solid #e4e4e7;
+      border-radius: 999px;
+      background: var(--surface);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .wk-select:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+    }
+
+    .wk-select select {
+      flex: 1;
+      padding: 12px 8px 12px 18px;
+      border: none;
+      background-color: var(--surface);
+      font-family: inherit;
+      font-size: 0.875rem;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* Dropdown readability */
+    select,
+    .wk-select select,
+    select.wk-select,
+    .form-brutal select {
+      color-scheme: light;
+      color: var(--text);
+      background-color: var(--surface);
+    }
+
+    select option,
+    .wk-select select option,
+    select.wk-select option,
+    .form-brutal select option {
+      background-color: #ffffff;
+      color: #18181b;
+    }
+
+    .wk-select-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      margin: 4px;
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--muted);
+      font-size: 0.75rem;
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+
+    .wk-checks,
+    .wk-radios { display: flex; flex-direction: column; gap: 10px; }
+
+    .wk-check,
+    .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+
+    .wk-check input,
+    .wk-radio input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .wk-check-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      border: 1.5px solid #d4d4d8;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s, border-color 0.2s;
+    }
+
+    .wk-check-box::after {
+      content: "✓";
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      opacity: 0;
+      transform: scale(0.4);
+      transition: opacity 0.2s, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .wk-check input:checked + .wk-check-box {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.08);
+    }
+
+    .wk-check input:checked + .wk-check-box::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .wk-radio-ring {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #d4d4d8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+
+    .wk-radio-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      transform: scale(0);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .wk-radio input:checked + .wk-radio-ring {
+      border-color: var(--accent);
+    }
+
+    .wk-radio input:checked + .wk-radio-ring .wk-radio-dot {
+      transform: scale(1);
+    }
+
+    .wk-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .wk-toggle {
+      position: relative;
+      display: inline-block;
+      width: 52px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .wk-toggle input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .wk-toggle-track {
+      position: absolute;
+      inset: 0;
+      background: #e4e4e7;
+      border-radius: 999px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .wk-toggle-track::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 26px;
+      height: 26px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+
+    .wk-toggle input:checked + .wk-toggle-track {
+      background: var(--green);
+    }
+
+    .wk-toggle input:checked + .wk-toggle-track::after {
+      transform: translateX(20px);
+    }
+
+    .wk-range-wrap { padding: 4px 0; }
+
+    .wk-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--accent) 50%, #e4e4e7 50%);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid var(--accent);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+      cursor: pointer;
+    }
+
+    .wk-range::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid var(--accent);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+      cursor: pointer;
+    }
+
+    .wk-progress {
+      height: 10px;
+      background: #e4e4e7;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .wk-progress-bar {
+      height: 100%;
+      width: 68%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), #8b5cf6);
+      transition: width 0.3s;
+    }
+
+    .wk-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .wk-tabs-input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .wk-tabs-nav {
+      display: flex;
+      gap: 4px;
+      background: var(--surface);
+      padding: 4px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .wk-tabs-nav label {
+      flex: 1;
+      text-align: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .wk-tabs-input:nth-of-type(1):checked ~ .wk-tabs-nav label:nth-of-type(1),
+    .wk-tabs-input:nth-of-type(2):checked ~ .wk-tabs-nav label:nth-of-type(2),
+    .wk-tabs-input:nth-of-type(3):checked ~ .wk-tabs-nav label:nth-of-type(3) {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .wk-tabs-panel { display: none; font-size: 0.875rem; color: var(--muted); }
+    .wk-tabs-input:nth-of-type(1):checked ~ .wk-tabs-panels .wk-tabs-panel:nth-of-type(1),
+    .wk-tabs-input:nth-of-type(2):checked ~ .wk-tabs-panels .wk-tabs-panel:nth-of-type(2),
+    .wk-tabs-input:nth-of-type(3):checked ~ .wk-tabs-panels .wk-tabs-panel:nth-of-type(3) {
+      display: block;
+    }
+
+    .wk-pagination {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .wk-page {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--muted);
+      border: 1.5px solid transparent;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .wk-page:hover { background: var(--surface); color: var(--text); }
+    .wk-page.is-active { background: var(--text); color: #fff; }
+    .wk-page.is-disabled { opacity: 0.4; pointer-events: none; }
+
+    .wk-tooltip-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .wk-tooltip-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      cursor: help;
+      border: none;
+    }
+
+    .wk-tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) scale(0.95);
+      padding: 8px 12px;
+      background: var(--text);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border-radius: 10px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .wk-tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--text);
+    }
+
+    .wk-tooltip-wrap:hover .wk-tooltip,
+    .wk-tooltip-wrap:focus-within .wk-tooltip {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    .widget-group--full { flex: 1 1 100%; }
+
+    .modal::backdrop { background: rgba(24, 24, 27, 0.4); backdrop-filter: blur(4px); }
+
+    .modal {
+      border: none;
+      border-radius: var(--radius);
+      padding: 0;
+      max-width: 440px;
+      width: calc(100% - 32px);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+    }
+
+    .modal-inner { padding: 32px; position: relative; }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 50%;
+      background: var(--bg);
+      cursor: pointer;
+      font-size: 1.125rem;
+      color: var(--muted);
+    }
+
+    .modal h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+
+    .modal-inner > p { color: var(--muted); font-size: 0.875rem; margin-bottom: 20px; }
+
+    @media (max-width: 900px) {
+      .bento-card--hero,
+      .bento-card--stats,
+      .bento-card--feature,
+      .bento-card--chart,
+      .bento-card--testimonial,
+      .bento-card--cta,
+      .bento-card--pricing { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">BentoUI</div>
+    <nav class="nav">
+      <a href="#">Продукт</a>
+      <a href="#">Решения</a>
+      <a href="#">Цены</a>
+      <a href="#">Блог</a>
+    </nav>
+    <a href="#" class="btn btn-primary">Начать</a>
+  </header>
+
+  <main class="main">
+    <div class="hero-badge"><span></span> Новый релиз 2025</div>
+    <h1 class="hero-title">Модульный дизайн для современных продуктов</h1>
+    <p class="hero-text">Bento Grid — один из главных UI-трендов 2025–2026. Карточки, метрики и CTA в единой сетке.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary">Попробовать бесплатно</a>
+      <a href="#" class="btn btn-outline">Смотреть демо</a>
+    </div>
+
+    <section class="bento" aria-label="Bento grid">
+      <article class="bento-card bento-card--hero">
+        <div>
+          <p class="card-label">Главная карточка</p>
+          <h2 class="card-title">Аналитика в реальном времени</h2>
+          <p class="card-desc">Отслеживайте KPI, конверсии и поведение пользователей на одном экране.</p>
+        </div>
+        <div class="mini-chart">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </article>
+
+      <article class="bento-card bento-card--stats">
+        <div>
+          <p class="stat-value">98.7%</p>
+          <p class="stat-label">Uptime за последние 30 дней</p>
+        </div>
+        <div class="avatar-row">
+          <img src="https://i.pravatar.cc/72?img=1" alt="User">
+          <img src="https://i.pravatar.cc/72?img=2" alt="User">
+          <img src="https://i.pravatar.cc/72?img=3" alt="User">
+          <img src="https://i.pravatar.cc/72?img=4" alt="User">
+        </div>
+      </article>
+
+      <article class="bento-card bento-card--feature">
+        <p class="card-label">Интеграции</p>
+        <h3 class="card-title">120+ API</h3>
+        <p class="card-desc">Slack, Notion, Figma, GitHub и другие сервисы.</p>
+      </article>
+
+      <article class="bento-card bento-card--feature">
+        <p class="card-label">Безопасность</p>
+        <h3 class="card-title">SOC 2</h3>
+        <p class="card-desc">Шифрование данных и двухфакторная аутентификация.</p>
+      </article>
+
+      <article class="bento-card bento-card--chart">
+        <p class="card-label">Рост</p>
+        <h3 class="card-title">+240% MRR</h3>
+        <p class="card-desc">Средний рост клиентов за первый квартал.</p>
+        <div class="mini-chart">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </article>
+
+      <article class="bento-card bento-card--testimonial">
+        <p class="card-desc">«Bento-подход ускорил наш лендинг в 3 раза. Команда в восторге.»</p>
+        <p class="card-label" style="margin-top: 16px; opacity: 1;">— Алекс, CTO</p>
+      </article>
+
+      <article class="bento-card bento-card--cta">
+        <p class="card-label">Подписка</p>
+        <h3 class="card-title">Получайте инсайты</h3>
+        <form class="form-inline">
+          <input type="email" placeholder="email@company.com" aria-label="Email">
+          <button type="submit" class="btn btn-primary">→</button>
+        </form>
+      </article>
+
+      <article class="bento-card bento-card--pricing">
+        <p class="card-label">Pro Plan</p>
+        <p class="price">$29<small>/мес</small></p>
+        <ul class="feature-list">
+          <li>Неограниченные проекты</li>
+          <li>Приоритетная поддержка</li>
+          <li>White-label</li>
+        </ul>
+        <a href="#" class="btn btn-outline" style="margin-top: 16px; width: 100%;">Выбрать план</a>
+      </article>
+    </section>
+
+    <section class="widget-kit">
+      <h2>Widget Kit</h2>
+      <p>Полный набор UI-компонентов в iOS / Material hybrid стиле</p>
+
+      <div class="widget-grid">
+        <div class="widget-group widget-group--full">
+          <p class="widget-group-title">Alerts</p>
+          <div class="wk-alert wk-alert--success">
+            <span aria-hidden="true">✓</span>
+            <div><strong>Успешно</strong> Настройки сохранены и применены.</div>
+          </div>
+          <div class="wk-alert wk-alert--warning">
+            <span aria-hidden="true">!</span>
+            <div><strong>Внимание</strong> Лимит API почти исчерпан.</div>
+          </div>
+          <div class="wk-alert wk-alert--error">
+            <span aria-hidden="true">✕</span>
+            <div><strong>Ошибка</strong> Не удалось сохранить изменения.</div>
+          </div>
+          <div class="wk-alert wk-alert--info">
+            <span aria-hidden="true">i</span>
+            <div><strong>Инфо</strong> Доступен новый релиз v2.4.</div>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Badges & Tags</p>
+          <div class="wk-badges">
+            <span class="wk-badge">Pro</span>
+            <span class="wk-badge wk-badge--soft">Beta</span>
+            <span class="wk-badge wk-badge--green">Live</span>
+            <span class="wk-tag">Analytics</span>
+            <span class="wk-tag">API</span>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Tooltip</p>
+          <span class="wk-tooltip-wrap">
+            <button type="button" class="wk-tooltip-trigger" aria-describedby="bento-tip">?</button>
+            <span class="wk-tooltip" id="bento-tip" role="tooltip">Подсказка на CSS hover</span>
+          </span>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Text Input</p>
+          <label class="wk-label" for="wk-email">Email</label>
+          <input type="email" class="wk-input" id="wk-email" placeholder="you@company.com">
+          <label class="wk-label" for="wk-notes" style="margin-top:10px;">Заметки</label>
+          <textarea class="wk-textarea" id="wk-notes" placeholder="Комментарий…"></textarea>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Select</p>
+          <label class="wk-label" for="wk-plan">Тарифный план</label>
+          <div class="wk-select">
+            <select id="wk-plan">
+              <option>Starter — бесплатно</option>
+              <option>Pro — $29/мес</option>
+              <option>Enterprise — custom</option>
+            </select>
+            <span class="wk-select-btn" aria-hidden="true">▾</span>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Checkboxes</p>
+          <div class="wk-checks">
+            <label class="wk-check">
+              <input type="checkbox" checked>
+              <span class="wk-check-box"></span>
+              Аналитика в реальном времени
+            </label>
+            <label class="wk-check">
+              <input type="checkbox">
+              <span class="wk-check-box"></span>
+              White-label
+            </label>
+            <label class="wk-check">
+              <input type="checkbox">
+              <span class="wk-check-box"></span>
+              API-доступ
+            </label>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Radio Group</p>
+          <div class="wk-radios">
+            <label class="wk-radio">
+              <input type="radio" name="bento-billing" checked>
+              <span class="wk-radio-ring"><span class="wk-radio-dot"></span></span>
+              Ежемесячно
+            </label>
+            <label class="wk-radio">
+              <input type="radio" name="bento-billing">
+              <span class="wk-radio-ring"><span class="wk-radio-dot"></span></span>
+              Ежегодно (−20%)
+            </label>
+            <label class="wk-radio">
+              <input type="radio" name="bento-billing">
+              <span class="wk-radio-ring"><span class="wk-radio-dot"></span></span>
+              Custom
+            </label>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Toggle</p>
+          <div class="wk-toggle-row">
+            <span style="font-size:0.875rem;">Push-уведомления</span>
+            <label class="wk-toggle">
+              <input type="checkbox" checked>
+              <span class="wk-toggle-track"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Range Slider</p>
+          <label class="wk-label" for="wk-volume">Громкость</label>
+          <div class="wk-range-wrap">
+            <input type="range" class="wk-range" id="wk-volume" min="0" max="100" value="50">
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Progress</p>
+          <div class="wk-progress-label"><span>Загрузка</span><span>68%</span></div>
+          <div class="wk-progress" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100">
+            <div class="wk-progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Tabs</p>
+          <div class="wk-tabs">
+            <input type="radio" name="bento-tabs" id="bento-tab-1" class="wk-tabs-input" checked>
+            <input type="radio" name="bento-tabs" id="bento-tab-2" class="wk-tabs-input">
+            <input type="radio" name="bento-tabs" id="bento-tab-3" class="wk-tabs-input">
+            <div class="wk-tabs-nav">
+              <label for="bento-tab-1">Overview</label>
+              <label for="bento-tab-2">Metrics</label>
+              <label for="bento-tab-3">Settings</label>
+            </div>
+            <div class="wk-tabs-panels">
+              <div class="wk-tabs-panel">Обзор ключевых метрик и активности за сегодня.</div>
+              <div class="wk-tabs-panel">Графики конверсий, retention и MRR.</div>
+              <div class="wk-tabs-panel">Настройки интеграций и уведомлений.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Pagination</p>
+          <nav class="wk-pagination" aria-label="Pagination">
+            <a href="#" class="wk-page is-disabled" aria-disabled="true">←</a>
+            <a href="#" class="wk-page is-active" aria-current="page">1</a>
+            <a href="#" class="wk-page">2</a>
+            <a href="#" class="wk-page">3</a>
+            <a href="#" class="wk-page">→</a>
+          </nav>
+        </div>
+
+        <div class="widget-group widget-group--full">
+          <p class="widget-group-title">Modal</p>
+          <button type="button" class="btn btn-primary" data-open-modal="bento-modal">Открыть модальное окно</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="modal" id="bento-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>Настройка тарифа</h2>
+      <p>Выберите параметры и подтвердите выбор.</p>
+      <div style="margin-bottom:20px;">
+        <label class="wk-label" for="modal-region">Регион</label>
+        <div class="wk-select">
+          <select id="modal-region">
+            <option>Европа</option>
+            <option>США</option>
+            <option>Азия</option>
+          </select>
+          <span class="wk-select-btn" aria-hidden="true">▾</span>
+        </div>
+      </div>
+      <div style="margin-bottom:20px;">
+        <div class="wk-checks">
+          <label class="wk-check">
+            <input type="checkbox" checked>
+            <span class="wk-check-box"></span>
+            Годовая оплата (−20%)
+          </label>
+          <label class="wk-check">
+            <input type="checkbox">
+            <span class="wk-check-box"></span>
+            Приоритетная поддержка
+          </label>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" style="margin-top:8px;">Подтвердить</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">
+    <span>© 2025 BentoUI</span>
+    <span>Bento Grid Template</span>
+  </footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.getElementById(btn.dataset.openModal).showModal();
+      });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        btn.closest('dialog').close();
+      });
+    });
+  </script>
+</body>
+</html>

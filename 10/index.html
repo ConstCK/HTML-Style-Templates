@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grotesque Art — UI Kit 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f0e8;
+      --surface: #fffdf8;
+      --text: #1a1a1a;
+      --muted: #5c5346;
+      --acid: #d4ff00;
+      --rust: #c0392b;
+      --slime: #7cb342;
+      --serif: "Libre Baskerville", Georgia, serif;
+      --display: "Syne", sans-serif;
+    }
+
+    body {
+      font-family: var(--serif);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      background-image: radial-gradient(circle at 90% 10%, rgba(212, 255, 0, 0.25) 0%, transparent 40%);
+    }
+
+    .header {
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 4px solid var(--text);
+      transform: rotate(-0.5deg);
+      background: var(--acid);
+    }
+
+    .logo {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+    }
+
+    .hero {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 64px 32px 40px;
+    }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      transform: rotate(-2deg);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--rust);
+      font-style: italic;
+      font-family: var(--serif);
+      font-size: 0.55em;
+      transform: rotate(3deg) translateX(20px);
+    }
+
+    .hero p { max-width: 520px; font-size: 1.0625rem; color: var(--muted); }
+
+    .widget-kit { max-width: 1000px; margin: 0 auto; padding: 0 32px 80px; }
+    .widget-kit > h2 { font-family: var(--display); font-size: 2rem; transform: skewX(-4deg); margin-bottom: 8px; }
+    .widget-kit > p { color: var(--muted); margin-bottom: 32px; }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .widget-group {
+      flex: 1 1 280px;
+      max-width: 100%;
+      background: var(--surface);
+      padding: 24px;
+      border: 3px solid var(--text);
+      box-shadow: 8px 8px 0 var(--rust);
+      transform: rotate(0.6deg);
+    }
+
+    .widget-group:nth-child(even) { transform: rotate(-0.8deg); box-shadow: 8px 8px 0 var(--slime); }
+    .widget-group--wide { flex: 1 1 100%; }
+
+    .widget-group h3 {
+      font-family: var(--display);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--text);
+      padding-bottom: 8px;
+    }
+
+    .wk-alert {
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      border: 2px solid var(--text);
+      font-weight: 700;
+      transform: skewX(-1deg);
+    }
+
+    .wk-alert:last-child { margin-bottom: 0; }
+    .wk-alert--success { background: var(--acid); }
+    .wk-alert--warning { background: #ff9800; color: #1a1a1a; }
+    .wk-alert--error { background: #722F37; color: #fff; }
+    .wk-alert--info { background: var(--rust); color: #fff; }
+
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .wk-badge {
+      padding: 6px 14px;
+      font-family: var(--display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      border: 2px solid var(--text);
+      transform: rotate(-2deg);
+      background: var(--surface);
+    }
+
+    .wk-badge--rust { background: var(--rust); color: #fff; transform: rotate(2deg); }
+
+    .wk-input, .wk-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 3px solid var(--text);
+      background: var(--bg);
+      font-family: var(--serif);
+      font-size: 1rem;
+      outline: none;
+      transform: skewX(-0.5deg);
+    }
+
+    .wk-input:focus, .wk-textarea:focus { box-shadow: 6px 6px 0 var(--acid); }
+    .wk-textarea { min-height: 80px; resize: vertical; margin-top: 8px; }
+
+    /* Grotesque select — skewed frame */
+    .wk-select {
+      display: flex;
+      align-items: stretch;
+      border: 4px solid var(--text);
+      background: var(--bg);
+      transform: rotate(-1deg);
+      overflow: hidden;
+    }
+
+    .wk-select select {
+      flex: 1;
+      padding: 14px 16px;
+      border: none;
+      background-color: var(--surface);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 700;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      color-scheme: light;
+    }
+
+    .wk-select select option {
+      background-color: #ffffff;
+      color: #1a1a1a;
+    }
+
+    .wk-select-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      background: var(--rust);
+      color: #fff;
+      font-family: var(--display);
+      font-size: 1.25rem;
+      transform: skewX(-8deg);
+      pointer-events: none;
+    }
+
+    .wk-check-group, .wk-radio-group { display: flex; flex-direction: column; gap: 12px; }
+
+    .wk-check, .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .wk-check input, .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    /* Lopsided checkbox */
+    .wk-check-box {
+      width: 24px;
+      height: 20px;
+      border: 3px solid var(--text);
+      background: var(--surface);
+      transform: rotate(-4deg);
+      flex-shrink: 0;
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    .wk-check input:checked + .wk-check-box {
+      background: var(--rust);
+      transform: rotate(4deg) scale(1.1);
+    }
+
+    .wk-check input:checked + .wk-check-box::after {
+      content: "!";
+      display: block;
+      text-align: center;
+      color: #fff;
+      font-family: var(--display);
+      font-weight: 800;
+      line-height: 14px;
+    }
+
+    /* Oval distorted radio */
+    .wk-radio-blob {
+      width: 22px;
+      height: 28px;
+      border: 3px solid var(--text);
+      border-radius: 50% 40% 60% 50%;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+
+    .wk-radio input:checked + .wk-radio-blob {
+      background: var(--acid);
+      border-radius: 40% 60% 50% 50%;
+    }
+
+    .wk-toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+    .wk-toggle {
+      position: relative;
+      width: 56px;
+      height: 28px;
+      border: 3px solid var(--text);
+      background: var(--bg);
+      transform: skewX(-6deg);
+    }
+
+    .wk-toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+
+    .wk-toggle-block {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: var(--text);
+      transition: left 0.2s, background 0.2s;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-block {
+      left: calc(100% - 22px);
+      background: var(--slime);
+    }
+
+    .wk-range {
+      width: 100%;
+      height: 8px;
+      appearance: none;
+      background: repeating-linear-gradient(90deg, var(--text) 0, var(--text) 4px, transparent 4px, transparent 8px);
+      outline: none;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 24px;
+      height: 32px;
+      background: var(--acid);
+      border: 3px solid var(--text);
+      cursor: grab;
+      transform: rotate(-5deg);
+    }
+
+    .wk-progress {
+      height: 24px;
+      border: 3px solid var(--text);
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    .wk-progress-fill {
+      height: 100%;
+      width: 55%;
+      background: repeating-linear-gradient(-45deg, var(--rust), var(--rust) 8px, var(--acid) 8px, var(--acid) 16px);
+    }
+
+    .wk-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .wk-tab-labels { display: flex; gap: 4px; margin-bottom: 12px; flex-wrap: wrap; }
+
+    .wk-tab-labels label {
+      padding: 8px 16px;
+      border: 2px solid var(--text);
+      font-family: var(--display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      transform: rotate(-1deg);
+      background: var(--surface);
+    }
+
+    .wk-tab-labels label:nth-child(2) { transform: rotate(1deg); }
+
+    #gr-tab1:checked ~ .wk-tab-labels label[for="gr-tab1"],
+    #gr-tab2:checked ~ .wk-tab-labels label[for="gr-tab2"],
+    #gr-tab3:checked ~ .wk-tab-labels label[for="gr-tab3"] {
+      background: var(--acid);
+      box-shadow: 4px 4px 0 var(--text);
+    }
+
+    .wk-tab-panel { display: none; font-size: 0.9375rem; }
+    #gr-tab1:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    #gr-tab2:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    #gr-tab3:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) { display: block; }
+
+    .wk-pagination { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .wk-page {
+      min-width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--text);
+      font-family: var(--display);
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text);
+      background: var(--surface);
+      transform: rotate(1deg);
+    }
+
+    .wk-page--active { background: var(--rust); color: #fff; transform: rotate(-2deg); }
+
+    .wk-tooltip-wrap { position: relative; display: inline-block; }
+
+    .wk-tooltip-trigger {
+      padding: 10px 18px;
+      border: 3px solid var(--text);
+      background: var(--acid);
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      cursor: help;
+      transform: skewX(-3deg);
+    }
+
+    .wk-tooltip-wrap::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 0;
+      padding: 10px 14px;
+      background: var(--text);
+      color: var(--acid);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      border: 2px solid var(--rust);
+      transform: rotate(-2deg);
+      transition: opacity 0.2s;
+    }
+
+    .wk-tooltip-wrap:hover::after { opacity: 1; }
+
+    .wk-btn {
+      padding: 14px 28px;
+      border: 3px solid var(--text);
+      background: var(--rust);
+      color: #fff;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 6px 6px 0 var(--text);
+      transform: rotate(-1deg);
+    }
+
+    .wk-btn:active { transform: rotate(0) translate(4px, 4px); box-shadow: 2px 2px 0 var(--text); }
+
+    .modal::backdrop { background: rgba(26, 26, 26, 0.7); }
+    .modal {
+      border: 4px solid var(--text);
+      padding: 0;
+      max-width: 440px;
+      width: calc(100% - 32px);
+      background: var(--surface);
+      box-shadow: 12px 12px 0 var(--rust);
+    }
+
+    .modal-inner { padding: 32px; position: relative; }
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      border: 2px solid var(--text);
+      background: var(--acid);
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .modal h2 { font-family: var(--display); font-size: 1.25rem; margin-bottom: 16px; }
+
+    .footer {
+      text-align: center;
+      padding: 24px;
+      border-top: 4px solid var(--text);
+      font-family: var(--display);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      background: var(--text);
+      color: var(--acid);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Grotesk</div>
+    <span style="font-weight:700;">Art Brut UI</span>
+  </header>
+
+  <section class="hero">
+    <h1>Гротеск<span>намеренно неудобный, но выразительный</span></h1>
+    <p>Экспериментальный гротескный дизайн: перекошенные формы, кислотные акценты, асимметрия и кастомные виджеты, которые нельзя спутать с другими темами.</p>
+  </section>
+
+  <section class="widget-kit">
+    <h2>Widget Kit</h2>
+    <p>Кривые чекбоксы, skew-select, blob-radio и остальные компоненты</p>
+
+    <div class="widget-grid">
+      <div class="widget-group widget-group--wide">
+        <h3>Alerts</h3>
+        <div class="wk-alert wk-alert--success">Успех — но что-то не так</div>
+        <div class="wk-alert wk-alert--warning">Внимание: дизайн намеренно странный</div>
+        <div class="wk-alert wk-alert--error">Ошибка: что-то сломалось окончательно</div>
+        <div class="wk-alert wk-alert--info">Инфо — не бойтесь асимметрии</div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Badges</h3>
+        <div class="wk-badges">
+          <span class="wk-badge">Raw</span>
+          <span class="wk-badge wk-badge--rust">Ugly</span>
+          <span class="wk-badge">Bold</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Tooltip</h3>
+        <div class="wk-tooltip-wrap" data-tip="Гротескная подсказка!">
+          <button type="button" class="wk-tooltip-trigger">?</button>
+        </div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Inputs</h3>
+        <input type="text" class="wk-input" placeholder="Ваше имя...">
+        <textarea class="wk-textarea" placeholder="Сообщение..."></textarea>
+      </div>
+
+      <div class="widget-group">
+        <h3>Select</h3>
+        <div class="wk-select">
+          <select>
+            <option>Хаос mild</option>
+            <option>Хаос medium</option>
+            <option>Хаос extreme</option>
+          </select>
+          <span class="wk-select-mark">?</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Checkboxes</h3>
+        <div class="wk-check-group">
+          <label class="wk-check"><input type="checkbox" checked><span class="wk-check-box"></span>Кривые углы</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-box"></span>Кислотный жёлтый</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-box"></span>Ржавый акцент</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Radio</h3>
+        <div class="wk-radio-group">
+          <label class="wk-radio"><input type="radio" name="gr-mode" checked><span class="wk-radio-blob"></span>Dada</label>
+          <label class="wk-radio"><input type="radio" name="gr-mode"><span class="wk-radio-blob"></span>Surreal</label>
+          <label class="wk-radio"><input type="radio" name="gr-mode"><span class="wk-radio-blob"></span>Absurd</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Toggle</h3>
+        <div class="wk-toggle-row">
+          <span>Режим хаоса</span>
+          <label class="wk-toggle"><input type="checkbox" checked><span class="wk-toggle-block"></span></label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Range</h3>
+        <input type="range" class="wk-range" min="0" max="100" value="55">
+      </div>
+
+      <div class="widget-group">
+        <h3>Progress</h3>
+        <div class="wk-progress"><div class="wk-progress-fill"></div></div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Tabs</h3>
+        <div class="wk-tabs">
+          <input type="radio" name="gr-tabs" id="gr-tab1" checked>
+          <input type="radio" name="gr-tabs" id="gr-tab2">
+          <input type="radio" name="gr-tabs" id="gr-tab3">
+          <div class="wk-tab-labels">
+            <label for="gr-tab1">I</label>
+            <label for="gr-tab2">II</label>
+            <label for="gr-tab3">III</label>
+          </div>
+          <div class="wk-tab-panels">
+            <div class="wk-tab-panel">Первая вкладка — всё криво.</div>
+            <div class="wk-tab-panel">Вторая — ещё криче.</div>
+            <div class="wk-tab-panel">Третья — предел гротеска.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Pagination</h3>
+        <div class="wk-pagination">
+          <a href="#" class="wk-page">‹</a>
+          <a href="#" class="wk-page wk-page--active">1</a>
+          <a href="#" class="wk-page">2</a>
+          <a href="#" class="wk-page">3</a>
+          <a href="#" class="wk-page">›</a>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Modal</h3>
+        <button type="button" class="wk-btn" data-open-modal="gr-modal">Открыть</button>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="modal" id="gr-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>Гротескная форма</h2>
+      <div class="wk-select" style="margin-bottom:16px;">
+        <select><option>Вариант A</option><option>Вариант B</option></select>
+        <span class="wk-select-mark">▼</span>
+      </div>
+      <div class="wk-check-group">
+        <label class="wk-check"><input type="checkbox" checked><span class="wk-check-box"></span>Принимаю хаос</label>
+      </div>
+      <button type="button" class="wk-btn" style="margin-top:16px;">OK</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">© 2025 Grotesk · Art Brut Template</footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() { document.getElementById(btn.dataset.openModal).showModal(); });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { btn.closest('dialog').close(); });
+    });
+  </script>
+</body>
+</html>

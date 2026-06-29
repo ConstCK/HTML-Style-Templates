@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Gradient — Tech 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(255, 255, 255, 0.05);
+      --bg-card-hover: rgba(255, 255, 255, 0.08);
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+      --shadow-glow: 0 8px 32px rgba(102, 126, 234, 0.3);
+    }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(79, 172, 254, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      backdrop-filter: blur(20px);
+      border-bottom: var(--glass-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient-3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav { display: flex; gap: 8px; }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.875rem;
+      padding: 10px 20px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text-primary);
+      background: var(--bg-card-hover);
+    }
+
+    .btn-ai {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--gradient-1);
+      color: white;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-ai:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-ai--outline {
+      background: transparent;
+      border: var(--glass-border);
+      box-shadow: none;
+    }
+
+    .btn-ai--outline:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      padding: 100px 40px;
+      gap: 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hero-content { flex: 1; }
+    .hero-visual { flex: 1; }
+
+    .hero-label {
+      display: inline-block;
+      background: var(--gradient-2);
+      padding: 6px 16px;
+      font-weight: 600;
+      font-size: 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .hero-visual {
+      position: relative;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-orb {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      filter: blur(60px);
+      opacity: 0.6;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    .hero-orb-2 {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: var(--gradient-2);
+      filter: blur(50px);
+      opacity: 0.5;
+      animation: pulse 4s ease-in-out infinite 1s;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      padding: 60px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: var(--glass-border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .feature-icon:nth-child(1) { background: var(--gradient-1); }
+    .feature-icon:nth-child(1) { background: var(--gradient-2); }
+    .feature-icon:nth-child(1) { background: var(--gradient-3); }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      padding: 60px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: var(--glass-border);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--gradient-3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 80px 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+      margin-bottom: 32px;
+    }
+
+    /* Widget Kit — AI Gradient */
+    .widget-kit {
+      padding: 80px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .widget-kit h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: var(--gradient-3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .widget-kit > p { margin-bottom: 40px; color: var(--text-secondary); }
+
+    .widget-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .widget-group {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: var(--glass-border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .widget-group--full { grid-column: 1 / -1; }
+
+    .widget-group-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    /* Alerts */
+    .wk-alerts { display: flex; flex-direction: column; gap: 12px; }
+
+    .wk-alert {
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .wk-alert--success { 
+      background: rgba(67, 233, 123, 0.15); 
+      border: 1px solid rgba(67, 233, 123, 0.3);
+      color: #43e97b;
+    }
+    .wk-alert--warning { 
+      background: rgba(254, 225, 64, 0.15); 
+      border: 1px solid rgba(254, 225, 64, 0.3);
+      color: #fee140;
+    }
+    .wk-alert--error { 
+      background: rgba(245, 87, 108, 0.15); 
+      border: 1px solid rgba(245, 87, 108, 0.3);
+      color: #f5576c;
+    }
+    .wk-alert--info { 
+      background: rgba(79, 172, 254, 0.15); 
+      border: 1px solid rgba(79, 172, 254, 0.3);
+      color: #4facfe;
+    }
+
+    /* Badges */
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .wk-badge {
+      display: inline-flex;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.75rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .wk-badge--purple { background: rgba(102, 126, 234, 0.2); color: #667eea; border: 1px solid rgba(102, 126, 234, 0.3); }
+    .wk-badge--pink { background: rgba(240, 147, 251, 0.2); color: #f093fb; border: 1px solid rgba(240, 147, 251, 0.3); }
+    .wk-badge--blue { background: rgba(79, 172, 254, 0.2); color: #4facfe; border: 1px solid rgba(79, 172, 254, 0.3); }
+    .wk-badge--green { background: rgba(67, 233, 123, 0.2); color: #43e97b; border: 1px solid rgba(67, 233, 123, 0.3); }
+
+    /* Inputs */
+    .wk-field { margin-bottom: 16px; }
+    .wk-field:last-child { margin-bottom: 0; }
+
+    .wk-label {
+      display: block;
+      font-weight: 500;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .wk-input,
+    .wk-textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--bg-card);
+      border: var(--glass-border);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      color: var(--text-primary);
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .wk-input:focus,
+    .wk-textarea:focus {
+      border-color: rgba(102, 126, 234, 0.5);
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .wk-input::placeholder,
+    .wk-textarea::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .wk-textarea { min-height: 80px; resize: vertical; }
+
+    /* Select */
+    .wk-select-wrap { position: relative; }
+
+    .wk-select {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--bg-card);
+      border: var(--glass-border);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      color: var(--text-primary);
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .wk-select:focus {
+      border-color: rgba(102, 126, 234, 0.5);
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .wk-select-wrap::after {
+      content: "▼";
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    select,
+    .wk-select select,
+    select.wk-select {
+      color-scheme: dark;
+      color: var(--text-primary);
+      background-color: var(--bg-card);
+    }
+
+    select option,
+    .wk-select select option,
+    select.wk-select option {
+      background-color: #1a1a2e;
+      color: #ffffff;
+    }
+
+    /* Checkbox */
+    .wk-check-group,
+    .wk-radio-group { display: flex; flex-direction: column; gap: 12px; }
+
+    .wk-check,
+    .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .wk-check input,
+    .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-check-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: var(--glass-border);
+      background: var(--bg-card);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .wk-check input:checked + .wk-check-box {
+      background: var(--gradient-1);
+      border-color: transparent;
+    }
+
+    .wk-check input:checked + .wk-check-box::after {
+      content: "✓";
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: white;
+    }
+
+    /* Radio */
+    .wk-radio-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: var(--glass-border);
+      background: var(--bg-card);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .wk-radio input:checked + .wk-radio-box {
+      background: var(--gradient-2);
+      border-color: transparent;
+    }
+
+    .wk-radio input:checked + .wk-radio-box::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    /* Toggle */
+    .wk-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .wk-toggle {
+      position: relative;
+      width: 52px;
+      height: 28px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .wk-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-toggle-track {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      background: var(--bg-card);
+      border: var(--glass-border);
+      transition: all 0.3s ease;
+    }
+
+    .wk-toggle-thumb {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-track {
+      background: var(--gradient-3);
+      border-color: transparent;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-thumb {
+      transform: translateX(24px);
+      background: white;
+    }
+
+    /* Range */
+    .wk-range {
+      width: 100%;
+      height: 6px;
+      appearance: none;
+      background: var(--bg-card);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .wk-range::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .wk-range-val {
+      font-weight: 500;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    /* Progress */
+    .wk-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 500;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .wk-progress {
+      height: 8px;
+      background: var(--bg-card);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .wk-progress-bar {
+      height: 100%;
+      width: 75%;
+      background: var(--gradient-4);
+      border-radius: 4px;
+    }
+
+    /* Tabs */
+    .wk-tabs { position: relative; }
+
+    .wk-tab-input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .wk-tabs-nav {
+      display: flex;
+      gap: 4px;
+      background: var(--bg-card);
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .wk-tabs-nav label {
+      flex: 1;
+      padding: 10px 16px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      color: var(--text-secondary);
+    }
+
+    .wk-tab-input:nth-of-type(1):checked ~ .wk-tabs-nav label:nth-child(1),
+    .wk-tab-input:nth-of-type(2):checked ~ .wk-tabs-nav label:nth-child(2),
+    .wk-tab-input:nth-of-type(3):checked ~ .wk-tabs-nav label:nth-child(3) {
+      background: var(--gradient-1);
+      color: white;
+    }
+
+    .wk-tab-panel {
+      display: none;
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      padding: 8px 0;
+    }
+
+    .wk-tab-input:nth-of-type(1):checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    .wk-tab-input:nth-of-type(2):checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    .wk-tab-input:nth-of-type(3):checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) {
+      display: block;
+    }
+
+    /* Pagination */
+    .wk-pagination {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .wk-page-btn {
+      min-width: 40px;
+      height: 40px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 0.875rem;
+      background: var(--bg-card);
+      border: var(--glass-border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .wk-page-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .wk-page-btn--active {
+      background: var(--gradient-2);
+      border-color: transparent;
+      color: white;
+    }
+
+    /* Tooltip */
+    .wk-tooltip-wrap { display: inline-block; }
+
+    .wk-tooltip-trigger {
+      font-weight: 500;
+      font-size: 0.875rem;
+      cursor: help;
+      border-bottom: 2px dotted rgba(255, 255, 255, 0.3);
+      position: relative;
+      color: var(--text-primary);
+    }
+
+    .wk-tooltip-trigger::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 14px;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: var(--glass-border);
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      color: var(--text-primary);
+    }
+
+    .wk-tooltip-trigger:hover::after { opacity: 1; }
+
+    .widget-kit-actions { margin-top: 16px; }
+
+    .modal::backdrop { background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(10px); }
+
+    .modal {
+      border: var(--glass-border);
+      padding: 0;
+      max-width: 500px;
+      width: calc(100% - 32px);
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-inner { padding: 32px; position: relative; }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border: var(--glass-border);
+      background: var(--bg-card);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .modal h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: var(--gradient-3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .modal-inner > p { margin-bottom: 20px; color: var(--text-secondary); }
+
+    .footer {
+      border-top: var(--glass-border);
+      padding: 32px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .hero { flex-direction: column; padding: 60px 24px; }
+      .hero-visual { height: 300px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .header { padding: 16px 24px; }
+      .nav { display: none; }
+      .features, .widget-kit, .cta { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">AI Gradient</div>
+    <nav class="nav">
+      <a href="#">Features</a>
+      <a href="#">Pricing</a>
+      <a href="#">About</a>
+    </nav>
+    <a href="#" class="btn-ai btn-ai--outline">Get Started</a>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-label">AI-Powered Design 2026</span>
+      <h1 class="hero-title">Build the Future with Intelligent Design</h1>
+      <p class="hero-desc">Современные градиенты, glassmorphism и AI-эстетика. Идеально для tech-стартапов, AI-продуктов и инновационных проектов.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-ai">Start Free Trial</a>
+        <a href="#" class="btn-ai btn-ai--outline">View Demo</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-orb"></div>
+      <div class="hero-orb-2"></div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h3>AI Integration</h3>
+      <p>Мощные AI-инструменты для автоматизации дизайна и контента.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Lightning Fast</h3>
+      <p>Оптимизированная производительность для мгновенной загрузки.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎨</div>
+      <h3>Modern Aesthetics</h3>
+      <p>Градиенты и glassmorphism — тренды 2026 года.</p>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat-card">
+      <p class="stat-value">50K+</p>
+      <p class="stat-label">Active Users</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-value">99.9%</p>
+      <p class="stat-label">Uptime</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-value">24/7</p>
+      <p class="stat-label">Support</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-value">150+</p>
+      <p class="stat-label">Integrations</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Ready to Transform Your Design?</h2>
+    <p>Присоединяйтесь к тысячам команд, которые уже используют AI Gradient.</p>
+    <a href="#" class="btn-ai">Get Started Now</a>
+  </section>
+
+  <section class="widget-kit">
+    <h2>Widget Kit</h2>
+    <p>AI Gradient UI components — modern gradients, glassmorphism, future-ready</p>
+
+    <div class="widget-grid">
+      <div class="widget-group widget-group--full">
+        <p class="widget-group-title">Alerts</p>
+        <div class="wk-alerts">
+          <div class="wk-alert wk-alert--success">✓ AI model trained successfully</div>
+          <div class="wk-alert wk-alert--warning">⚠ GPU usage approaching limit</div>
+          <div class="wk-alert wk-alert--error">✕ API key expired — renew now</div>
+          <div class="wk-alert wk-alert--info">ℹ New AI features available</div>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <p class="widget-group-title">Badges</p>
+        <div class="wk-badges">
+          <span class="wk-badge wk-badge--purple">AI</span>
+          <span class="wk-badge wk-badge--pink">Beta</span>
+          <span class="wk-badge wk-badge--blue">Pro</span>
+          <span class="wk-badge wk-badge--green">Stable</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <p class="widget-group-title">Tooltip</p>
+        <div class="wk-tooltip-wrap">
+          <span class="wk-tooltip-trigger" data-tip="Starting at $29/mo">Pricing info</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <p class="widget-group-title">Text Input</p>
+        <div class="wk-field">
+          <label class="wk-label" for="wk-input-ai">API Key</label>
+          <input class="wk-input" type="text" id="wk-input-ai" placeholder="sk-...">
+        </div>
+        <div class="wk-field">
+          <label class="wk-label" for="wk-textarea-ai">Prompt</label>
+          <textarea class="wk-textarea" id="wk-textarea-ai" placeholder="Enter your prompt..."></textarea>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <p class="widget-group-title">Select</p>
+        <label class="wk-label" for="wk-select-ai">Model</label>
+        <div class="wk-select-wrap">
+          <select class="wk-select" id="wk-select-ai">
+            <option>GPT-4 Turbo</option>
+            <option>GPT-4</option>
+            <option>GPT-3.5 Turbo</option>
+            <option>Claude 3</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <p class="widget-group-title">Checkbox</p>
+        <div class="wk-check-group">
+          <label class="wk-check">
+            <input type="checkbox" checked>
+            <span class="wk-check-box"></span>
+            Enable streaming
+          </label>
+          <label class="wk-check">
+            <input type="checkbox">
+            <span class="wk-check-box"></span>
+            Use context
+          </label>
+          <label class="wk-check">
+            <input type="checkbox">
+            <span class="wk-check-box"></span>
+            Save history
+          </label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <p class="widget-group-title">Radio</p>
+        <div class="wk-radio-group">
+          <label class="wk-radio">
+            <input type="radio" name="wk-mode-ai" checked>
+            <span class="wk-radio-box"></span>
+            Creative
+          </label>
+          <label class="wk-radio">
+            <input type="radio" name="wk-mode-ai">
+            <span class="wk-radio-box"></span>
+            Balanced
+          </label>
+          <label class="wk-radio">
+            <input type="radio" name="wk-mode-ai">
+            <span class="wk-radio-box"></span>
+            Precise
+          </label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <p class="widget-group-title">Toggle</p>
+        <div class="wk-toggle-row">
+          <span style="font-weight:500;">Auto-save</span>
+          <label class="wk-toggle">
+            <input type="checkbox" checked>
+            <span class="wk-toggle-track"></span>
+            <span class="wk-toggle-thumb"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <p class="widget-group-title">Range</p>
+        <input class="wk-range" type="range" min="0" max="100" value="70">
+        <p class="wk-range-val">Temperature: 70%</p>
+      </div>
+
+      <div class="widget-group">
+        <p class="widget-group-title">Progress</p>
+        <div class="wk-progress-label"><span>Training</span><span>75%</span></div>
+        <div class="wk-progress"><div class="wk-progress-bar"></div></div>
+      </div>
+
+      <div class="widget-group widget-group--full">
+        <p class="widget-group-title">Tabs</p>
+        <div class="wk-tabs">
+          <input class="wk-tab-input" type="radio" name="wk-tabs-ai" id="wk-tab-ai-1" checked>
+          <input class="wk-tab-input" type="radio" name="wk-tabs-ai" id="wk-tab-ai-2">
+          <input class="wk-tab-input" type="radio" name="wk-tabs-ai" id="wk-tab-ai-3">
+          <div class="wk-tabs-nav">
+            <label for="wk-tab-ai-1">Chat</label>
+            <label for="wk-tab-ai-2">Images</label>
+            <label for="wk-tab-ai-3">Code</label>
+          </div>
+          <div class="wk-tab-panels">
+            <div class="wk-tab-panel">AI-powered chat interface with context awareness</div>
+            <div class="wk-tab-panel">Generate and edit images with AI</div>
+            <div class="wk-tab-panel">Code generation and refactoring assistance</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-group widget-group--full">
+        <p class="widget-group-title">Pagination</p>
+        <div class="wk-pagination">
+          <a href="#" class="wk-page-btn">←</a>
+          <a href="#" class="wk-page-btn wk-page-btn--active">1</a>
+          <a href="#" class="wk-page-btn">2</a>
+          <a href="#" class="wk-page-btn">3</a>
+          <a href="#" class="wk-page-btn">→</a>
+        </div>
+      </div>
+
+      <div class="widget-group widget-group--full">
+        <p class="widget-group-title">Modal</p>
+        <div class="widget-kit-actions">
+          <button type="button" class="btn-ai" data-open-modal="ai-modal">Open Modal</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="modal" id="ai-modal">
+    <button type="button" class="modal-close modal-close-btn">×</button>
+    <div class="modal-inner">
+      <h2>AI Gradient Modal</h2>
+      <p>Modern glassmorphism modal with gradient accents. Perfect for AI-powered interfaces.</p>
+      <button type="button" class="btn-ai modal-close-btn">Close</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">
+    <div>© 2026 AI Gradient. All rights reserved.</div>
+    <div>Built for the future of design</div>
+  </footer>
+
+  <script>
+    // Modal functionality
+    document.querySelectorAll('[data-open-modal]').forEach(button => {
+      button.addEventListener('click', () => {
+        const modalId = button.getAttribute('data-open-modal');
+        document.getElementById(modalId).showModal();
+      });
+    });
+
+    document.querySelectorAll('.modal-close-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        button.closest('.modal').close();
+      });
+    });
+
+    // Select picker for better UX
+    document.querySelectorAll('.wk-select-wrap').forEach(wrap => {
+      wrap.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'SELECT') {
+          const select = wrap.querySelector('select');
+          if (select && select.showPicker) {
+            select.showPicker();
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

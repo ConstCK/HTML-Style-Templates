@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corporate Strict — UI Kit 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #eef0f3;
+      --surface: #ffffff;
+      --surface-2: #f8f9fa;
+      --text: #111827;
+      --muted: #4b5563;
+      --line: #c9ced6;
+      --line-strong: #9ca3af;
+      --accent: #1e3a5f;
+      --accent-hover: #152a45;
+      --accent-soft: rgba(30, 58, 95, 0.08);
+      --radius: 2px;
+    }
+
+    body {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      font-size: 0.9375rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .topbar {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 6px 16px;
+    }
+
+    .header {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 64px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      position: relative;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 2px solid #fff;
+    }
+
+    .nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav a {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.15s;
+    }
+
+    .nav a:hover { color: var(--accent); }
+
+    .header-actions { display: flex; gap: 8px; }
+
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 48px 32px 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .hero-main { flex: 1 1 420px; }
+
+    .hero-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.625rem, 3vw, 2.125rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      max-width: 22ch;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 480px;
+      font-size: 0.9375rem;
+    }
+
+    .hero-aside {
+      flex: 1 1 280px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 24px;
+    }
+
+    .hero-aside h2 {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat-list { list-style: none; }
+
+    .stat-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.8125rem;
+    }
+
+    .stat-list li:last-child { border-bottom: none; }
+
+    .stat-list strong {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .widget-kit {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 32px 64px;
+    }
+
+    .widget-kit-header {
+      padding: 20px 0;
+      border-top: 2px solid var(--accent);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 24px;
+    }
+
+    .widget-kit-header h2 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .widget-kit-header p {
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .widget-group {
+      flex: 1 1 280px;
+      max-width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 20px;
+    }
+
+    .widget-group--wide { flex: 1 1 100%; }
+
+    .widget-group h3 {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wk-alert {
+      padding: 12px 14px 12px 16px;
+      margin-bottom: 8px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      border: 1px solid var(--line);
+      border-left: 4px solid;
+      background: var(--surface-2);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .wk-alert:last-child { margin-bottom: 0; }
+    .wk-alert--success { border-left-color: #166534; color: #14532d; }
+    .wk-alert--warning { border-left-color: #b45309; color: #92400e; }
+    .wk-alert--error { border-left-color: #991b1b; color: #7f1d1d; background: #fef2f2; }
+    .wk-alert--info { border-left-color: var(--accent); color: var(--accent); }
+
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .wk-badge {
+      padding: 4px 10px;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      background: var(--surface);
+    }
+
+    .wk-badge--neutral {
+      border-color: var(--line-strong);
+      color: var(--muted);
+    }
+
+    .wk-badge--solid {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .wk-input, .wk-textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface);
+      font-family: inherit;
+      font-size: 0.875rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .wk-input:focus, .wk-textarea:focus {
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent);
+    }
+
+    .wk-textarea { min-height: 72px; resize: vertical; margin-top: 8px; }
+
+    .wk-select { position: relative; }
+
+    .wk-select select {
+      width: 100%;
+      padding: 10px 36px 10px 12px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.875rem;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      color-scheme: light;
+    }
+
+    .wk-select select option { background: #fff; color: var(--text); }
+
+    .wk-select::after {
+      content: "";
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--muted);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .wk-check-group, .wk-radio-group { display: flex; flex-direction: column; gap: 10px; }
+
+    .wk-check, .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+
+    .wk-check input, .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-check-box {
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wk-check input:checked + .wk-check-box {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .wk-check input:checked + .wk-check-box::after {
+      content: "";
+      width: 8px;
+      height: 4px;
+      border: solid #fff;
+      border-width: 0 0 2px 2px;
+      transform: rotate(-45deg) translateY(-1px);
+    }
+
+    .wk-radio-ring {
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--line-strong);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .wk-radio input:checked + .wk-radio-ring { border-color: var(--accent); }
+
+    .wk-radio input:checked + .wk-radio-ring::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      background: var(--accent);
+    }
+
+    .wk-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wk-toggle-row:last-child { border-bottom: none; }
+
+    .wk-toggle {
+      position: relative;
+      width: 44px;
+      height: 22px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface-2);
+    }
+
+    .wk-toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+
+    .wk-toggle-dot {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: var(--line-strong);
+      transition: left 0.2s, background 0.2s;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-dot {
+      left: calc(100% - 18px);
+      background: var(--accent);
+    }
+
+    .wk-range {
+      width: 100%;
+      height: 4px;
+      appearance: none;
+      background: var(--line);
+      outline: none;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      border: 2px solid var(--surface);
+      box-shadow: 0 0 0 1px var(--line-strong);
+      cursor: pointer;
+    }
+
+    .wk-progress {
+      height: 8px;
+      background: var(--line);
+      border: 1px solid var(--line-strong);
+      overflow: hidden;
+    }
+
+    .wk-progress-fill {
+      height: 100%;
+      width: 68%;
+      background: var(--accent);
+    }
+
+    .wk-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .wk-tab-labels {
+      display: flex;
+      margin-bottom: 16px;
+      border: 1px solid var(--line-strong);
+    }
+
+    .wk-tab-labels label {
+      flex: 1;
+      text-align: center;
+      padding: 10px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      color: var(--muted);
+      background: var(--surface-2);
+      border-right: 1px solid var(--line-strong);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .wk-tab-labels label:last-child { border-right: none; }
+
+    #co-tab1:checked ~ .wk-tab-labels label[for="co-tab1"],
+    #co-tab2:checked ~ .wk-tab-labels label[for="co-tab2"],
+    #co-tab3:checked ~ .wk-tab-labels label[for="co-tab3"] {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .wk-tab-panel {
+      display: none;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      line-height: 1.65;
+      padding: 4px 0;
+    }
+
+    #co-tab1:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    #co-tab2:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    #co-tab3:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) { display: block; }
+
+    .wk-pagination { display: flex; gap: 0; border: 1px solid var(--line-strong); width: fit-content; }
+
+    .wk-page {
+      min-width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-decoration: none;
+      color: var(--muted);
+      border-right: 1px solid var(--line-strong);
+      background: var(--surface);
+    }
+
+    .wk-page:last-child { border-right: none; }
+
+    .wk-page--active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .wk-tooltip-wrap { position: relative; display: inline-block; }
+
+    .wk-tooltip-trigger {
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      color: var(--text);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: help;
+    }
+
+    .wk-tooltip-wrap::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+      background: var(--text);
+      color: #fff;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
+    }
+
+    .wk-tooltip-wrap:hover::after { opacity: 1; }
+
+    .wk-btn {
+      display: inline-block;
+      padding: 10px 18px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .wk-btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+    .wk-btn--ghost {
+      background: var(--surface);
+      color: var(--accent);
+    }
+
+    .wk-btn--ghost:hover { background: var(--accent-soft); }
+
+    .modal::backdrop { background: rgba(17, 24, 39, 0.55); }
+
+    .modal {
+      border: none;
+      padding: 0;
+      max-width: 440px;
+      width: calc(100% - 32px);
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 24px 48px rgba(17, 24, 39, 0.15);
+    }
+
+    .modal-inner { padding: 28px; position: relative; }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1.125rem;
+      line-height: 1;
+    }
+
+    .modal h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .modal p { font-size: 0.8125rem; color: var(--muted); margin-bottom: 16px; }
+
+    .footer {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 20px 32px;
+      border-top: 1px solid var(--line);
+      font-size: 0.6875rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .hero-main, .hero-aside { flex: 1 1 100%; }
+      .widget-group { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">Meridian Group · Корпоративные решения с 1998 года</div>
+
+  <header class="header">
+    <div class="logo"><span class="logo-mark"></span>Meridian</div>
+    <nav class="nav">
+      <a href="#">Услуги</a>
+      <a href="#">Отрасли</a>
+      <a href="#">Кейсы</a>
+      <a href="#">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#" class="wk-btn wk-btn--ghost">Вход</a>
+      <a href="#" class="wk-btn">Запрос КП</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-main">
+      <p class="hero-label">Corporate Strict · B2B</p>
+      <h1>Стратегия, комплаенс и операционная эффективность</h1>
+      <p>Строгая деловая тема для консалтинга, финансов, юридических и государственных проектов: navy-палитра, прямоугольная геометрия, uppercase-навигация и формальная типографика IBM Plex Sans.</p>
+    </div>
+    <aside class="hero-aside">
+      <h2>Ключевые показатели</h2>
+      <ul class="stat-list">
+        <li><span>Опыт на рынке</span><strong>27 лет</strong></li>
+        <li><span>Корпоративных клиентов</span><strong>340+</strong></li>
+        <li><span>Регионов присутствия</span><strong>18</strong></li>
+        <li><span>Сертификация ISO</span><strong>9001 · 27001</strong></li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="widget-kit">
+    <div class="widget-kit-header">
+      <h2>Widget Kit</h2>
+      <p>Формальные UI-компоненты для корпоративных порталов и внутренних систем</p>
+    </div>
+
+    <div class="widget-grid">
+      <div class="widget-group widget-group--wide">
+        <h3>Alerts</h3>
+        <div class="wk-alert wk-alert--success">Договор №MG-2025/041 успешно подписан обеими сторонами</div>
+        <div class="wk-alert wk-alert--warning">Срок действия сертификата истекает через 14 дней</div>
+        <div class="wk-alert wk-alert--error">Заявка отклонена — требуется актуализация документов</div>
+        <div class="wk-alert wk-alert--info">Обновлена политика обработки персональных данных</div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Badges</h3>
+        <div class="wk-badges">
+          <span class="wk-badge wk-badge--solid">Approved</span>
+          <span class="wk-badge">In review</span>
+          <span class="wk-badge wk-badge--neutral">Draft</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Tooltip</h3>
+        <div class="wk-tooltip-wrap" data-tip="Срок рассмотрения — до 5 рабочих дней">
+          <button type="button" class="wk-tooltip-trigger">Статус заявки</button>
+        </div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Inputs</h3>
+        <input type="text" class="wk-input" placeholder="Корпоративный email">
+        <textarea class="wk-textarea" placeholder="Опишите задачу или запрос на коммерческое предложение..."></textarea>
+      </div>
+
+      <div class="widget-group">
+        <h3>Select</h3>
+        <div class="wk-select">
+          <select>
+            <option>Стратегический консалтинг</option>
+            <option>Управление рисками</option>
+            <option>Корпоративное право</option>
+            <option>Due diligence</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Checkboxes</h3>
+        <div class="wk-check-group">
+          <label class="wk-check"><input type="checkbox" checked><span class="wk-check-box"></span>Согласие на обработку данных</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-box"></span>Подписка на отраслевой digest</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-box"></span>Конфиденциальное NDA</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Radio</h3>
+        <div class="wk-radio-group">
+          <label class="wk-radio"><input type="radio" name="co-format" checked><span class="wk-radio-ring"></span>Очная встреча</label>
+          <label class="wk-radio"><input type="radio" name="co-format"><span class="wk-radio-ring"></span>Видеоконференция</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Toggle</h3>
+        <div class="wk-toggle-row">
+          <span>Двухфакторная аутентификация</span>
+          <label class="wk-toggle"><input type="checkbox" checked><span class="wk-toggle-dot"></span></label>
+        </div>
+        <div class="wk-toggle-row">
+          <span>Уведомления по email</span>
+          <label class="wk-toggle"><input type="checkbox"><span class="wk-toggle-dot"></span></label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Range</h3>
+        <input type="range" class="wk-range" min="0" max="100" value="68">
+      </div>
+
+      <div class="widget-group">
+        <h3>Progress</h3>
+        <div class="wk-progress"><div class="wk-progress-fill"></div></div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Tabs</h3>
+        <div class="wk-tabs">
+          <input type="radio" name="co-tabs" id="co-tab1" checked>
+          <input type="radio" name="co-tabs" id="co-tab2">
+          <input type="radio" name="co-tabs" id="co-tab3">
+          <div class="wk-tab-labels">
+            <label for="co-tab1">Обзор</label>
+            <label for="co-tab2">Документы</label>
+            <label for="co-tab3">История</label>
+          </div>
+          <div class="wk-tab-panels">
+            <div class="wk-tab-panel">Проект в статусе «Active» · ответственный партнёр: A. Volkov · бюджет согласован</div>
+            <div class="wk-tab-panel">Договор, приложения, протоколы согласования — 12 файлов в реестре</div>
+            <div class="wk-tab-panel">Последнее изменение: 24.06.2025 · этап «Due diligence» завершён</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Pagination</h3>
+        <div class="wk-pagination">
+          <a href="#" class="wk-page">‹</a>
+          <a href="#" class="wk-page wk-page--active">1</a>
+          <a href="#" class="wk-page">2</a>
+          <a href="#" class="wk-page">3</a>
+          <a href="#" class="wk-page">›</a>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Modal</h3>
+        <button type="button" class="wk-btn" data-open-modal="co-modal">Отправить заявку</button>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="modal" id="co-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>Запрос консультации</h2>
+      <p>Заполните форму — менеджер свяжется с вами в течение одного рабочего дня.</p>
+      <input type="text" class="wk-input" placeholder="Компания" style="margin-bottom:8px;">
+      <div class="wk-select" style="margin-bottom:12px;">
+        <select>
+          <option>Стратегический консалтинг</option>
+          <option>Комплаенс и аудит</option>
+        </select>
+      </div>
+      <label class="wk-check"><input type="checkbox" checked><span class="wk-check-box"></span>Подтверждаю согласие на обработку данных</label>
+      <button type="button" class="wk-btn" style="margin-top:16px;width:100%;">Отправить</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">
+    <span>© 2025 Meridian Group</span>
+    <span>Corporate Strict Template</span>
+  </footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() { document.getElementById(btn.dataset.openModal).showModal(); });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { btn.closest('dialog').close(); });
+    });
+    document.querySelectorAll('.wk-select').forEach(function(wrap) {
+      var sel = wrap.querySelector('select');
+      wrap.addEventListener('click', function(e) {
+        if (e.target === sel) return;
+        sel.focus();
+        if (typeof sel.showPicker === 'function') sel.showPicker();
+        else sel.click();
+      });
+    });
+  </script>
+</body>
+</html>

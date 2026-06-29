@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chrome Metallic — UI Kit 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a1f17;
+      --surface: #0f2922;
+      --text: #e8f5ef;
+      --muted: #7eb89a;
+      --malachite: #0BDA51;
+      --malachite-dark: #048243;
+      --malachite-deep: #0f3d2e;
+      --malachite-glow: rgba(11, 218, 81, 0.35);
+      --burgundy: #722F37;
+      --burgundy-dark: #4A0E14;
+      --burgundy-light: #a8324a;
+      --burgundy-glow: rgba(168, 50, 74, 0.35);
+      --chrome: linear-gradient(180deg, #ffffff 0%, #d1d5db 18%, #6b7280 50%, #d1d5db 82%, #f9fafb 100%);
+      --chrome-h: linear-gradient(90deg, #9ca3af, #f3f4f6, #6b7280, #e5e7eb, #9ca3af);
+      --accent: var(--malachite);
+      --radius: 16px;
+      --display: "Syncopate", sans-serif;
+    }
+
+    body {
+      font-family: "Outfit", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      background-image:
+        radial-gradient(ellipse at 50% 0%, rgba(11, 218, 81, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 15% 85%, rgba(114, 47, 55, 0.12) 0%, transparent 35%),
+        radial-gradient(circle at 80% 80%, rgba(4, 130, 67, 0.15) 0%, transparent 40%);
+    }
+
+    .header {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--display);
+      font-size: 1.125rem;
+      letter-spacing: 0.15em;
+      background: var(--chrome-h);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 32px 32px 48px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+      background: var(--chrome);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 8px rgba(255,255,255,0.2));
+    }
+
+    .hero p { color: var(--muted); max-width: 520px; margin: 0 auto; }
+
+    .widget-kit { max-width: 1000px; margin: 0 auto; padding: 0 32px 80px; }
+    .widget-kit > h2 {
+      font-family: var(--display);
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .widget-kit > p { color: var(--muted); margin-bottom: 32px; }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .widget-group {
+      flex: 1 1 280px;
+      max-width: 100%;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .widget-group--wide { flex: 1 1 100%; }
+
+    .widget-group h3 {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .wk-alert {
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .wk-alert:last-child { margin-bottom: 0; }
+    .wk-alert--success {
+      background: linear-gradient(135deg, rgba(11, 218, 81, 0.18), rgba(11, 218, 81, 0.05));
+      border-color: rgba(11, 218, 81, 0.35);
+      color: #6ee7a0;
+    }
+    .wk-alert--warning {
+      background: linear-gradient(135deg, rgba(234, 88, 12, 0.22), rgba(154, 52, 18, 0.35));
+      border-color: rgba(251, 146, 60, 0.45);
+      color: #fdba74;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 20px rgba(234, 88, 12, 0.12);
+    }
+    .wk-alert--error {
+      background: linear-gradient(135deg, rgba(168, 50, 74, 0.28), rgba(74, 14, 20, 0.45));
+      border-color: rgba(168, 50, 74, 0.55);
+      color: #f0a8b4;
+      border-left: 3px solid var(--burgundy-light);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 20px var(--burgundy-glow);
+    }
+    .wk-alert--info {
+      background: linear-gradient(135deg, rgba(11, 218, 81, 0.12) 0%, rgba(114, 47, 55, 0.18) 100%);
+      border-color: rgba(114, 47, 55, 0.4);
+      color: #c9e8d4;
+      border-left: 3px solid var(--burgundy-light);
+    }
+
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .wk-badge {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--chrome);
+      color: #1f2937;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .wk-input, .wk-textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      color: var(--text);
+      outline: none;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .wk-input:focus, .wk-textarea:focus {
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.1);
+    }
+
+    .wk-textarea { min-height: 80px; resize: vertical; margin-top: 8px; }
+
+    /* Chrome select — metallic bezel, клик по всей области включая стрелку */
+    .wk-select {
+      position: relative;
+      display: block;
+      border-radius: 12px;
+      padding: 3px;
+      background: var(--chrome);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      cursor: pointer;
+    }
+
+    .wk-select select {
+      width: 100%;
+      padding: 12px 52px 12px 16px;
+      border: none;
+      border-radius: 9px;
+      background-color: var(--malachite-deep);
+      color: #e8f5ef;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      color-scheme: dark;
+    }
+
+    .wk-select select option {
+      background-color: #0f2922;
+      color: #e8f5ef;
+    }
+
+    .wk-select-shine {
+      position: absolute;
+      right: 3px;
+      top: 3px;
+      bottom: 3px;
+      width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--chrome);
+      color: #374151;
+      font-size: 0.875rem;
+      border-radius: 0 9px 9px 0;
+      pointer-events: none;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .wk-check-group, .wk-radio-group { display: flex; flex-direction: column; gap: 12px; }
+
+    .wk-check, .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.9375rem;
+    }
+
+    .wk-check input, .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    /* Chrome checkbox — metallic circle */
+    .wk-check-chrome {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--chrome);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.2s;
+    }
+
+    .wk-check input:checked + .wk-check-chrome {
+      box-shadow: 0 0 12px var(--malachite-glow), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    }
+
+    .wk-check input:checked + .wk-check-chrome::after {
+      content: "✓";
+      color: #1f2937;
+      font-weight: 800;
+      font-size: 0.875rem;
+    }
+
+    /* Chrome radio — glossy orb */
+    .wk-radio-orb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--chrome);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35), inset 0 -2px 4px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.7);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .wk-radio input:checked + .wk-radio-orb::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--malachite), var(--malachite-dark));
+      box-shadow: 0 0 8px var(--malachite-glow);
+    }
+
+    .wk-toggle-row { display: flex; align-items: center; justify-content: space-between; }
+
+    .wk-toggle {
+      position: relative;
+      width: 56px;
+      height: 28px;
+      border-radius: 999px;
+      padding: 2px;
+      background: var(--chrome);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .wk-toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+
+    .wk-toggle-knob {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--chrome);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+      transition: left 0.25s;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-knob { left: calc(100% - 25px); }
+
+    .wk-range {
+      width: 100%;
+      height: 10px;
+      appearance: none;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--malachite-deep), #061510);
+      border: 1px solid rgba(11, 218, 81, 0.2);
+      outline: none;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--chrome);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+    }
+
+    .wk-progress {
+      height: 14px;
+      border-radius: 999px;
+      padding: 2px;
+      background: var(--chrome);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25), 0 0 12px rgba(114, 47, 55, 0.12);
+      border: 1px solid rgba(168, 50, 74, 0.2);
+    }
+
+    .wk-progress-fill {
+      height: 100%;
+      width: 75%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--malachite-dark) 0%, var(--malachite) 35%, var(--burgundy-light) 70%, var(--burgundy-dark) 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 0 14px var(--burgundy-glow);
+      position: relative;
+    }
+
+    .wk-progress-fill::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, transparent 45%, rgba(74, 14, 20, 0.2) 100%);
+      pointer-events: none;
+    }
+
+    .wk-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .wk-tab-labels {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+      padding: 3px;
+      border-radius: 12px;
+      background: var(--chrome);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+
+    .wk-tab-labels label {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border-radius: 9px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #374151;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    #ch-tab1:checked ~ .wk-tab-labels label[for="ch-tab1"],
+    #ch-tab2:checked ~ .wk-tab-labels label[for="ch-tab2"],
+    #ch-tab3:checked ~ .wk-tab-labels label[for="ch-tab3"] {
+      background: var(--malachite-deep);
+      color: #e8f5ef;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 0 12px rgba(11, 218, 81, 0.15);
+    }
+
+    .wk-tab-panel { display: none; font-size: 0.875rem; color: var(--muted); }
+    #ch-tab1:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    #ch-tab2:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    #ch-tab3:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) { display: block; }
+
+    .wk-pagination { display: flex; gap: 6px; }
+
+    .wk-page {
+      min-width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      background: var(--chrome);
+      color: #1f2937;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .wk-page:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .wk-page--active {
+      background: var(--malachite-deep);
+      color: #e8f5ef;
+      border-color: rgba(11, 218, 81, 0.35);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 0 12px rgba(11, 218, 81, 0.15);
+    }
+
+    .wk-page--active:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 0 12px rgba(11, 218, 81, 0.15);
+    }
+
+    .wk-tooltip-wrap { position: relative; display: inline-block; }
+
+    .wk-tooltip-trigger {
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: var(--chrome);
+      color: #1f2937;
+      font-weight: 600;
+      font-size: 0.875rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      cursor: help;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .wk-tooltip-wrap::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 14px;
+      background: var(--chrome);
+      color: #1f2937;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      transition: opacity 0.2s;
+    }
+
+    .wk-tooltip-wrap:hover::after { opacity: 1; }
+
+    .wk-btn {
+      padding: 14px 28px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: var(--chrome);
+      color: #1f2937;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .wk-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.9); }
+
+    .modal::backdrop { background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); }
+    .modal {
+      border: none;
+      border-radius: 20px;
+      padding: 4px;
+      max-width: 440px;
+      width: calc(100% - 32px);
+      background: var(--chrome);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-inner {
+      padding: 32px;
+      position: relative;
+      background: var(--surface);
+      border-radius: 16px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: var(--chrome);
+      color: #374151;
+      cursor: pointer;
+      font-size: 1.125rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal h2 {
+      font-family: var(--display);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      background: var(--chrome);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer { text-align: center; padding: 24px; color: var(--muted); font-size: 0.8125rem; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">CHROME</div>
+    <span style="font-size:0.8125rem;color:var(--muted);">Metallic UI</span>
+  </header>
+
+  <section class="hero">
+    <h1>CHROME DESIGN</h1>
+    <p>Хромовые градиенты, металлический блеск и glossy-виджеты — эстетика liquid metal и reflective surfaces.</p>
+  </section>
+
+  <section class="widget-kit">
+    <h2>CHROME KIT</h2>
+    <p>Кастомные chrome-компоненты: metallic bezel select, glossy orbs, shine badges</p>
+
+    <div class="widget-grid">
+      <div class="widget-group widget-group--wide">
+        <h3>Alerts</h3>
+        <div class="wk-alert wk-alert--success">Sync complete — malachite channel active</div>
+        <div class="wk-alert wk-alert--warning">Storage at 85% — capacity threshold</div>
+        <div class="wk-alert wk-alert--error">Connection failed — check credentials and retry</div>
+        <div class="wk-alert wk-alert--info">Chrome + malachite & burgundy theme blend</div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Badges</h3>
+        <div class="wk-badges">
+          <span class="wk-badge">Pro</span>
+          <span class="wk-badge">Shine</span>
+          <span class="wk-badge">Metal</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Tooltip</h3>
+        <div class="wk-tooltip-wrap" data-tip="Chrome reflection tooltip">
+          <button type="button" class="wk-tooltip-trigger">Hover</button>
+        </div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Inputs</h3>
+        <input type="text" class="wk-input" placeholder="Enter value...">
+        <textarea class="wk-textarea" placeholder="Message..."></textarea>
+      </div>
+
+      <div class="widget-group">
+        <h3>Select</h3>
+        <div class="wk-select">
+          <select>
+            <option>Silver Chrome</option>
+            <option>Dark Chrome</option>
+            <option>Rose Gold</option>
+          </select>
+          <span class="wk-select-shine">▼</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Checkboxes</h3>
+        <div class="wk-check-group">
+          <label class="wk-check"><input type="checkbox" checked><span class="wk-check-chrome"></span>Mirror finish</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-chrome"></span>Brushed metal</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-chrome"></span>High gloss</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Radio</h3>
+        <div class="wk-radio-group">
+          <label class="wk-radio"><input type="radio" name="ch-finish" checked><span class="wk-radio-orb"></span>Polished</label>
+          <label class="wk-radio"><input type="radio" name="ch-finish"><span class="wk-radio-orb"></span>Satin</label>
+          <label class="wk-radio"><input type="radio" name="ch-finish"><span class="wk-radio-orb"></span>Matte</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Toggle</h3>
+        <div class="wk-toggle-row">
+          <span>Reflections</span>
+          <label class="wk-toggle"><input type="checkbox" checked><span class="wk-toggle-knob"></span></label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Range</h3>
+        <input type="range" class="wk-range" min="0" max="100" value="75">
+      </div>
+
+      <div class="widget-group">
+        <h3>Progress</h3>
+        <div class="wk-progress"><div class="wk-progress-fill"></div></div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Tabs</h3>
+        <div class="wk-tabs">
+          <input type="radio" name="ch-tabs" id="ch-tab1" checked>
+          <input type="radio" name="ch-tabs" id="ch-tab2">
+          <input type="radio" name="ch-tabs" id="ch-tab3">
+          <div class="wk-tab-labels">
+            <label for="ch-tab1">Surface</label>
+            <label for="ch-tab2">Reflect</label>
+            <label for="ch-tab3">Polish</label>
+          </div>
+          <div class="wk-tab-panels">
+            <div class="wk-tab-panel">Metallic surface rendering at 60fps.</div>
+            <div class="wk-tab-panel">Environment reflections enabled.</div>
+            <div class="wk-tab-panel">Polish level: mirror-grade.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Pagination</h3>
+        <div class="wk-pagination">
+          <a href="#" class="wk-page">‹</a>
+          <a href="#" class="wk-page wk-page--active">1</a>
+          <a href="#" class="wk-page">2</a>
+          <a href="#" class="wk-page">3</a>
+          <a href="#" class="wk-page">›</a>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Modal</h3>
+        <button type="button" class="wk-btn" data-open-modal="ch-modal">Open modal</button>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="modal" id="ch-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>CHROME SETTINGS</h2>
+      <div class="wk-select" style="margin-bottom:16px;">
+        <select><option>Silver</option><option>Platinum</option><option>Titanium</option></select>
+        <span class="wk-select-shine">▼</span>
+      </div>
+      <div class="wk-check-group">
+        <label class="wk-check"><input type="checkbox" checked><span class="wk-check-chrome"></span>Enable chrome FX</label>
+      </div>
+      <button type="button" class="wk-btn" style="margin-top:16px;width:100%;">Apply</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">© 2025 CHROME · Metallic Widget Template</footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() { document.getElementById(btn.dataset.openModal).showModal(); });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { btn.closest('dialog').close(); });
+    });
+    document.querySelectorAll('.wk-select').forEach(function(wrap) {
+      var sel = wrap.querySelector('select');
+      wrap.addEventListener('click', function(e) {
+        if (e.target === sel) return;
+        sel.focus();
+        if (typeof sel.showPicker === 'function') sel.showPicker();
+        else sel.click();
+      });
+    });
+  </script>
+</body>
+</html>

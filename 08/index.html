@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neo-Brutalism — Agency 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fffef5;
+      --black: #0a0a0a;
+      --yellow: #ffe066;
+      --pink: #ff6b9d;
+      --blue: #4dabf7;
+      --green: #69db7c;
+      --border: 3px solid var(--black);
+      --shadow: 6px 6px 0 var(--black);
+      --shadow-lg: 10px 10px 0 var(--black);
+    }
+
+    body {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      border-bottom: var(--border);
+      background: var(--yellow);
+    }
+
+    .logo {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .nav { display: flex; gap: 0; }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--black);
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      border-left: var(--border);
+      transition: background 0.15s;
+    }
+
+    .nav a:hover { background: var(--pink); }
+
+    .btn-brutal {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--black);
+      color: var(--bg);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: var(--border);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+
+    .btn-brutal:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 4px 4px 0 var(--black);
+    }
+
+    .btn-brutal:active {
+      transform: translate(6px, 6px);
+      box-shadow: none;
+    }
+
+    .btn-brutal--outline {
+      background: var(--bg);
+      color: var(--black);
+    }
+
+    .btn-brutal--pink { background: var(--pink); color: var(--black); }
+    .btn-brutal--blue { background: var(--blue); color: var(--black); }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: var(--border);
+    }
+
+    .hero-text { flex: 1.2 1 320px; }
+    .hero-visual { flex: 1 1 280px; }
+
+    .hero-text {
+      padding: 64px 48px;
+      border-right: var(--border);
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: var(--black);
+      color: var(--yellow);
+      padding: 6px 14px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero-title span {
+      display: block;
+      color: var(--pink);
+      -webkit-text-stroke: 2px var(--black);
+    }
+
+    .hero-desc {
+      font-size: 1.125rem;
+      max-width: 480px;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .hero-visual {
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-shape {
+      width: 200px;
+      height: 200px;
+      background: var(--yellow);
+      border: var(--border);
+      box-shadow: var(--shadow-lg);
+      transform: rotate(-8deg);
+    }
+
+    .hero-shape-2 {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: var(--pink);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      bottom: 40px;
+      right: 60px;
+      transform: rotate(12deg);
+    }
+
+    .marquee {
+      overflow: hidden;
+      border-bottom: var(--border);
+      background: var(--green);
+      padding: 16px 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 48px;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-track span {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: var(--border);
+    }
+
+    .service { flex: 1 1 calc(33.333% - 0px); min-width: 240px; }
+
+    .service {
+      padding: 40px 32px;
+      border-right: var(--border);
+    }
+
+    .service:last-child { border-right: none; }
+
+    .service-num {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .service h3 {
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .service p { font-size: 0.9375rem; }
+
+    .about {
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: var(--border);
+    }
+
+    .about-image { flex: 1 1 320px; }
+    .about-content { flex: 1 1 320px; }
+
+    .about-image {
+      background: var(--pink);
+      border-right: var(--border);
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-image-inner {
+      width: 80%;
+      height: 70%;
+      background: var(--bg);
+      border: var(--border);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 4rem;
+    }
+
+    .about-content { padding: 48px; }
+
+    .about-content h2 {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .about-content p { margin-bottom: 16px; font-size: 1rem; }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: var(--border);
+    }
+
+    .stat { flex: 1 1 calc(25% - 0px); min-width: 160px; }
+
+    .stat {
+      padding: 32px;
+      text-align: center;
+      border-right: var(--border);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-value {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 2.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .stat:nth-child(1) { background: var(--yellow); }
+    .stat:nth-child(2) { background: var(--pink); }
+    .stat:nth-child(3) { background: var(--blue); }
+    .stat:nth-child(4) { background: var(--green); }
+
+    .contact {
+      padding: 64px 48px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact > div:first-child { flex: 1 1 280px; }
+    .contact .form-brutal { flex: 1 1 280px; }
+
+    .contact h2 {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+    }
+
+    .form-brutal { display: flex; flex-direction: column; gap: 16px; }
+
+    .form-brutal input,
+    .form-brutal textarea,
+    .form-brutal select {
+      padding: 16px;
+      border: var(--border);
+      background: var(--bg);
+      font-family: inherit;
+      font-size: 1rem;
+      box-shadow: var(--shadow);
+      outline: none;
+    }
+
+    .form-brutal input:focus,
+    .form-brutal textarea:focus,
+    .form-brutal select:focus {
+      background: var(--yellow);
+    }
+
+    .form-brutal textarea { min-height: 120px; resize: vertical; }
+
+    /* Widget Kit — Neo-Brutalism */
+    .widget-kit {
+      padding: 48px 32px;
+      border-bottom: var(--border);
+      background: var(--green);
+    }
+
+    .widget-kit-box { max-width: 1100px; margin: 0 auto; }
+
+    .widget-kit h2 {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 2rem;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .widget-kit > .widget-kit-box > p { margin-bottom: 32px; font-weight: 600; }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .widget-group {
+      flex: 1 1 280px;
+      max-width: 100%;
+      background: var(--bg);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .widget-group--full { flex: 1 1 100%; }
+
+    .widget-group-title {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    /* Alerts */
+    .wk-alerts { display: flex; flex-direction: column; gap: 12px; }
+
+    .wk-alert {
+      padding: 14px 16px;
+      border: var(--border);
+      box-shadow: 4px 4px 0 var(--black);
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    .wk-alert--success { background: var(--green); }
+    .wk-alert--warning { background: var(--yellow); }
+    .wk-alert--error { background: #722F37; color: #fff; }
+    .wk-alert--info { background: var(--blue); }
+
+    /* Badges */
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .wk-badge {
+      display: inline-flex;
+      padding: 6px 14px;
+      border: var(--border);
+      box-shadow: 3px 3px 0 var(--black);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .wk-badge--yellow { background: var(--yellow); }
+    .wk-badge--pink { background: var(--pink); }
+    .wk-badge--blue { background: var(--blue); }
+    .wk-badge--green { background: var(--green); }
+
+    /* Inputs */
+    .wk-field { margin-bottom: 12px; }
+    .wk-field:last-child { margin-bottom: 0; }
+
+    .wk-label {
+      display: block;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.6875rem;
+      margin-bottom: 8px;
+    }
+
+    .wk-input,
+    .wk-textarea {
+      width: 100%;
+      padding: 14px;
+      border: var(--border);
+      background: var(--bg);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      box-shadow: var(--shadow);
+      outline: none;
+    }
+
+    .wk-input:focus,
+    .wk-textarea:focus { background: var(--yellow); }
+
+    .wk-textarea { min-height: 72px; resize: vertical; }
+
+    /* Brutal Select */
+    .wk-select-wrap { position: relative; max-width: 100%; }
+
+    .wk-select {
+      width: 100%;
+      padding: 16px 48px 16px 16px;
+      border: var(--border);
+      background: var(--bg);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .wk-select:focus { background: var(--yellow); }
+
+    .wk-select-wrap::after {
+      content: "▼";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      font-size: 1.125rem;
+      font-weight: 900;
+    }
+
+    /* Dropdown readability */
+    select,
+    .wk-select select,
+    select.wk-select,
+    .form-brutal select {
+      color-scheme: light;
+      color: var(--black);
+      background-color: var(--bg);
+    }
+
+    select option,
+    .wk-select select option,
+    select.wk-select option,
+    .form-brutal select option {
+      background-color: #ffffff;
+      color: #18181b;
+    }
+
+    /* Brutal Checkbox */
+    .wk-check-group,
+    .wk-radio-group { display: flex; flex-direction: column; gap: 12px; }
+
+    .wk-check,
+    .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .wk-check input,
+    .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-check-box {
+      width: 26px;
+      height: 26px;
+      border: var(--border);
+      background: var(--bg);
+      box-shadow: 4px 4px 0 var(--black);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+    }
+
+    .wk-check input:checked + .wk-check-box {
+      background: var(--pink);
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0 var(--black);
+    }
+
+    .wk-check input:checked + .wk-check-box::after {
+      content: "✓";
+      font-weight: 900;
+      font-size: 0.875rem;
+    }
+
+    /* Square Radio */
+    .wk-radio-box {
+      width: 26px;
+      height: 26px;
+      border: var(--border);
+      background: var(--bg);
+      box-shadow: 4px 4px 0 var(--black);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+    }
+
+    .wk-radio input:checked + .wk-radio-box {
+      background: var(--blue);
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0 var(--black);
+    }
+
+    .wk-radio input:checked + .wk-radio-box::after {
+      content: "■";
+      font-size: 0.625rem;
+    }
+
+    /* Rectangular Toggle */
+    .wk-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .wk-toggle {
+      position: relative;
+      width: 56px;
+      height: 32px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .wk-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-toggle-track {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: var(--border);
+      background: var(--bg);
+      box-shadow: inset 3px 3px 0 rgba(0,0,0,0.08);
+    }
+
+    .wk-toggle-thumb {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 24px;
+      height: 24px;
+      border: var(--border);
+      background: var(--yellow);
+      box-shadow: 3px 3px 0 var(--black);
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-thumb {
+      transform: translateX(24px);
+      background: var(--pink);
+    }
+
+    /* Chunky Range */
+    .wk-range {
+      width: 100%;
+      height: 12px;
+      appearance: none;
+      background: var(--bg);
+      border: var(--border);
+      box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      background: var(--pink);
+      border: var(--border);
+      box-shadow: 4px 4px 0 var(--black);
+      cursor: pointer;
+    }
+
+    .wk-range::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      background: var(--pink);
+      border: 3px solid var(--black);
+      box-shadow: 4px 4px 0 var(--black);
+      cursor: pointer;
+    }
+
+    .wk-range-val {
+      font-weight: 700;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    /* Progress */
+    .wk-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .wk-progress {
+      height: 20px;
+      border: var(--border);
+      background: var(--bg);
+      box-shadow: inset 2px 2px 0 rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .wk-progress-bar {
+      height: 100%;
+      width: 75%;
+      background: var(--pink);
+      border-right: var(--border);
+    }
+
+    /* Tabs */
+    .wk-tabs { position: relative; }
+
+    .wk-tab-input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .wk-tabs-nav {
+      display: flex;
+      gap: 0;
+      border-bottom: var(--border);
+      margin-bottom: 14px;
+    }
+
+    .wk-tabs-nav label {
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-right: var(--border);
+      background: var(--bg);
+      transition: background 0.1s;
+    }
+
+    .wk-tabs-nav label:last-child { border-right: none; }
+
+    .wk-tab-input:nth-of-type(1):checked ~ .wk-tabs-nav label:nth-child(1),
+    .wk-tab-input:nth-of-type(2):checked ~ .wk-tabs-nav label:nth-child(2),
+    .wk-tab-input:nth-of-type(3):checked ~ .wk-tabs-nav label:nth-child(3) {
+      background: var(--yellow);
+      box-shadow: inset 0 -4px 0 var(--black);
+    }
+
+    .wk-tab-panel {
+      display: none;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      padding: 8px 0;
+    }
+
+    .wk-tab-input:nth-of-type(1):checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    .wk-tab-input:nth-of-type(2):checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    .wk-tab-input:nth-of-type(3):checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) {
+      display: block;
+    }
+
+    /* Pagination */
+    .wk-pagination {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .wk-page-btn {
+      min-width: 44px;
+      height: 44px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      background: var(--bg);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: var(--black);
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+
+    .wk-page-btn:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 4px 4px 0 var(--black);
+    }
+
+    .wk-page-btn--active {
+      background: var(--pink);
+      transform: translate(4px, 4px);
+      box-shadow: 2px 2px 0 var(--black);
+    }
+
+    /* Tooltip */
+    .wk-tooltip-wrap { display: inline-block; }
+
+    .wk-tooltip-trigger {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.8125rem;
+      cursor: help;
+      border-bottom: 3px solid var(--black);
+      position: relative;
+    }
+
+    .wk-tooltip-trigger::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 14px;
+      background: var(--yellow);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
+    }
+
+    .wk-tooltip-trigger:hover::after { opacity: 1; }
+
+    .widget-kit-actions { margin-top: 4px; }
+
+    .modal::backdrop { background: rgba(10, 10, 10, 0.6); }
+
+    .modal {
+      border: var(--border);
+      padding: 0;
+      max-width: 480px;
+      width: calc(100% - 32px);
+      background: var(--yellow);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-inner { padding: 32px; position: relative; }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border: var(--border);
+      background: var(--bg);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .modal h2 {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 1.75rem;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .modal-inner > p { margin-bottom: 20px; }
+
+    .footer {
+      border-top: var(--border);
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      background: var(--black);
+      color: var(--bg);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .hero-text, .hero-visual, .about-image, .about-content, .service, .stat, .contact > div:first-child, .contact .form-brutal { flex: 1 1 100%; }
+      .hero-text, .about-image, .service, .stat { border-right: none; border-bottom: var(--border); }
+      .nav { display: none; }
+      .widget-group { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Brutal™</div>
+    <nav class="nav">
+      <a href="#">Work</a>
+      <a href="#">Studio</a>
+      <a href="#">Contact</a>
+    </nav>
+    <a href="#" class="btn-brutal btn-brutal--outline">Hire us</a>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Neo-Brutalism · 2025</span>
+      <h1 class="hero-title">
+        Design
+        <span>Without</span>
+        Compromise
+      </h1>
+      <p class="hero-desc">Жирные шрифты, жёсткие границы и контрастные цвета. Neo-brutalism — один из самых узнаваемых стилей 2025–2026.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-brutal">View Projects</a>
+        <a href="#" class="btn-brutal btn-brutal--pink">Get Quote</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-shape"></div>
+      <div class="hero-shape-2"></div>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Branding ★ Web Design ★ Motion ★ Strategy ★</span>
+      <span>Branding ★ Web Design ★ Motion ★ Strategy ★</span>
+    </div>
+  </div>
+
+  <section class="services">
+    <article class="service">
+      <p class="service-num">01</p>
+      <h3>Branding</h3>
+      <p>Логотипы, айдентика и brand guidelines с характером.</p>
+    </article>
+    <article class="service">
+      <p class="service-num">02</p>
+      <h3>Web Design</h3>
+      <p>Сайты, которые запоминаются и конвертируют.</p>
+    </article>
+    <article class="service">
+      <p class="service-num">03</p>
+      <h3>Motion</h3>
+      <p>Анимация и видео для digital-кампаний.</p>
+    </article>
+  </section>
+
+  <section class="about">
+    <div class="about-image">
+      <div class="about-image-inner">B</div>
+    </div>
+    <div class="about-content">
+      <h2>Мы ломаем правила</h2>
+      <p>Neo-brutalism возвращает смелость в веб-дизайн: никаких размытых теней — только чёткие box-shadow и контраст.</p>
+      <p>Работаем с брендами, которые не боятся выделяться.</p>
+      <a href="#" class="btn-brutal btn-brutal--blue" style="margin-top: 16px;">About Studio</a>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <p class="stat-value">150+</p>
+      <p class="stat-label">Projects</p>
+    </div>
+    <div class="stat">
+      <p class="stat-value">12</p>
+      <p class="stat-label">Awards</p>
+    </div>
+    <div class="stat">
+      <p class="stat-value">8yr</p>
+      <p class="stat-label">Experience</p>
+    </div>
+    <div class="stat">
+      <p class="stat-value">40+</p>
+      <p class="stat-label">Clients</p>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div>
+      <h2>Start a Project</h2>
+      <p style="margin-top: 16px;">Расскажите о задаче — ответим за 48 часов.</p>
+    </div>
+    <form class="form-brutal">
+      <input type="text" placeholder="Ваше имя" aria-label="Имя">
+      <input type="email" placeholder="Email" aria-label="Email">
+      <select aria-label="Тип проекта">
+        <option>Branding</option>
+        <option>Web Design</option>
+        <option>Motion</option>
+        <option>Full Package</option>
+      </select>
+      <textarea placeholder="Опишите проект..." aria-label="Сообщение"></textarea>
+      <button type="submit" class="btn-brutal">Send →</button>
+    </form>
+  </section>
+
+  <section class="widget-kit">
+    <div class="widget-kit-box">
+      <h2>Widget Kit</h2>
+      <p>Brutal UI components — thick borders, hard shadows, zero compromise</p>
+
+      <div class="widget-grid">
+        <div class="widget-group widget-group--full">
+          <p class="widget-group-title">Alerts</p>
+          <div class="wk-alerts">
+            <div class="wk-alert wk-alert--success">✓ Project delivered on time!</div>
+            <div class="wk-alert wk-alert--warning">⚠ Budget review needed</div>
+            <div class="wk-alert wk-alert--error">✕ Payment declined — update billing</div>
+            <div class="wk-alert wk-alert--info">ℹ New portfolio piece added</div>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Badges</p>
+          <div class="wk-badges">
+            <span class="wk-badge wk-badge--yellow">New</span>
+            <span class="wk-badge wk-badge--pink">Hot</span>
+            <span class="wk-badge wk-badge--blue">Pro</span>
+            <span class="wk-badge wk-badge--green">Done</span>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Tooltip</p>
+          <div class="wk-tooltip-wrap">
+            <span class="wk-tooltip-trigger" data-tip="Starting at $5K">Pricing info</span>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Text Input</p>
+          <div class="wk-field">
+            <label class="wk-label" for="wk-input-brutal">Client Name</label>
+            <input class="wk-input" type="text" id="wk-input-brutal" placeholder="Your company">
+          </div>
+          <div class="wk-field">
+            <label class="wk-label" for="wk-textarea-brutal">Brief</label>
+            <textarea class="wk-textarea" id="wk-textarea-brutal" placeholder="Describe your project..."></textarea>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Select</p>
+          <label class="wk-label" for="wk-select-brutal">Budget</label>
+          <div class="wk-select-wrap">
+            <select class="wk-select" id="wk-select-brutal">
+              <option>&lt; $5 000</option>
+              <option>$5 000 — $15 000</option>
+              <option>$15 000 — $50 000</option>
+              <option>$50 000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Checkbox</p>
+          <div class="wk-check-group">
+            <label class="wk-check">
+              <input type="checkbox" checked>
+              <span class="wk-check-box"></span>
+              Brand Identity
+            </label>
+            <label class="wk-check">
+              <input type="checkbox">
+              <span class="wk-check-box"></span>
+              Web Development
+            </label>
+            <label class="wk-check">
+              <input type="checkbox">
+              <span class="wk-check-box"></span>
+              Motion Design
+            </label>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Radio</p>
+          <div class="wk-radio-group">
+            <label class="wk-radio">
+              <input type="radio" name="wk-package-brutal" checked>
+              <span class="wk-radio-box"></span>
+              Basic
+            </label>
+            <label class="wk-radio">
+              <input type="radio" name="wk-package-brutal">
+              <span class="wk-radio-box"></span>
+              Standard
+            </label>
+            <label class="wk-radio">
+              <input type="radio" name="wk-package-brutal">
+              <span class="wk-radio-box"></span>
+              Premium
+            </label>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Toggle</p>
+          <div class="wk-toggle-row">
+            <span style="font-weight:700;">Rush delivery</span>
+            <label class="wk-toggle">
+              <input type="checkbox">
+              <span class="wk-toggle-track"></span>
+              <span class="wk-toggle-thumb"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Range</p>
+          <input class="wk-range" type="range" min="0" max="100" value="60">
+          <p class="wk-range-val">Priority: 60%</p>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Progress</p>
+          <div class="wk-progress-label"><span>Project</span><span>75%</span></div>
+          <div class="wk-progress"><div class="wk-progress-bar"></div></div>
+        </div>
+
+        <div class="widget-group widget-group--full">
+          <p class="widget-group-title">Tabs</p>
+          <div class="wk-tabs">
+            <input class="wk-tab-input" type="radio" name="wk-tabs-brutal" id="wk-tab-brutal-1" checked>
+            <input class="wk-tab-input" type="radio" name="wk-tabs-brutal" id="wk-tab-brutal-2">
+            <input class="wk-tab-input" type="radio" name="wk-tabs-brutal" id="wk-tab-brutal-3">
+            <div class="wk-tabs-nav">
+              <label for="wk-tab-brutal-1">Work</label>
+              <label for="wk-tab-brutal-2">Process</label>
+              <label for="wk-tab-brutal-3">Contact</label>
+            </div>
+            <div class="wk-tab-panels">
+              <div class="wk-tab-panel">150+ projects delivered. Branding, web, motion — all brutal.</div>
+              <div class="wk-tab-panel">Brief → Concept → Design → Delivery. No fluff, just results.</div>
+              <div class="wk-tab-panel">Ready to start? Hit the modal button for a quick quote.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Pagination</p>
+          <nav class="wk-pagination" aria-label="Pagination">
+            <a class="wk-page-btn" href="#">←</a>
+            <a class="wk-page-btn wk-page-btn--active" href="#">1</a>
+            <a class="wk-page-btn" href="#">2</a>
+            <a class="wk-page-btn" href="#">3</a>
+            <a class="wk-page-btn" href="#">→</a>
+          </nav>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Modal</p>
+          <div class="widget-kit-actions">
+            <button type="button" class="btn-brutal btn-brutal--pink" data-open-modal="brutal-modal">Open Modal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="modal" id="brutal-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>Quick Quote</h2>
+      <p>Заполните параметры для быстрого расчёта.</p>
+      <div class="wk-field">
+        <label class="wk-label" for="modal-deadline">Срок</label>
+        <div class="wk-select-wrap">
+          <select class="wk-select" id="modal-deadline">
+            <option>1 месяц</option>
+            <option>2–3 месяца</option>
+            <option>6+ месяцев</option>
+          </select>
+        </div>
+      </div>
+      <div class="wk-field">
+        <div class="wk-check-group">
+          <label class="wk-check">
+            <input type="checkbox" checked>
+            <span class="wk-check-box"></span>
+            NDA required
+          </label>
+          <label class="wk-check">
+            <input type="checkbox">
+            <span class="wk-check-box"></span>
+            Rush delivery (+30%)
+          </label>
+        </div>
+      </div>
+      <button type="button" class="btn-brutal" style="margin-top:8px;">Get Quote</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">
+    <span>© 2025 Brutal Studio</span>
+    <span>Neo-Brutalism Template</span>
+  </footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.getElementById(btn.dataset.openModal).showModal();
+      });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        btn.closest('dialog').close();
+      });
+    });
+  </script>
+</body>
+</html>

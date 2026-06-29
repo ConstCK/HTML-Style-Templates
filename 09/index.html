@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberpunk Neon — UI Kit 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --text: #e0e0ff;
+      --muted: #6b6b8a;
+      --neon-pink: #ff2d95;
+      --neon-cyan: #00f0ff;
+      --neon-yellow: #fcee0a;
+      --mono: "Orbitron", sans-serif;
+      --sans: "Rajdhani", sans-serif;
+      --cut: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      background-image:
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .header {
+      padding: 24px 32px;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-size: 1.25rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px var(--neon-cyan);
+      letter-spacing: 0.15em;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 32px 48px;
+    }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      color: var(--neon-pink);
+      letter-spacing: 0.2em;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: var(--mono);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      text-shadow: 0 0 30px rgba(255, 45, 149, 0.4);
+    }
+
+    .hero p { color: var(--muted); font-size: 1.125rem; max-width: 560px; }
+
+    /* Widget Kit */
+    .widget-kit {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    .widget-kit > h2 {
+      font-family: var(--mono);
+      font-size: 1.5rem;
+      color: var(--neon-cyan);
+      margin-bottom: 8px;
+      letter-spacing: 0.1em;
+    }
+
+    .widget-kit > p { color: var(--muted); margin-bottom: 32px; }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .widget-group {
+      flex: 1 1 280px;
+      max-width: 100%;
+      background: var(--surface);
+      clip-path: var(--cut);
+      padding: 24px;
+      border: 1px solid rgba(0, 240, 255, 0.15);
+    }
+
+    .widget-group h3 {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.15em;
+      color: var(--neon-pink);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .widget-group--wide { flex: 1 1 100%; }
+
+    /* Alerts — scanline style */
+    .wk-alert {
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      font-size: 0.875rem;
+      clip-path: var(--cut);
+      border-left: 3px solid;
+    }
+
+    .wk-alert:last-child { margin-bottom: 0; }
+    .wk-alert--success { background: rgba(0, 255, 136, 0.08); border-color: #00ff88; color: #00ff88; }
+    .wk-alert--warning { background: rgba(252, 238, 10, 0.08); border-color: var(--neon-yellow); color: var(--neon-yellow); }
+    .wk-alert--error { background: rgba(168, 50, 74, 0.12); border-color: #ff3366; color: #ff6b8a; }
+    .wk-alert--info { background: rgba(0, 240, 255, 0.08); border-color: var(--neon-cyan); color: var(--neon-cyan); }
+
+    /* Badges — neon tags */
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .wk-badge {
+      padding: 4px 12px;
+      font-family: var(--mono);
+      font-size: 0.625rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid;
+    }
+
+    .wk-badge--pink { border-color: var(--neon-pink); color: var(--neon-pink); box-shadow: 0 0 8px rgba(255, 45, 149, 0.3); }
+    .wk-badge--cyan { border-color: var(--neon-cyan); color: var(--neon-cyan); box-shadow: 0 0 8px rgba(0, 240, 255, 0.3); }
+    .wk-badge--yellow { border-color: var(--neon-yellow); color: var(--neon-yellow); }
+
+    /* Input — terminal frame */
+    .wk-input, .wk-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--neon-cyan);
+      font-family: var(--mono);
+      font-size: 0.8125rem;
+      outline: none;
+      clip-path: var(--cut);
+    }
+
+    .wk-input:focus, .wk-textarea:focus {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    }
+
+    .wk-textarea { min-height: 80px; resize: vertical; margin-top: 8px; }
+
+    /* Select — angular dropdown with corner accent */
+    .wk-select {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      clip-path: var(--cut);
+      border: 1px solid var(--neon-pink);
+      background: rgba(255, 45, 149, 0.05);
+    }
+
+    .wk-select select {
+      flex: 1;
+      padding: 12px 16px;
+      background-color: var(--surface);
+      border: none;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.9375rem;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* Dropdown readability */
+    select,
+    .wk-select select,
+    select.wk-select {
+      color-scheme: dark;
+      background-color: var(--surface);
+    }
+
+    select option,
+    .wk-select select option {
+      background-color: #12121a;
+      color: #e0e0ff;
+    }
+
+    .wk-select-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      background: var(--neon-pink);
+      color: #0a0a0f;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      pointer-events: none;
+    }
+
+    /* Checkbox — X mark neon toggle */
+    .wk-check-group { display: flex; flex-direction: column; gap: 12px; }
+
+    .wk-check {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.9375rem;
+    }
+
+    .wk-check input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-check-box {
+      width: 22px;
+      height: 22px;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      border: 2px solid var(--neon-cyan);
+      background: transparent;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .wk-check input:checked + .wk-check-box {
+      background: var(--neon-cyan);
+      box-shadow: 0 0 12px var(--neon-cyan);
+    }
+
+    .wk-check input:checked + .wk-check-box::after {
+      content: "✕";
+      color: #0a0a0f;
+      font-size: 0.625rem;
+      font-weight: 700;
+      transform: rotate(45deg);
+    }
+
+    /* Radio — diamond shape */
+    .wk-radio-group { display: flex; flex-direction: column; gap: 10px; }
+
+    .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-radio-mark {
+      width: 18px;
+      height: 18px;
+      transform: rotate(45deg);
+      border: 2px solid var(--neon-pink);
+      flex-shrink: 0;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .wk-radio input:checked + .wk-radio-mark {
+      background: var(--neon-pink);
+      box-shadow: 0 0 10px var(--neon-pink);
+    }
+
+    /* Toggle — segmented neon bar */
+    .wk-toggle-row { display: flex; align-items: center; justify-content: space-between; }
+
+    .wk-toggle {
+      position: relative;
+      width: 56px;
+      height: 28px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--neon-cyan);
+      cursor: pointer;
+      clip-path: var(--cut);
+    }
+
+    .wk-toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+
+    .wk-toggle-track {
+      position: absolute;
+      inset: 3px;
+      background: rgba(0, 240, 255, 0.1);
+    }
+
+    .wk-toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 22px;
+      height: 22px;
+      background: var(--muted);
+      clip-path: var(--cut);
+      transition: left 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-thumb {
+      left: calc(100% - 25px);
+      background: var(--neon-cyan);
+      box-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    /* Range — laser line */
+    .wk-range {
+      width: 100%;
+      height: 4px;
+      appearance: none;
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+      outline: none;
+      border-radius: 0;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      background: var(--neon-yellow);
+      clip-path: var(--cut);
+      box-shadow: 0 0 10px var(--neon-yellow);
+      cursor: pointer;
+    }
+
+    /* Progress — segmented bars */
+    .wk-progress {
+      height: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      overflow: hidden;
+    }
+
+    .wk-progress-fill {
+      height: 100%;
+      width: 72%;
+      background: repeating-linear-gradient(90deg, var(--neon-cyan) 0, var(--neon-cyan) 8px, transparent 8px, transparent 12px);
+      box-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    /* Tabs — neon underline */
+    .wk-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .wk-tab-labels {
+      display: flex;
+      gap: 4px;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      margin-bottom: 12px;
+    }
+
+    .wk-tab-labels label {
+      padding: 8px 16px;
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      color: var(--muted);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+
+    #cy-tab1:checked ~ .wk-tab-labels label[for="cy-tab1"],
+    #cy-tab2:checked ~ .wk-tab-labels label[for="cy-tab2"],
+    #cy-tab3:checked ~ .wk-tab-labels label[for="cy-tab3"] {
+      color: var(--neon-cyan);
+      border-bottom-color: var(--neon-cyan);
+      text-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    .wk-tab-panel { display: none; font-size: 0.875rem; color: var(--muted); }
+    #cy-tab1:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    #cy-tab2:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    #cy-tab3:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) { display: block; }
+
+    /* Pagination — angular buttons */
+    .wk-pagination { display: flex; gap: 4px; }
+
+    .wk-page {
+      min-width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      clip-path: var(--cut);
+      text-decoration: none;
+    }
+
+    .wk-page:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+    .wk-page--active { background: var(--neon-cyan); color: #0a0a0f; border-color: var(--neon-cyan); }
+
+    /* Tooltip — glitch box */
+    .wk-tooltip-wrap { position: relative; display: inline-block; }
+
+    .wk-tooltip-trigger {
+      padding: 8px 16px;
+      border: 1px dashed var(--neon-pink);
+      color: var(--neon-pink);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      cursor: help;
+      background: transparent;
+    }
+
+    .wk-tooltip-wrap::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+      background: var(--surface);
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      clip-path: var(--cut);
+    }
+
+    .wk-tooltip-wrap:hover::after { opacity: 1; }
+
+    .wk-btn {
+      padding: 12px 24px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid var(--neon-pink);
+      color: var(--neon-pink);
+      cursor: pointer;
+      clip-path: var(--cut);
+      transition: box-shadow 0.2s, background 0.2s;
+    }
+
+    .wk-btn:hover {
+      background: rgba(255, 45, 149, 0.15);
+      box-shadow: 0 0 20px rgba(255, 45, 149, 0.4);
+    }
+
+    /* Modal */
+    .modal::backdrop { background: rgba(0, 0, 0, 0.85); }
+    .modal { border: 1px solid var(--neon-cyan); background: var(--surface); padding: 0; max-width: 440px; width: calc(100% - 32px); color: var(--text); clip-path: var(--cut); }
+    .modal-inner { padding: 32px; position: relative; }
+    .modal-close { position: absolute; top: 12px; right: 12px; background: transparent; border: 1px solid var(--neon-pink); color: var(--neon-pink); width: 32px; height: 32px; cursor: pointer; font-family: var(--mono); }
+    .modal h2 { font-family: var(--mono); font-size: 1rem; color: var(--neon-cyan); margin-bottom: 16px; letter-spacing: 0.1em; }
+
+    .footer { text-align: center; padding: 24px; color: var(--muted); font-size: 0.8125rem; border-top: 1px solid rgba(0, 240, 255, 0.1); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">NEON_SYS</div>
+    <span style="font-family:var(--mono);font-size:0.6875rem;color:var(--muted);">v2.077</span>
+  </header>
+
+  <section class="hero">
+    <p class="hero-tag">// CYBERPUNK_UI</p>
+    <h1>Neon Widgets</h1>
+    <p>Кастомные виджеты в cyberpunk-стиле: угловые clip-path, неоновое свечение, ромбовидные radio и hex-чекбоксы.</p>
+  </section>
+
+  <section class="widget-kit">
+    <h2>&lt;UI_KIT /&gt;</h2>
+    <p>Полный набор часто используемых компонентов с уникальным cyberpunk-дизайном</p>
+
+    <div class="widget-grid">
+      <div class="widget-group widget-group--wide">
+        <h3>Alerts</h3>
+        <div class="wk-alert wk-alert--success">✓ Система синхронизирована</div>
+        <div class="wk-alert wk-alert--warning">⚠ Превышен лимит bandwidth</div>
+        <div class="wk-alert wk-alert--error">✕ Сбой авторизации — доступ запрещён</div>
+        <div class="wk-alert wk-alert--info">ℹ Обновление прошивки доступно</div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Badges</h3>
+        <div class="wk-badges">
+          <span class="wk-badge wk-badge--pink">Live</span>
+          <span class="wk-badge wk-badge--cyan">Beta</span>
+          <span class="wk-badge wk-badge--yellow">New</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Tooltip</h3>
+        <div class="wk-tooltip-wrap" data-tip="Neon tooltip data">
+          <button type="button" class="wk-tooltip-trigger">Hover me</button>
+        </div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Inputs</h3>
+        <input type="text" class="wk-input" placeholder="> enter_username">
+        <textarea class="wk-textarea" placeholder="> enter_message"></textarea>
+      </div>
+
+      <div class="widget-group">
+        <h3>Select</h3>
+        <div class="wk-select">
+          <select>
+            <option>Tokyo Node</option>
+            <option>Neo Seoul</option>
+            <option>Night City</option>
+          </select>
+          <span class="wk-select-icon">▼</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Checkboxes</h3>
+        <div class="wk-check-group">
+          <label class="wk-check"><input type="checkbox" checked><span class="wk-check-box"></span>Neural link</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-box"></span>Stealth mode</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-box"></span>Auto-hack</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Radio</h3>
+        <div class="wk-radio-group">
+          <label class="wk-radio"><input type="radio" name="cy-mode" checked><span class="wk-radio-mark"></span>Assault</label>
+          <label class="wk-radio"><input type="radio" name="cy-mode"><span class="wk-radio-mark"></span>Stealth</label>
+          <label class="wk-radio"><input type="radio" name="cy-mode"><span class="wk-radio-mark"></span>Netrun</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Toggle</h3>
+        <div class="wk-toggle-row">
+          <span>HUD overlay</span>
+          <label class="wk-toggle">
+            <input type="checkbox" checked>
+            <span class="wk-toggle-track"></span>
+            <span class="wk-toggle-thumb"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Range</h3>
+        <input type="range" class="wk-range" min="0" max="100" value="65">
+      </div>
+
+      <div class="widget-group">
+        <h3>Progress</h3>
+        <div class="wk-progress"><div class="wk-progress-fill"></div></div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Tabs</h3>
+        <div class="wk-tabs">
+          <input type="radio" name="cy-tabs" id="cy-tab1" checked>
+          <input type="radio" name="cy-tabs" id="cy-tab2">
+          <input type="radio" name="cy-tabs" id="cy-tab3">
+          <div class="wk-tab-labels">
+            <label for="cy-tab1">Scan</label>
+            <label for="cy-tab2">Hack</label>
+            <label for="cy-tab3">Extract</label>
+          </div>
+          <div class="wk-tab-panels">
+            <div class="wk-tab-panel">Сканирование сети на уязвимости...</div>
+            <div class="wk-tab-panel">Взлом ICE-протокола в процессе.</div>
+            <div class="wk-tab-panel">Извлечение данных: 72% complete.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Pagination</h3>
+        <div class="wk-pagination">
+          <a href="#" class="wk-page">‹</a>
+          <a href="#" class="wk-page wk-page--active">1</a>
+          <a href="#" class="wk-page">2</a>
+          <a href="#" class="wk-page">3</a>
+          <a href="#" class="wk-page">›</a>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Modal</h3>
+        <button type="button" class="wk-btn" data-open-modal="cy-modal">Open modal</button>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="modal" id="cy-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>CONFIG_PANEL</h2>
+      <div class="wk-select" style="margin-bottom:16px;">
+        <select><option>Alpha squad</option><option>Bravo squad</option></select>
+        <span class="wk-select-icon">▼</span>
+      </div>
+      <div class="wk-check-group">
+        <label class="wk-check"><input type="checkbox" checked><span class="wk-check-box"></span>Confirm deploy</label>
+      </div>
+      <button type="button" class="wk-btn" style="margin-top:16px;">Execute</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">© 2025 NEON_SYS · Cyberpunk Widget Template</footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() { document.getElementById(btn.dataset.openModal).showModal(); });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { btn.closest('dialog').close(); });
+    });
+  </script>
+</body>
+</html>

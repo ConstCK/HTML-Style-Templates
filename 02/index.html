@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soft UI — Claymorphism 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #e8ecf4;
+      --surface: #e8ecf4;
+      --text: #4a5568;
+      --heading: #2d3748;
+      --accent: #228653;
+      --accent-light: #5cb87a;
+      --pink: #ed64a6;
+      --mint: #68d391;
+      --shadow-out: 8px 8px 16px #c5cad4, -8px -8px 16px #ffffff;
+      --shadow-in: inset 4px 4px 8px #c5cad4, inset -4px -4px 8px #ffffff;
+      --shadow-soft: 4px 4px 12px rgba(163, 177, 198, 0.5), -4px -4px 12px rgba(255, 255, 255, 0.8);
+      --radius: 24px;
+      --radius-sm: 16px;
+    }
+
+    body {
+      font-family: "Nunito", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .clay {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-out);
+    }
+
+    .clay-inset {
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-in);
+    }
+
+    .header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--heading);
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, var(--accent-light), var(--accent));
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.25rem;
+    }
+
+    .nav { display: flex; gap: 8px; }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 10px 18px;
+      border-radius: 999px;
+      transition: box-shadow 0.2s;
+    }
+
+    .nav a:hover { box-shadow: var(--shadow-in); }
+    .nav a.active { box-shadow: var(--shadow-in); color: var(--accent); }
+
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 24px 80px;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+
+    .hero-content { padding: 48px; flex: 1 1 320px; }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      color: var(--heading);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .hero p { margin-bottom: 28px; }
+
+    .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: linear-gradient(145deg, var(--accent-light), var(--accent));
+      color: #fff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-soft {
+      background: var(--surface);
+      color: var(--heading);
+      box-shadow: var(--shadow-out);
+    }
+
+    .hero-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      flex: 1 1 280px;
+    }
+
+    .hero-cards .hero-card { flex: 1 1 calc(50% - 10px); }
+
+    .hero-card {
+      padding: 28px;
+      text-align: center;
+    }
+
+    .hero-card-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      box-shadow: var(--shadow-out);
+    }
+
+    .hero-card-icon--mint { background: linear-gradient(145deg, #9ae6b4, var(--mint)); }
+    .hero-card-icon--pink { background: linear-gradient(145deg, #fbb6ce, var(--pink)); }
+    .hero-card-icon--purple { background: linear-gradient(145deg, var(--accent-light), var(--accent)); }
+    .hero-card-icon--green { background: linear-gradient(145deg, var(--accent-light), var(--accent)); }
+
+    .hero-card h3 {
+      font-size: 1rem;
+      color: var(--heading);
+      margin-bottom: 4px;
+    }
+
+    .hero-card p { font-size: 0.8125rem; }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .section-title h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--heading);
+      margin-bottom: 8px;
+    }
+
+    .cards-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .cards-grid .card { flex: 1 1 calc(33.333% - 16px); min-width: 240px; }
+
+    .card { padding: 32px; }
+
+    .card h3 {
+      font-size: 1.125rem;
+      color: var(--heading);
+      margin-bottom: 8px;
+    }
+
+    .card p { font-size: 0.9375rem; margin-bottom: 16px; }
+
+    .progress-bar {
+      height: 12px;
+      border-radius: 999px;
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    }
+
+    .progress-fill--80 { width: 80%; }
+    .progress-fill--65 { width: 65%; }
+    .progress-fill--92 { width: 92%; }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+    }
+
+    .toggle {
+      width: 52px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .toggle::after {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--accent-light), var(--accent));
+      top: 3px;
+      left: 3px;
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .testimonials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .testimonials .testimonial { flex: 1 1 calc(50% - 12px); min-width: 280px; }
+
+    .testimonial {
+      padding: 32px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .testimonial-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: var(--shadow-soft);
+      flex-shrink: 0;
+    }
+
+    .testimonial blockquote {
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .testimonial cite {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: var(--heading);
+    }
+
+    .pricing {
+      padding: 48px;
+      text-align: center;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .pricing h2 {
+      font-size: 1.5rem;
+      color: var(--heading);
+      margin-bottom: 8px;
+    }
+
+    .price-tag {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 20px 0;
+    }
+
+    .price-tag small { font-size: 1rem; color: var(--text); font-weight: 600; }
+
+    .pricing-list {
+      list-style: none;
+      text-align: left;
+      margin: 24px 0;
+    }
+
+    .pricing-list li {
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-in);
+      font-size: 0.9375rem;
+    }
+
+    .pricing-list li::before {
+      content: "✓ ";
+      color: var(--mint);
+      font-weight: 800;
+    }
+
+    .footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    /* Widget Kit — Claymorphism */
+    .widget-kit {
+      padding: 40px;
+      margin-bottom: 48px;
+    }
+
+    .widget-kit-box {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-out);
+      padding: 36px;
+    }
+
+    .widget-kit h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--heading);
+      margin-bottom: 8px;
+    }
+
+    .widget-kit > .widget-kit-box > p { margin-bottom: 32px; }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .widget-group {
+      flex: 1 1 280px;
+      max-width: 100%;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-out);
+      padding: 22px;
+    }
+
+    .widget-group--full { flex: 1 1 100%; }
+
+    .widget-group-title {
+      font-weight: 800;
+      font-size: 0.8125rem;
+      color: var(--heading);
+      margin-bottom: 14px;
+    }
+
+    /* Alerts */
+    .wk-alerts { display: flex; flex-direction: column; gap: 12px; }
+
+    .wk-alert {
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .wk-alert--success {
+      background: var(--surface);
+      box-shadow: var(--shadow-out);
+      color: var(--mint);
+    }
+
+    .wk-alert--warning {
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      color: #d69e2e;
+    }
+
+    .wk-alert--error {
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      color: #a8324a;
+    }
+
+    .wk-alert--info {
+      background: linear-gradient(145deg, rgba(92, 184, 122, 0.35), rgba(34, 134, 83, 0.18));
+      box-shadow: var(--shadow-soft);
+      color: var(--accent);
+    }
+
+    /* Badges */
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .wk-badge {
+      display: inline-flex;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      box-shadow: var(--shadow-out);
+    }
+
+    .wk-badge--purple { background: linear-gradient(145deg, var(--accent-light), var(--accent)); color: #fff; }
+    .wk-badge--pink { background: linear-gradient(145deg, #fbb6ce, var(--pink)); color: #fff; }
+    .wk-badge--mint { background: linear-gradient(145deg, #9ae6b4, var(--mint)); color: #fff; }
+    .wk-badge--soft { background: var(--surface); color: var(--accent); box-shadow: var(--shadow-in); }
+
+    /* Inputs */
+    .wk-field { margin-bottom: 12px; }
+    .wk-field:last-child { margin-bottom: 0; }
+
+    .wk-label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.8125rem;
+      color: var(--heading);
+      margin-bottom: 8px;
+    }
+
+    .wk-input,
+    .wk-textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      color: var(--heading);
+      outline: none;
+      transition: box-shadow 0.2s;
+    }
+
+    .wk-input:focus,
+    .wk-textarea:focus { box-shadow: var(--shadow-out); }
+
+    .wk-textarea { min-height: 72px; resize: vertical; }
+
+    /* Clay Select */
+    .wk-select-wrap { position: relative; max-width: 100%; }
+
+    .wk-select {
+      width: 100%;
+      padding: 14px 40px 14px 18px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      color: var(--heading);
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      transition: box-shadow 0.2s;
+    }
+
+    .wk-select:focus { box-shadow: var(--shadow-out); }
+
+    .wk-select-wrap::after {
+      content: "▾";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--accent);
+      font-size: 0.875rem;
+    }
+
+    /* Dropdown readability */
+    select,
+    .wk-select select,
+    select.wk-select,
+    .form-brutal select {
+      color-scheme: light;
+      color: var(--heading);
+      background-color: var(--surface);
+    }
+
+    select option,
+    .wk-select select option,
+    select.wk-select option,
+    .form-brutal select option {
+      background-color: #ffffff;
+      color: #18181b;
+    }
+
+    /* Clay Checkbox Orbs */
+    .wk-check-group,
+    .wk-radio-group { display: flex; flex-direction: column; gap: 12px; }
+
+    .wk-check,
+    .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.9375rem;
+    }
+
+    .wk-check input,
+    .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-check-orb {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.25s, background 0.25s;
+    }
+
+    .wk-check input:checked + .wk-check-orb {
+      box-shadow: var(--shadow-out);
+      background: linear-gradient(145deg, var(--accent-light), var(--accent));
+    }
+
+    .wk-check input:checked + .wk-check-orb::after {
+      content: "✓";
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    /* Clay Radio */
+    .wk-radio-clay {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      flex-shrink: 0;
+      position: relative;
+      transition: box-shadow 0.25s;
+    }
+
+    .wk-radio input:checked + .wk-radio-clay {
+      box-shadow: var(--shadow-out);
+    }
+
+    .wk-radio input:checked + .wk-radio-clay::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--accent-light), var(--accent));
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Clay Toggle */
+    .wk-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .wk-toggle {
+      position: relative;
+      width: 56px;
+      height: 30px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .wk-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-toggle-track {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      transition: box-shadow 0.25s;
+    }
+
+    .wk-toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #c5cad4, #ffffff);
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.25s, background 0.25s;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-track {
+      box-shadow: var(--shadow-in);
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-thumb {
+      transform: translateX(26px);
+      background: linear-gradient(145deg, var(--accent-light), var(--accent));
+    }
+
+    /* Soft Range */
+    .wk-range {
+      width: 100%;
+      height: 10px;
+      appearance: none;
+      background: var(--surface);
+      border-radius: 999px;
+      box-shadow: var(--shadow-in);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--accent-light), var(--accent));
+      box-shadow: var(--shadow-out);
+      cursor: pointer;
+    }
+
+    .wk-range::-moz-range-thumb {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(145deg, var(--accent-light), var(--accent));
+      box-shadow: var(--shadow-out);
+      cursor: pointer;
+    }
+
+    .wk-range-val {
+      font-weight: 700;
+      font-size: 0.8125rem;
+      color: var(--accent);
+      margin-top: 8px;
+    }
+
+    /* Progress */
+    .wk-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.8125rem;
+      color: var(--heading);
+      margin-bottom: 10px;
+    }
+
+    .wk-progress {
+      height: 14px;
+      border-radius: 999px;
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      overflow: hidden;
+    }
+
+    .wk-progress-bar {
+      height: 100%;
+      width: 72%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      box-shadow: 2px 0 8px rgba(34, 134, 83, 0.35);
+    }
+
+    /* Tabs */
+    .wk-tabs { position: relative; }
+
+    .wk-tab-input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .wk-tabs-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 6px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-in);
+    }
+
+    .wk-tabs-nav label {
+      flex: 1;
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.8125rem;
+      color: var(--text);
+      cursor: pointer;
+      background: var(--surface);
+      box-shadow: var(--shadow-out);
+      transition: box-shadow 0.2s, color 0.2s;
+    }
+
+    .wk-tab-input:nth-of-type(1):checked ~ .wk-tabs-nav label:nth-child(1),
+    .wk-tab-input:nth-of-type(2):checked ~ .wk-tabs-nav label:nth-child(2),
+    .wk-tab-input:nth-of-type(3):checked ~ .wk-tabs-nav label:nth-child(3) {
+      background: var(--surface);
+      box-shadow: var(--shadow-in);
+      color: var(--accent);
+    }
+
+    .wk-tab-panel {
+      display: none;
+      font-size: 0.9375rem;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-in);
+    }
+
+    .wk-tab-input:nth-of-type(1):checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    .wk-tab-input:nth-of-type(2):checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    .wk-tab-input:nth-of-type(3):checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) {
+      display: block;
+    }
+
+    /* Pagination */
+    .wk-pagination {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .wk-page-btn {
+      min-width: 40px;
+      height: 40px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.875rem;
+      background: var(--surface);
+      border: none;
+      border-radius: 50%;
+      box-shadow: var(--shadow-out);
+      text-decoration: none;
+      color: var(--heading);
+      cursor: pointer;
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+
+    .wk-page-btn:hover { box-shadow: var(--shadow-in); }
+
+    .wk-page-btn--active {
+      background: linear-gradient(145deg, var(--accent-light), var(--accent));
+      color: #fff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* Tooltip */
+    .wk-tooltip-wrap { display: inline-block; }
+
+    .wk-tooltip-trigger {
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: var(--accent);
+      cursor: help;
+      position: relative;
+    }
+
+    .wk-tooltip-trigger::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 16px;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-out);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--heading);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .wk-tooltip-trigger:hover::after { opacity: 1; }
+
+    .widget-kit-actions { margin-top: 4px; }
+
+    .modal::backdrop { background: rgba(45, 55, 72, 0.4); backdrop-filter: blur(6px); }
+
+    .modal {
+      border: none;
+      border-radius: var(--radius);
+      padding: 0;
+      max-width: 440px;
+      width: calc(100% - 32px);
+      background: var(--surface);
+      box-shadow: var(--shadow-out);
+    }
+
+    .modal-inner { padding: 36px; position: relative; }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: var(--shadow-out);
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+
+    .modal h2 {
+      font-size: 1.375rem;
+      font-weight: 800;
+      color: var(--heading);
+      margin-bottom: 8px;
+    }
+
+    .modal-inner > p { margin-bottom: 20px; }
+
+    @media (max-width: 768px) {
+      .hero-content, .hero-cards { flex: 1 1 100%; }
+      .hero-cards .hero-card, .cards-grid .card, .testimonials .testimonial { flex: 1 1 100%; }
+      .nav { display: none; }
+      .widget-group { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">☁</div>
+      SoftCloud
+    </div>
+    <nav class="nav">
+      <a href="#" class="active">Главная</a>
+      <a href="#">Функции</a>
+      <a href="#">Тарифы</a>
+    </nav>
+    <a href="#" class="btn btn-primary">Войти</a>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <div class="hero-content clay">
+        <span class="hero-badge">Claymorphism · Soft UI 2025</span>
+        <h1>Мягкий дизайн, который приятно трогать</h1>
+        <p>Soft UI и claymorphism создают ощущение тактильности через объёмные тени, скругления и пастельные градиенты.</p>
+        <div class="btn-group">
+          <a href="#" class="btn btn-primary">Попробовать</a>
+          <a href="#" class="btn btn-soft">Узнать больше</a>
+        </div>
+      </div>
+      <div class="hero-cards">
+        <div class="hero-card clay">
+          <div class="hero-card-icon hero-card-icon--mint">🌿</div>
+          <h3>Eco Mode</h3>
+          <p>Экономия ресурсов</p>
+        </div>
+        <div class="hero-card clay">
+          <div class="hero-card-icon hero-card-icon--pink">💜</div>
+          <h3>Wellness</h3>
+          <p>Забота о себе</p>
+        </div>
+        <div class="hero-card clay">
+          <div class="hero-card-icon hero-card-icon--purple">⚡</div>
+          <h3>Fast Sync</h3>
+          <p>Мгновенная синхронизация</p>
+        </div>
+        <div class="hero-card clay">
+          <div class="hero-card-icon hero-card-icon--green">🔒</div>
+          <h3>Secure</h3>
+          <p>Шифрование данных</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title">
+      <h2>Панель управления</h2>
+      <p>Progress bars, toggles и soft cards</p>
+    </div>
+
+    <section class="cards-grid">
+      <article class="card clay">
+        <h3>Хранилище</h3>
+        <p>Использовано 8.2 GB из 10 GB</p>
+        <div class="progress-bar"><div class="progress-fill progress-fill--80"></div></div>
+      </article>
+      <article class="card clay">
+        <h3>Активность</h3>
+        <p>65% целей выполнено</p>
+        <div class="progress-bar"><div class="progress-fill progress-fill--65"></div></div>
+      </article>
+      <article class="card clay">
+        <h3>Уведомления</h3>
+        <p>Включить push-уведомления</p>
+        <div class="toggle-row">
+          <span>Push alerts</span>
+          <div class="toggle" role="switch" aria-checked="true" tabindex="0"></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="testimonials">
+      <article class="testimonial clay">
+        <img class="testimonial-avatar" src="https://i.pravatar.cc/112?img=5" alt="Anna">
+        <div>
+          <blockquote>«Soft UI делает приложение уютным. Пользователи проводят в нём больше времени.»</blockquote>
+          <cite>— Анна, Product Designer</cite>
+        </div>
+      </article>
+      <article class="testimonial clay">
+        <img class="testimonial-avatar" src="https://i.pravatar.cc/112?img=12" alt="Max">
+        <div>
+          <blockquote>«Claymorphism отлично подходит для wellness и lifestyle продуктов.»</blockquote>
+          <cite>— Макс, Founder</cite>
+        </div>
+      </article>
+    </section>
+
+    <section class="pricing clay">
+      <h2>Premium Plan</h2>
+      <p>Все функции без ограничений</p>
+      <p class="price-tag">$12<small>/мес</small></p>
+      <ul class="pricing-list">
+        <li>Неограниченное хранилище</li>
+        <li>Приоритетная поддержка</li>
+        <li>Расширенная аналитика</li>
+        <li>Кастомные темы</li>
+      </ul>
+      <a href="#" class="btn btn-primary" style="width: 100%;">Подписаться</a>
+    </section>
+
+    <section class="widget-kit">
+      <div class="widget-kit-box">
+        <h2>Widget Kit</h2>
+        <p>Мягкие clay-компоненты с объёмными тенями и тактильным ощущением</p>
+
+        <div class="widget-grid">
+          <div class="widget-group widget-group--full">
+            <p class="widget-group-title">Alerts</p>
+            <div class="wk-alerts">
+              <div class="wk-alert wk-alert--success">Профиль успешно обновлён</div>
+              <div class="wk-alert wk-alert--warning">Хранилище заполнено на 90%</div>
+              <div class="wk-alert wk-alert--error">Не удалось загрузить файл</div>
+              <div class="wk-alert wk-alert--info">Доступна новая тема оформления</div>
+            </div>
+          </div>
+
+          <div class="widget-group">
+            <p class="widget-group-title">Badges</p>
+            <div class="wk-badges">
+              <span class="wk-badge wk-badge--purple">Premium</span>
+              <span class="wk-badge wk-badge--pink">New</span>
+              <span class="wk-badge wk-badge--mint">Eco</span>
+              <span class="wk-badge wk-badge--soft">Beta</span>
+            </div>
+          </div>
+
+          <div class="widget-group">
+            <p class="widget-group-title">Tooltip</p>
+            <div class="wk-tooltip-wrap">
+              <span class="wk-tooltip-trigger" data-tip="12 GB доступно">Хранилище</span>
+            </div>
+          </div>
+
+          <div class="widget-group">
+            <p class="widget-group-title">Text Input</p>
+            <div class="wk-field">
+              <label class="wk-label" for="wk-input-soft">Имя</label>
+              <input class="wk-input" type="text" id="wk-input-soft" placeholder="Ваше имя">
+            </div>
+            <div class="wk-field">
+              <label class="wk-label" for="wk-textarea-soft">Сообщение</label>
+              <textarea class="wk-textarea" id="wk-textarea-soft" placeholder="Напишите что-нибудь..."></textarea>
+            </div>
+          </div>
+
+          <div class="widget-group">
+            <p class="widget-group-title">Select</p>
+            <label class="wk-label" for="wk-select-soft">Тема</label>
+            <div class="wk-select-wrap">
+              <select class="wk-select" id="wk-select-soft">
+                <option>Lavender Dream</option>
+                <option>Ocean Breeze</option>
+                <option>Sunset Glow</option>
+                <option>Forest Calm</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="widget-group">
+            <p class="widget-group-title">Checkbox</p>
+            <div class="wk-check-group">
+              <label class="wk-check">
+                <input type="checkbox" checked>
+                <span class="wk-check-orb"></span>
+                Email-напоминания
+              </label>
+              <label class="wk-check">
+                <input type="checkbox">
+                <span class="wk-check-orb"></span>
+                Push на телефон
+              </label>
+              <label class="wk-check">
+                <input type="checkbox">
+                <span class="wk-check-orb"></span>
+                Еженедельный отчёт
+              </label>
+            </div>
+          </div>
+
+          <div class="widget-group">
+            <p class="widget-group-title">Radio</p>
+            <div class="wk-radio-group">
+              <label class="wk-radio">
+                <input type="radio" name="wk-plan-soft" checked>
+                <span class="wk-radio-clay"></span>
+                Free
+              </label>
+              <label class="wk-radio">
+                <input type="radio" name="wk-plan-soft">
+                <span class="wk-radio-clay"></span>
+                Pro
+              </label>
+              <label class="wk-radio">
+                <input type="radio" name="wk-plan-soft">
+                <span class="wk-radio-clay"></span>
+                Team
+              </label>
+            </div>
+          </div>
+
+          <div class="widget-group">
+            <p class="widget-group-title">Toggle</p>
+            <div class="wk-toggle-row">
+              <span style="font-weight:700;">Push alerts</span>
+              <label class="wk-toggle">
+                <input type="checkbox" checked>
+                <span class="wk-toggle-track"></span>
+                <span class="wk-toggle-thumb"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="widget-group">
+            <p class="widget-group-title">Range</p>
+            <input class="wk-range" type="range" min="0" max="100" value="45">
+            <p class="wk-range-val">Яркость: 45%</p>
+          </div>
+
+          <div class="widget-group">
+            <p class="widget-group-title">Progress</p>
+            <div class="wk-progress-label"><span>Хранилище</span><span>72%</span></div>
+            <div class="wk-progress"><div class="wk-progress-bar"></div></div>
+          </div>
+
+          <div class="widget-group widget-group--full">
+            <p class="widget-group-title">Tabs</p>
+            <div class="wk-tabs">
+              <input class="wk-tab-input" type="radio" name="wk-tabs-soft" id="wk-tab-soft-1" checked>
+              <input class="wk-tab-input" type="radio" name="wk-tabs-soft" id="wk-tab-soft-2">
+              <input class="wk-tab-input" type="radio" name="wk-tabs-soft" id="wk-tab-soft-3">
+              <div class="wk-tabs-nav">
+                <label for="wk-tab-soft-1">Обзор</label>
+                <label for="wk-tab-soft-2">Файлы</label>
+                <label for="wk-tab-soft-3">Настройки</label>
+              </div>
+              <div class="wk-tab-panels">
+                <div class="wk-tab-panel">Добро пожаловать в SoftCloud. Все системы работают штатно.</div>
+                <div class="wk-tab-panel">8.2 GB из 10 GB использовано. 142 файла в облаке.</div>
+                <div class="wk-tab-panel">Настройте профиль и уведомления через модальное окно.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="widget-group">
+            <p class="widget-group-title">Pagination</p>
+            <nav class="wk-pagination" aria-label="Pagination">
+              <a class="wk-page-btn" href="#">←</a>
+              <a class="wk-page-btn wk-page-btn--active" href="#">1</a>
+              <a class="wk-page-btn" href="#">2</a>
+              <a class="wk-page-btn" href="#">3</a>
+              <a class="wk-page-btn" href="#">→</a>
+            </nav>
+          </div>
+
+          <div class="widget-group">
+            <p class="widget-group-title">Modal</p>
+            <div class="widget-kit-actions">
+              <button type="button" class="btn btn-primary" data-open-modal="soft-modal">Открыть модальное окно</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="modal" id="soft-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>Настройки профиля</h2>
+      <p>Обновите параметры аккаунта.</p>
+      <div class="wk-field">
+        <label class="wk-label" for="modal-lang">Язык</label>
+        <div class="wk-select-wrap">
+          <select class="wk-select" id="modal-lang">
+            <option>Русский</option>
+            <option>English</option>
+            <option>Deutsch</option>
+          </select>
+        </div>
+      </div>
+      <div class="wk-field">
+        <div class="wk-check-group">
+          <label class="wk-check">
+            <input type="checkbox" checked>
+            <span class="wk-check-orb"></span>
+            Публичный профиль
+          </label>
+          <label class="wk-check">
+            <input type="checkbox">
+            <span class="wk-check-orb"></span>
+            Двухфакторная аутентификация
+          </label>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" style="margin-top:8px;width:100%;">Сохранить</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">© 2025 SoftCloud · Claymorphism Template</footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.getElementById(btn.dataset.openModal).showModal();
+      });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        btn.closest('dialog').close();
+      });
+    });
+  </script>
+</body>
+</html>

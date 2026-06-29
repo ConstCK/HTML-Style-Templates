@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editorial Magazine — 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf8f5;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b6560;
+      --accent: #c45c3e;
+      --line: #e8e4df;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "DM Sans", system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 24px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .nav { display: flex; gap: 28px; }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    .nav a:hover { color: var(--text); }
+
+    .main { max-width: 1200px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      margin-bottom: 64px;
+      align-items: end;
+    }
+
+    .hero > div:first-child { flex: 1.4 1 360px; }
+
+    .hero-meta {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em { font-style: italic; color: var(--accent); }
+
+    .hero-lead {
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 480px;
+    }
+
+    .hero-aside {
+      border-left: 1px solid var(--line);
+      padding-left: 32px;
+      flex: 1 1 280px;
+    }
+
+    .hero-aside p {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-style: italic;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .articles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 64px;
+    }
+
+    .article-card { flex: 1 1 calc(33.333% - 22px); min-width: 260px; }
+
+    .article-card { border-top: 2px solid var(--text); padding-top: 20px; }
+
+    .article-num {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .article-card h2 {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .article-card p { color: var(--muted); font-size: 0.9375rem; }
+
+    .article-img {
+      aspect-ratio: 4/3;
+      background: linear-gradient(145deg, #e8e4df, #d4cfc7);
+      margin-bottom: 16px;
+    }
+
+    .feature-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      padding: 48px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 64px;
+    }
+
+    .feature-row > h2 { flex: 1 1 240px; }
+    .feature-row > div { flex: 2 1 360px; }
+
+    .feature-row h2 {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 400;
+    }
+
+    .feature-row p { color: var(--muted); margin-bottom: 12px; }
+
+    /* Widget Kit — editorial / print aesthetic */
+    .widget-kit {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 40px;
+      margin-bottom: 48px;
+    }
+
+    .widget-kit > h2 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .widget-kit > p {
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .widget-group {
+      flex: 1 1 280px;
+      max-width: 100%;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+
+    .widget-group-title {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-variant: small-caps;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .wk-alert {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.9375rem;
+    }
+
+    .wk-alert:last-child { border-bottom: none; }
+
+    .wk-alert strong {
+      display: block;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-variant: small-caps;
+      margin-bottom: 4px;
+    }
+
+    .wk-alert--success strong { color: #2d6a4f; }
+    .wk-alert--warning strong { color: var(--accent); }
+    .wk-alert--error strong { color: #722F37; }
+    .wk-alert--info strong { color: var(--muted); }
+
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+    .wk-badge {
+      display: inline-block;
+      padding: 3px 0;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-variant: small-caps;
+      border-bottom: 2px solid var(--text);
+    }
+
+    .wk-badge--accent { border-color: var(--accent); color: var(--accent); }
+    .wk-badge--muted { border-color: var(--muted); color: var(--muted); }
+
+    .wk-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .wk-label {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .wk-label--caps {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-variant: small-caps;
+      color: var(--muted);
+    }
+
+    .wk-input,
+    .wk-textarea {
+      width: 100%;
+      padding: 10px 0;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      font-family: var(--sans);
+      font-size: 0.9375rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 0;
+    }
+
+    .wk-textarea {
+      min-height: 80px;
+      resize: vertical;
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      padding: 12px;
+    }
+
+    .wk-input:focus,
+    .wk-textarea:focus { border-bottom-color: var(--text); }
+    .wk-textarea:focus { border-color: var(--text); }
+
+    .wk-select {
+      display: flex;
+      align-items: stretch;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 2px solid var(--text);
+      background: transparent;
+    }
+
+    .wk-select select {
+      flex: 1;
+      padding: 10px 8px 10px 0;
+      border: none;
+      background-color: var(--surface);
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--text);
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* Dropdown readability */
+    select,
+    .wk-select select,
+    select.wk-select,
+    .form-brutal select {
+      color-scheme: light;
+      color: var(--text);
+      background-color: var(--surface);
+    }
+
+    select option,
+    .wk-select select option,
+    select.wk-select option,
+    .form-brutal select option {
+      background-color: #ffffff;
+      color: #18181b;
+    }
+
+    .wk-select-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--muted);
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+
+    .wk-checks,
+    .wk-radios { display: flex; flex-direction: column; gap: 12px; }
+
+    .wk-check,
+    .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.9375rem;
+    }
+
+    .wk-check input,
+    .wk-radio input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .wk-check-box {
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--text);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .wk-check-box::after {
+      content: "—";
+      color: var(--bg);
+      font-size: 0.875rem;
+      font-weight: 700;
+      line-height: 1;
+      opacity: 0;
+      transform: rotate(-45deg) scale(0.8);
+      transition: opacity 0.2s;
+    }
+
+    .wk-check input:checked + .wk-check-box {
+      background: var(--text);
+    }
+
+    .wk-check input:checked + .wk-check-box::after {
+      opacity: 1;
+    }
+
+    .wk-radio-ring {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .wk-radio-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text);
+      transform: scale(0);
+      transition: transform 0.2s;
+    }
+
+    .wk-radio input:checked + .wk-radio-ring .wk-radio-dot {
+      transform: scale(1);
+    }
+
+    .wk-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .wk-toggle {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    .wk-toggle input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .wk-toggle-track {
+      position: absolute;
+      inset: 0;
+      background: var(--line);
+      border: 1px solid var(--text);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .wk-toggle-track::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: var(--text);
+      transition: transform 0.2s;
+    }
+
+    .wk-toggle input:checked + .wk-toggle-track {
+      background: var(--text);
+    }
+
+    .wk-toggle input:checked + .wk-toggle-track::after {
+      background: var(--bg);
+      transform: translateX(22px);
+    }
+
+    .wk-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 1px;
+      background: var(--text);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      background: var(--text);
+      border: none;
+      cursor: pointer;
+    }
+
+    .wk-range::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      background: var(--text);
+      border: none;
+      cursor: pointer;
+    }
+
+    .wk-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-variant: small-caps;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .wk-progress {
+      height: 2px;
+      background: var(--line);
+      overflow: hidden;
+    }
+
+    .wk-progress-bar {
+      height: 100%;
+      width: 54%;
+      background: var(--text);
+    }
+
+    .wk-tabs-input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .wk-tabs-nav {
+      display: flex;
+      gap: 24px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 16px;
+    }
+
+    .wk-tabs-nav label {
+      padding-bottom: 10px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-variant: small-caps;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .wk-tabs-input:nth-of-type(1):checked ~ .wk-tabs-nav label:nth-of-type(1),
+    .wk-tabs-input:nth-of-type(2):checked ~ .wk-tabs-nav label:nth-of-type(2),
+    .wk-tabs-input:nth-of-type(3):checked ~ .wk-tabs-nav label:nth-of-type(3) {
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }
+
+    .wk-tabs-panel { display: none; font-size: 0.9375rem; color: var(--muted); line-height: 1.6; }
+    .wk-tabs-input:nth-of-type(1):checked ~ .wk-tabs-panels .wk-tabs-panel:nth-of-type(1),
+    .wk-tabs-input:nth-of-type(2):checked ~ .wk-tabs-panels .wk-tabs-panel:nth-of-type(2),
+    .wk-tabs-input:nth-of-type(3):checked ~ .wk-tabs-panels .wk-tabs-panel:nth-of-type(3) {
+      display: block;
+    }
+
+    .wk-pagination {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .wk-page {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      padding: 0 8px;
+      font-size: 0.8125rem;
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .wk-page:hover { color: var(--text); border-color: var(--line); }
+    .wk-page.is-active { color: var(--text); border-color: var(--text); font-weight: 600; }
+    .wk-page.is-disabled { opacity: 0.35; pointer-events: none; }
+
+    .wk-tooltip-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .wk-tooltip-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--text);
+      background: transparent;
+      font-family: var(--serif);
+      font-size: 0.875rem;
+      font-style: italic;
+      cursor: help;
+    }
+
+    .wk-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+      background: var(--text);
+      color: var(--bg);
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .wk-tooltip-wrap:hover .wk-tooltip,
+    .wk-tooltip-wrap:focus-within .wk-tooltip {
+      opacity: 1;
+    }
+
+    .widget-group--full { flex: 1 1 100%; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      font-family: var(--sans);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn:hover { background: var(--accent); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--text);
+    }
+
+    .btn-outline:hover { background: var(--text); color: var(--bg); }
+
+    /* Modal */
+    .modal::backdrop { background: rgba(26, 26, 26, 0.5); backdrop-filter: blur(4px); }
+
+    .modal {
+      border: none;
+      padding: 0;
+      max-width: 480px;
+      width: calc(100% - 32px);
+      background: var(--surface);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-inner { padding: 40px; position: relative; }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      cursor: pointer;
+      font-size: 1.25rem;
+      line-height: 1;
+      color: var(--muted);
+    }
+
+    .modal-close:hover { color: var(--text); }
+
+    .modal h2 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .modal > .modal-inner > p { color: var(--muted); margin-bottom: 24px; }
+
+    .footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 768px) {
+      .hero > div:first-child, .hero-aside, .article-card, .feature-row > h2, .feature-row > div { flex: 1 1 100%; }
+      .hero-aside { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
+      .nav { display: none; }
+      .widget-group { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">The Edit</div>
+    <nav class="nav">
+      <a href="#">Culture</a>
+      <a href="#">Design</a>
+      <a href="#">Archive</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <div>
+        <p class="hero-meta">Editorial · Trend 2025–2026</p>
+        <h1>Типографика как <em>искусство</em></h1>
+        <p class="hero-lead">Editorial Magazine — стиль с крупной serif-типографикой, асимметрией и минимализмом. Популярен у медиа, fashion-брендов и культурных проектов.</p>
+      </div>
+      <aside class="hero-aside">
+        <p>«Хороший дизайн начинается с правильного шрифта и воздуха между строками.»</p>
+        <a href="#" class="btn btn-outline">Читать выпуск</a>
+      </aside>
+    </section>
+
+    <section class="articles">
+      <article class="article-card">
+        <div class="article-img"></div>
+        <p class="article-num">01 — Design</p>
+        <h2>Serif возвращается</h2>
+        <p>Instrument Serif и аналоги доминируют в editorial-верстке 2025 года.</p>
+      </article>
+      <article class="article-card">
+        <div class="article-img" style="background: linear-gradient(145deg, #d4cfc7, #c45c3e33);"></div>
+        <p class="article-num">02 — Culture</p>
+        <h2>Медленный контент</h2>
+        <p>Длинные формы и качественная типографика против бесконечного скролла.</p>
+      </article>
+      <article class="article-card">
+        <div class="article-img" style="background: linear-gradient(145deg, #c45c3e22, #e8e4df);"></div>
+        <p class="article-num">03 — Archive</p>
+        <h2>Print meets Web</h2>
+        <p>Журнальная сетка и колонки переходят в digital без потери характера.</p>
+      </article>
+    </section>
+
+    <section class="feature-row">
+      <h2>О стиле</h2>
+      <div>
+        <p>Editorial design опирается на контраст serif-заголовков и sans-serif текста, тонкие линии-разделители и щедрые поля.</p>
+        <p>Идеален для блогов, портфолио фотографов, fashion-lookbook и культурных изданий.</p>
+      </div>
+    </section>
+
+    <section class="widget-kit">
+      <h2>Widget Kit</h2>
+      <p>Полный набор UI-компонентов в editorial / print эстетике</p>
+
+      <div class="widget-grid">
+        <div class="widget-group widget-group--full">
+          <p class="widget-group-title">Alerts</p>
+          <div class="wk-alert wk-alert--success">
+            <strong>Success</strong>
+            Подписка оформлена. Первый выпуск уже в пути.
+          </div>
+          <div class="wk-alert wk-alert--warning">
+            <strong>Warning</strong>
+            Пробный период заканчивается через 3 дня.
+          </div>
+          <div class="wk-alert wk-alert--error">
+            <strong>Error</strong>
+            Оплата не прошла — проверьте карту.
+          </div>
+          <div class="wk-alert wk-alert--info">
+            <strong>Info</strong>
+            Новый номер доступен в цифровом архиве.
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Badges & Tags</p>
+          <div class="wk-badges">
+            <span class="wk-badge">Featured</span>
+            <span class="wk-badge wk-badge--accent">New Issue</span>
+            <span class="wk-badge wk-badge--muted">Archive</span>
+            <span class="wk-tag">Design</span>
+            <span class="wk-tag">Culture</span>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Tooltip</p>
+          <span class="wk-tooltip-wrap">
+            <button type="button" class="wk-tooltip-trigger" aria-describedby="edit-tip">i</button>
+            <span class="wk-tooltip" id="edit-tip" role="tooltip">Editorial tooltip on hover</span>
+          </span>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Text Input</p>
+          <label class="wk-label" for="wk-email">Your email</label>
+          <input type="email" class="wk-input" id="wk-email" placeholder="reader@mail.com">
+          <label class="wk-label wk-label--caps" for="wk-message" style="margin-top:16px;">Message</label>
+          <textarea class="wk-textarea" id="wk-message" placeholder="Write a note…"></textarea>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Select</p>
+          <label class="wk-label" for="wk-topic">Тема подписки</label>
+          <div class="wk-select">
+            <select id="wk-topic">
+              <option>Design & Typography</option>
+              <option>Culture & Arts</option>
+              <option>Photography</option>
+              <option>Architecture</option>
+            </select>
+            <span class="wk-select-btn" aria-hidden="true">↓</span>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Checkboxes</p>
+          <div class="wk-checks">
+            <label class="wk-check">
+              <input type="checkbox" checked>
+              <span class="wk-check-box"></span>
+              Еженедельный дайджест
+            </label>
+            <label class="wk-check">
+              <input type="checkbox">
+              <span class="wk-check-box"></span>
+              Эксклюзивные материалы
+            </label>
+            <label class="wk-check">
+              <input type="checkbox">
+              <span class="wk-check-box"></span>
+              Уведомления о новых выпусках
+            </label>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Radio Group</p>
+          <div class="wk-radios">
+            <label class="wk-radio">
+              <input type="radio" name="edit-format" checked>
+              <span class="wk-radio-ring"><span class="wk-radio-dot"></span></span>
+              Digital only
+            </label>
+            <label class="wk-radio">
+              <input type="radio" name="edit-format">
+              <span class="wk-radio-ring"><span class="wk-radio-dot"></span></span>
+              Print + Digital
+            </label>
+            <label class="wk-radio">
+              <input type="radio" name="edit-format">
+              <span class="wk-radio-ring"><span class="wk-radio-dot"></span></span>
+              Annual bundle
+            </label>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Toggle</p>
+          <div class="wk-toggle-row">
+            <span style="font-size:0.9375rem;">Print delivery</span>
+            <label class="wk-toggle">
+              <input type="checkbox">
+              <span class="wk-toggle-track"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Range Slider</p>
+          <label class="wk-label wk-label--caps" for="wk-font-size">Font size</label>
+          <input type="range" class="wk-range" id="wk-font-size" min="12" max="24" value="16">
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Progress</p>
+          <div class="wk-progress-label"><span>Reading</span><span>54%</span></div>
+          <div class="wk-progress" role="progressbar" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100">
+            <div class="wk-progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Tabs</p>
+          <div class="wk-tabs">
+            <input type="radio" name="edit-tabs" id="edit-tab-1" class="wk-tabs-input" checked>
+            <input type="radio" name="edit-tabs" id="edit-tab-2" class="wk-tabs-input">
+            <input type="radio" name="edit-tabs" id="edit-tab-3" class="wk-tabs-input">
+            <div class="wk-tabs-nav">
+              <label for="edit-tab-1">Essays</label>
+              <label for="edit-tab-2">Interviews</label>
+              <label for="edit-tab-3">Reviews</label>
+            </div>
+            <div class="wk-tabs-panels">
+              <div class="wk-tabs-panel">Длинные формы и эссе о типографике и культуре дизайна.</div>
+              <div class="wk-tabs-panel">Разговоры с редакторами, фотографами и art directors.</div>
+              <div class="wk-tabs-panel">Обзоры книг, выставок и print-изданий сезона.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-group">
+          <p class="widget-group-title">Pagination</p>
+          <nav class="wk-pagination" aria-label="Pagination">
+            <a href="#" class="wk-page is-disabled" aria-disabled="true">Prev</a>
+            <a href="#" class="wk-page is-active" aria-current="page">1</a>
+            <a href="#" class="wk-page">2</a>
+            <a href="#" class="wk-page">3</a>
+            <a href="#" class="wk-page">Next</a>
+          </nav>
+        </div>
+
+        <div class="widget-group widget-group--full">
+          <p class="widget-group-title">Modal</p>
+          <button type="button" class="btn" data-open-modal="subscribe-modal">Подписаться — модальное окно</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="modal" id="subscribe-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>Подписка на The Edit</h2>
+      <p>Выберите формат и подтвердите подписку.</p>
+
+      <div style="margin-bottom:24px;">
+        <label class="wk-label" for="modal-format">Формат</label>
+        <div class="wk-select">
+          <select id="modal-format">
+            <option>Digital only</option>
+            <option>Print + Digital</option>
+            <option>Annual bundle</option>
+          </select>
+          <span class="wk-select-btn" aria-hidden="true">↓</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:24px;">
+        <div class="wk-checks">
+          <label class="wk-check">
+            <input type="checkbox" checked>
+            <span class="wk-check-box"></span>
+            Согласен с условиями
+          </label>
+          <label class="wk-check">
+            <input type="checkbox">
+            <span class="wk-check-box"></span>
+            Получать рекламные материалы
+          </label>
+        </div>
+      </div>
+
+      <button type="button" class="btn" style="margin-top: 8px;">Подтвердить</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">
+    <span>© 2025 The Edit</span>
+    <span>Editorial Magazine Template</span>
+  </footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.getElementById(btn.dataset.openModal).showModal();
+      });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        btn.closest('dialog').close();
+      });
+    });
+  </script>
+</body>
+</html>
