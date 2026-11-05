@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wabi-Sabi Zen — UI Kit 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f1ec;
+      --surface: #faf8f4;
+      --text: #3a3733;
+      --muted: #8c867c;
+      --ink: #56514a;
+      --moss: #7a8b6f;
+      --clay: #b08d6e;
+      --line: rgba(58, 55, 51, 0.14);
+      --radius: 3px;
+    }
+
+    body {
+      font-family: "Zen Kaku Gothic New", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    ::selection { background: var(--moss); color: var(--bg); }
+
+    .header {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 28px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.125rem;
+      color: var(--ink);
+      letter-spacing: 0.35em;
+    }
+
+    .hero {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 56px 32px 48px;
+    }
+
+    .hero .jp {
+      font-family: "Noto Serif JP", serif;
+      font-size: 0.9375rem;
+      color: var(--muted);
+      letter-spacing: 0.3em;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-family: "Noto Serif JP", serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      margin-bottom: 18px;
+      max-width: 16ch;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    .hero p { color: var(--muted); max-width: 460px; font-size: 0.9375rem; }
+
+    .widget-kit { max-width: 920px; margin: 0 auto; padding: 0 32px 88px; }
+    .widget-kit > h2 { font-family: "Noto Serif JP", serif; font-size: 1.0625rem; font-weight: 500; margin-bottom: 4px; color: var(--ink); letter-spacing: 0.2em; }
+    .widget-kit > p { color: var(--muted); margin-bottom: 32px; font-size: 0.875rem; }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .widget-group {
+      flex: 1 1 280px;
+      max-width: 100%;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 26px;
+      border: 1px solid var(--line);
+    }
+
+    .widget-group--wide { flex: 1 1 100%; }
+
+    .widget-group h3 {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .wk-alert {
+      padding: 12px 18px;
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      font-size: 0.875rem;
+      border: none;
+      border-left: 2px solid;
+      background: transparent;
+    }
+
+    .wk-alert:last-child { margin-bottom: 0; }
+    .wk-alert--success { border-color: var(--moss); color: var(--ink); background: rgba(122, 139, 111, 0.08); }
+    .wk-alert--warning { border-color: var(--clay); color: var(--ink); background: rgba(176, 141, 110, 0.08); }
+    .wk-alert--error { border-color: #a8695e; color: var(--ink); background: rgba(168, 105, 94, 0.08); }
+    .wk-alert--info { border-color: var(--muted); color: var(--muted); background: rgba(140, 134, 124, 0.06); }
+
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .wk-badge {
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      background: transparent;
+      color: var(--moss);
+      border: 1px solid rgba(122, 139, 111, 0.4);
+    }
+
+    .wk-badge--clay {
+      color: var(--clay);
+      border-color: rgba(176, 141, 110, 0.45);
+    }
+
+    .wk-input, .wk-textarea {
+      width: 100%;
+      padding: 12px 2px;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .wk-input::placeholder, .wk-textarea::placeholder { color: var(--muted); }
+    .wk-input:focus, .wk-textarea:focus { border-bottom-color: var(--ink); }
+
+    .wk-textarea { min-height: 80px; resize: vertical; margin-top: 10px; }
+
+    .wk-select { position: relative; }
+
+    .wk-select select {
+      width: 100%;
+      padding: 12px 40px 12px 2px;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      color-scheme: light;
+    }
+
+    .wk-select select option { background: var(--surface); color: var(--text); }
+
+    .wk-select::after {
+      content: "〳";
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .wk-check-group, .wk-radio-group { display: flex; flex-direction: column; gap: 12px; }
+
+    .wk-check, .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.9375rem;
+    }
+
+    .wk-check input, .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-check-ring {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid var(--muted);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--moss);
+      font-size: 0.6875rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .wk-check input:checked + .wk-check-ring {
+      background: var(--moss);
+      border-color: var(--moss);
+      color: var(--bg);
+    }
+
+    .wk-check input:checked + .wk-check-ring::after { content: "●"; font-size: 0.5625rem; }
+
+    .wk-radio-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid var(--muted);
+      position: relative;
+      flex-shrink: 0;
+      transition: border-color 0.3s;
+    }
+
+    .wk-radio input:checked + .wk-radio-dot { border-color: var(--clay); }
+
+    .wk-radio input:checked + .wk-radio-dot::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: var(--clay);
+    }
+
+    .wk-toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: 0.9375rem; }
+
+    .wk-toggle {
+      position: relative;
+      width: 42px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(140, 134, 124, 0.25);
+      transition: background 0.3s;
+    }
+
+    .wk-toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+
+    .wk-toggle-dot {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: 0 1px 4px rgba(58, 55, 51, 0.15);
+      transition: left 0.3s;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-dot { left: calc(100% - 19px); }
+    .wk-toggle input:checked ~ .wk-toggle-dot::before { content: ""; }
+    .wk-toggle:has(input:checked) { background: var(--moss); }
+
+    .wk-range {
+      width: 100%;
+      height: 1px;
+      appearance: none;
+      background: var(--line);
+      outline: none;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--ink);
+      border: 4px solid var(--surface);
+      box-shadow: 0 0 0 1px var(--line);
+      cursor: pointer;
+    }
+
+    .wk-range::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: none;
+      background: var(--ink);
+      cursor: pointer;
+    }
+
+    .wk-progress {
+      height: 2px;
+      background: rgba(140, 134, 124, 0.2);
+      overflow: hidden;
+    }
+
+    .wk-progress-fill {
+      height: 100%;
+      width: 58%;
+      background: var(--moss);
+      transition: width 0.5s;
+    }
+
+    .wk-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .wk-tab-labels {
+      display: flex;
+      gap: 28px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .wk-tab-labels label {
+      padding: 4px 0;
+      font-size: 0.875rem;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      color: var(--muted);
+      border-bottom: 1px solid transparent;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    #wz-tab1:checked ~ .wk-tab-labels label[for="wz-tab1"],
+    #wz-tab2:checked ~ .wk-tab-labels label[for="wz-tab2"],
+    #wz-tab3:checked ~ .wk-tab-labels label[for="wz-tab3"] {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+
+    .wk-tab-panel { display: none; font-size: 0.875rem; color: var(--muted); line-height: 1.9; }
+
+    #wz-tab1:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    #wz-tab2:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    #wz-tab3:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) { display: block; }
+
+    .wk-pagination { display: flex; gap: 10px; }
+
+    .wk-page {
+      min-width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .wk-page:hover { color: var(--ink); }
+
+    .wk-page--active {
+      color: var(--bg);
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .wk-tooltip-wrap { position: relative; display: inline-block; }
+
+    .wk-tooltip-trigger {
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-family: inherit;
+      letter-spacing: 0.08em;
+      font-size: 0.875rem;
+      cursor: help;
+    }
+
+    .wk-tooltip-wrap::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 16px;
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: 2px;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 10;
+    }
+
+    .wk-tooltip-wrap:hover::after { opacity: 1; }
+
+    .wk-btn {
+      padding: 12px 32px;
+      border-radius: 999px;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--bg);
+      font-family: inherit;
+      letter-spacing: 0.14em;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .wk-btn:hover { background: transparent; color: var(--ink); }
+
+    .wk-btn--ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .wk-btn--ghost:hover { border-color: var(--ink); }
+
+    .modal::backdrop { background: rgba(58, 55, 51, 0.35); }
+
+    .modal {
+      border: none;
+      border-radius: var(--radius);
+      padding: 0;
+      max-width: 400px;
+      width: calc(100% - 32px);
+      background: var(--surface);
+      box-shadow: 0 24px 64px rgba(58, 55, 51, 0.14);
+    }
+
+    .modal-inner { padding: 32px; position: relative; }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .modal-close:hover { color: var(--ink); }
+
+    .modal h2 {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.0625rem;
+      font-weight: 500;
+      margin-bottom: 18px;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 32px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+    }
+
+  /* Mobile adaptation */
+  @media (max-width: 768px) {
+    .header { flex-wrap: wrap; gap: 12px; padding: 18px 20px; }
+    .hero { padding: 40px 20px 32px; }
+    .widget-kit { padding: 0 20px 64px; }
+    .footer { padding: 20px; text-align: center; }
+    .widget-grid { gap: 16px; }
+    .widget-group { flex: 1 1 100%; }
+    .wk-badges { gap: 6px; }
+    .wk-tab-labels { flex-wrap: wrap; gap: 16px; }
+    .modal { width: calc(100% - 24px); }
+  }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">侘 寂</div>
+    <a href="#" class="wk-btn wk-btn--ghost">войти</a>
+  </header>
+
+  <section class="hero">
+    <p class="jp">侘寂 — красота несовершенства</p>
+    <h1>Тишина, тушь и воздух</h1>
+    <p>Японский минимализм: тёплый белый, след туши, асимметрия и много пустого пространства. Для чайных домов, галерей, спа и всех, кто говорит тихо.</p>
+  </section>
+
+  <section class="widget-kit">
+    <h2>Widget Kit</h2>
+    <p>компоненты в палитре туши и мха</p>
+
+    <div class="widget-grid">
+      <div class="widget-group widget-group--wide">
+        <h3>Alerts</h3>
+        <div class="wk-alert wk-alert--success">Чай заварен — три минуты до готовности</div>
+        <div class="wk-alert wk-alert--warning">Последняя чашка из этой партии</div>
+        <div class="wk-alert wk-alert--error">Печь остыла — нужно время</div>
+        <div class="wk-alert wk-alert--info">В саду цветёт слива — короткий сезон</div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Badges</h3>
+        <div class="wk-badges">
+          <span class="wk-badge">сезонное</span>
+          <span class="wk-badge wk-badge--clay">ручная работа</span>
+          <span class="wk-badge">лимит</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Tooltip</h3>
+        <div class="wk-tooltip-wrap" data-tip="Чайник: глиняный, обжиг 1280°">
+          <button type="button" class="wk-tooltip-trigger">о посуде</button>
+        </div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Inputs</h3>
+        <input type="text" class="wk-input" placeholder="ваше имя">
+        <textarea class="wk-textarea" placeholder="несколько слов о себе..."></textarea>
+      </div>
+
+      <div class="widget-group">
+        <h3>Select</h3>
+        <div class="wk-select">
+          <select>
+            <option>сенча</option>
+            <option>гёкуро</option>
+            <option>хо-дзича</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Checkboxes</h3>
+        <div class="wk-check-group">
+          <label class="wk-check"><input type="checkbox" checked><span class="wk-check-ring"></span>тихий зал</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-ring"></span>сад с видом</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-ring"></span>церемония целиком</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Radio</h3>
+        <div class="wk-radio-group">
+          <label class="wk-radio"><input type="radio" name="wz-seat" checked><span class="wk-radio-dot"></span>у окна</label>
+          <label class="wk-radio"><input type="radio" name="wz-seat"><span class="wk-radio-dot"></span>татами</label>
+          <label class="wk-radio"><input type="radio" name="wz-seat"><span class="wk-radio-dot"></span>кресло</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Toggle</h3>
+        <div class="wk-toggle-row">
+          <span>напоминание</span>
+          <label class="wk-toggle"><input type="checkbox" checked><span class="wk-toggle-dot"></span></label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Range</h3>
+        <input type="range" class="wk-range" min="0" max="100" value="58">
+      </div>
+
+      <div class="widget-group">
+        <h3>Progress</h3>
+        <div class="wk-progress"><div class="wk-progress-fill"></div></div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Tabs</h3>
+        <div class="wk-tabs">
+          <input type="radio" name="wz-tabs" id="wz-tab1" checked>
+          <input type="radio" name="wz-tabs" id="wz-tab2">
+          <input type="radio" name="wz-tabs" id="wz-tab3">
+          <div class="wk-tab-labels">
+            <label for="wz-tab1">чай</label>
+            <label for="wz-tab2">дом</label>
+            <label for="wz-tab3">путь</label>
+          </div>
+          <div class="wk-tab-panels">
+            <div class="wk-tab-panel">Сенча этого сезона — листья с плантации в Удзи, собраны вручную в мае.</div>
+            <div class="wk-tab-panel">Дом на склоне холма: соломенная крыша, глинобитные стены, вода из родника.</div>
+            <div class="wk-tab-panel">Путь мастера: сорок лет практики, каждый день — первый.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Pagination</h3>
+        <div class="wk-pagination">
+          <a href="#" class="wk-page">‹</a>
+          <a href="#" class="wk-page wk-page--active">1</a>
+          <a href="#" class="wk-page">2</a>
+          <a href="#" class="wk-page">3</a>
+          <a href="#" class="wk-page">›</a>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Modal</h3>
+        <button type="button" class="wk-btn" data-open-modal="wz-modal">записаться</button>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="modal" id="wz-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>Запись на церемонию</h2>
+      <div class="wk-select" style="margin-bottom:16px;">
+        <select><option>суббота, 10:00</option><option>воскресенье, 16:00</option></select>
+      </div>
+      <label class="wk-check"><input type="checkbox" checked><span class="wk-check-ring"></span>приду с открытым сердцем</label>
+      <button type="button" class="wk-btn" style="margin-top:18px;width:100%;">подтвердить</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">© 2026 侘寂 · Wabi-Sabi Zen Template</footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() { document.getElementById(btn.dataset.openModal).showModal(); });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { btn.closest('dialog').close(); });
+    });
+    document.querySelectorAll('.wk-select').forEach(function(wrap) {
+      var sel = wrap.querySelector('select');
+      wrap.addEventListener('click', function(e) {
+        if (e.target === sel) return;
+        sel.focus();
+        if (typeof sel.showPicker === 'function') sel.showPicker();
+        else sel.click();
+      });
+    });
+  </script>
+</body>
+</html>

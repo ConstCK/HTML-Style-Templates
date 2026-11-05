@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Deco Luxe — UI Kit 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #101418;
+      --surface: #171d23;
+      --text: #ede4d3;
+      --muted: #9a917f;
+      --gold: #c9a45c;
+      --gold-bright: #e3c184;
+      --emerald: #1f5c50;
+      --line: rgba(201, 164, 92, 0.28);
+      --radius: 2px;
+    }
+
+    body {
+      font-family: "Jost", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(201, 164, 92, 0.06) 0%, transparent 45%);
+    }
+
+    ::selection { background: var(--gold); color: var(--bg); }
+
+    .header {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-family: "Marcellus", serif;
+      font-size: 1.25rem;
+      color: var(--gold);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 56px 32px 44px;
+      text-align: center;
+    }
+
+    .hero .deco-line {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 20px;
+    }
+
+    .hero h1 {
+      font-family: "Marcellus", serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .hero p { color: var(--muted); max-width: 520px; margin: 0 auto; font-size: 1rem; letter-spacing: 0.02em; }
+
+    .hero .deco-line:last-child { margin: 20px auto 0; }
+
+    .widget-kit { max-width: 1000px; margin: 0 auto; padding: 0 32px 80px; }
+    .widget-kit > h2 { font-family: "Marcellus", serif; font-size: 1.25rem; font-weight: 400; margin-bottom: 6px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.14em; text-align: center; }
+    .widget-kit > p { color: var(--muted); margin-bottom: 28px; text-align: center; font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .widget-group {
+      flex: 1 1 280px;
+      max-width: 100%;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--line);
+      position: relative;
+    }
+
+    .widget-group::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(201, 164, 92, 0.12);
+      pointer-events: none;
+    }
+
+    .widget-group--wide { flex: 1 1 100%; }
+
+    .widget-group h3 {
+      font-family: "Marcellus", serif;
+      font-size: 0.8125rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .wk-alert {
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      font-size: 0.875rem;
+      border: 1px solid;
+      border-left-width: 3px;
+    }
+
+    .wk-alert:last-child { margin-bottom: 0; }
+    .wk-alert--success { border-color: rgba(107, 191, 134, 0.4); color: #8fc9a3; background: rgba(31, 92, 80, 0.25); }
+    .wk-alert--warning { border-color: rgba(201, 164, 92, 0.5); color: var(--gold-bright); background: rgba(201, 164, 92, 0.08); }
+    .wk-alert--error { border-color: rgba(217, 97, 89, 0.5); color: #e0a29c; background: rgba(217, 97, 89, 0.1); }
+    .wk-alert--info { border-color: rgba(154, 145, 127, 0.4); color: var(--muted); background: rgba(154, 145, 127, 0.07); }
+
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .wk-badge {
+      padding: 5px 14px;
+      border-radius: var(--radius);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--line);
+    }
+
+    .wk-badge--solid {
+      background: var(--gold);
+      color: var(--bg);
+      border-color: var(--gold);
+    }
+
+    .wk-input, .wk-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      border: none;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .wk-input::placeholder, .wk-textarea::placeholder { color: var(--muted); }
+    .wk-input:focus, .wk-textarea:focus { border-bottom-color: var(--gold); }
+
+    .wk-textarea { min-height: 80px; resize: vertical; margin-top: 8px; }
+
+    .wk-select { position: relative; }
+
+    .wk-select select {
+      width: 100%;
+      padding: 12px 40px 12px 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      color-scheme: dark;
+    }
+
+    .wk-select select option { background: var(--surface); color: var(--text); }
+
+    .wk-select::after {
+      content: "▾";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold);
+      pointer-events: none;
+    }
+
+    .wk-check-group, .wk-radio-group { display: flex; flex-direction: column; gap: 10px; }
+
+    .wk-check, .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.9375rem;
+    }
+
+    .wk-check input, .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-check-mark {
+      width: 18px;
+      height: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--bg);
+    }
+
+    .wk-check input:checked + .wk-check-mark {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .wk-check input:checked + .wk-check-mark::after { content: "✓"; }
+
+    .wk-radio-ring {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .wk-radio input:checked + .wk-radio-ring { border-color: var(--gold); }
+
+    .wk-radio input:checked + .wk-radio-ring::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .wk-toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: 0.9375rem; }
+
+    .wk-toggle {
+      position: relative;
+      width: 44px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+    }
+
+    .wk-toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+
+    .wk-toggle-dot {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--muted);
+      transition: left 0.2s, background 0.2s;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-dot {
+      left: calc(100% - 19px);
+      background: var(--gold);
+    }
+
+    .wk-range {
+      width: 100%;
+      height: 2px;
+      appearance: none;
+      background: var(--line);
+      outline: none;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      transform: rotate(45deg);
+      border-radius: 1px;
+      background: var(--gold);
+      cursor: pointer;
+    }
+
+    .wk-range::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      transform: rotate(45deg);
+      border-radius: 1px;
+      border: none;
+      background: var(--gold);
+      cursor: pointer;
+    }
+
+    .wk-progress {
+      height: 4px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .wk-progress-fill {
+      height: 100%;
+      width: 58%;
+      background: linear-gradient(90deg, var(--emerald), var(--gold));
+    }
+
+    .wk-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .wk-tab-labels {
+      display: flex;
+      gap: 0;
+      margin-bottom: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wk-tab-labels label {
+      padding: 10px 22px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: var(--muted);
+      border-bottom: 1px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    #ad-tab1:checked ~ .wk-tab-labels label[for="ad-tab1"],
+    #ad-tab2:checked ~ .wk-tab-labels label[for="ad-tab2"],
+    #ad-tab3:checked ~ .wk-tab-labels label[for="ad-tab3"] {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    .wk-tab-panel { display: none; font-size: 0.875rem; color: var(--muted); line-height: 1.7; text-align: center; padding-top: 16px; }
+
+    #ad-tab1:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    #ad-tab2:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    #ad-tab3:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) { display: block; }
+
+    .wk-pagination { display: flex; gap: 8px; justify-content: center; }
+
+    .wk-page {
+      min-width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      font-weight: 500;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .wk-page:hover { color: var(--gold); border-color: var(--gold); }
+
+    .wk-page--active {
+      background: var(--gold);
+      color: var(--bg);
+      border-color: var(--gold);
+    }
+
+    .wk-tooltip-wrap { position: relative; display: inline-block; }
+
+    .wk-tooltip-trigger {
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--gold);
+      font-family: inherit;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      cursor: help;
+    }
+
+    .wk-tooltip-wrap::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 14px;
+      background: var(--gold);
+      color: var(--bg);
+      border-radius: var(--radius);
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 10;
+    }
+
+    .wk-tooltip-wrap:hover::after { opacity: 1; }
+
+    .wk-btn {
+      padding: 12px 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--gold);
+      background: var(--gold);
+      color: var(--bg);
+      font-family: inherit;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .wk-btn:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+
+    .wk-btn--ghost {
+      background: transparent;
+      color: var(--gold);
+    }
+
+    .wk-btn--ghost:hover { background: rgba(201, 164, 92, 0.1); }
+
+    .modal::backdrop { background: rgba(16, 20, 24, 0.8); }
+
+    .modal {
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 0;
+      max-width: 420px;
+      width: calc(100% - 32px);
+      background: var(--surface);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-inner { padding: 28px; position: relative; }
+    .modal-inner::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(201, 164, 92, 0.15);
+      pointer-events: none;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 30px;
+      height: 30px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1rem;
+      z-index: 1;
+    }
+
+    .modal-close:hover { color: var(--gold); border-color: var(--gold); }
+
+    .modal h2 {
+      font-family: "Marcellus", serif;
+      font-size: 1.125rem;
+      font-weight: 400;
+      margin-bottom: 16px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 28px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      border-top: 1px solid var(--line);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+  /* Mobile adaptation */
+  @media (max-width: 768px) {
+    .header { flex-wrap: wrap; gap: 12px; padding: 16px 20px; }
+    .hero { padding: 40px 20px 32px; }
+    .widget-kit { padding: 0 20px 64px; }
+    .footer { padding: 20px; text-align: center; }
+    .widget-grid { gap: 14px; }
+    .widget-group { flex: 1 1 100%; }
+    .wk-badges { gap: 6px; }
+    .wk-tab-labels { flex-wrap: wrap; }
+    .modal { width: calc(100% - 24px); }
+  }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Luxe Deco</div>
+    <a href="#" class="wk-btn wk-btn--ghost">Войти</a>
+  </header>
+
+  <section class="hero">
+    <div class="deco-line"></div>
+    <h1>Роскошь золотого века</h1>
+    <p>Геометрия, золото и эмеральд на глубоком графите — эстетика великих отелей 1920-х для премиум-брендов, ювелирных домов и авторских заведений.</p>
+    <div class="deco-line"></div>
+  </section>
+
+  <section class="widget-kit">
+    <h2>Widget Kit</h2>
+    <p>Компоненты в ар-деко палитре</p>
+
+    <div class="widget-grid">
+      <div class="widget-group widget-group--wide">
+        <h3>Alerts</h3>
+        <div class="wk-alert wk-alert--success">Резерв confirmed — столик waiting at 20:00</div>
+        <div class="wk-alert wk-alert--warning">Осталось два места на вечер</div>
+        <div class="wk-alert wk-alert--error">Платёж не прошёл — обратитесь в банк</div>
+        <div class="wk-alert wk-alert--info">Winter menu — с 1 декабря</div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Badges</h3>
+        <div class="wk-badges">
+          <span class="wk-badge">Signature</span>
+          <span class="wk-badge wk-badge--solid">VIP</span>
+          <span class="wk-badge">1927</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Tooltip</h3>
+        <div class="wk-tooltip-wrap" data-tip="Дресс-код: smart casual">
+          <button type="button" class="wk-tooltip-trigger">Правила</button>
+        </div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Inputs</h3>
+        <input type="text" class="wk-input" placeholder="Ваше имя">
+        <textarea class="wk-textarea" placeholder="Особые пожелания..."></textarea>
+      </div>
+
+      <div class="widget-group">
+        <h3>Select</h3>
+        <div class="wk-select">
+          <select>
+            <option>Ужин, 19:00</option>
+            <option>Ужин, 20:00</option>
+            <option>Бранч, 12:00</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Checkboxes</h3>
+        <div class="wk-check-group">
+          <label class="wk-check"><input type="checkbox" checked><span class="wk-check-mark"></span>Столик у окна</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-mark"></span>Живая музыка</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-mark"></span>Винное сопровождение</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Radio</h3>
+        <div class="wk-radio-group">
+          <label class="wk-radio"><input type="radio" name="ad-hall" checked><span class="wk-radio-ring"></span>Главный зал</label>
+          <label class="wk-radio"><input type="radio" name="ad-hall"><span class="wk-radio-ring"></span>Terrace</label>
+          <label class="wk-radio"><input type="radio" name="ad-hall"><span class="wk-radio-ring"></span>Private room</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Toggle</h3>
+        <div class="wk-toggle-row">
+          <span>Напоминание о брони</span>
+          <label class="wk-toggle"><input type="checkbox" checked><span class="wk-toggle-dot"></span></label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Range</h3>
+        <input type="range" class="wk-range" min="0" max="100" value="58">
+      </div>
+
+      <div class="widget-group">
+        <h3>Progress</h3>
+        <div class="wk-progress"><div class="wk-progress-fill"></div></div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Tabs</h3>
+        <div class="wk-tabs">
+          <input type="radio" name="ad-tabs" id="ad-tab1" checked>
+          <input type="radio" name="ad-tabs" id="ad-tab2">
+          <input type="radio" name="ad-tabs" id="ad-tab3">
+          <div class="wk-tab-labels">
+            <label for="ad-tab1">Menu</label>
+            <label for="ad-tab2">Wine</label>
+            <label for="ad-tab3">Events</label>
+          </div>
+          <div class="wk-tab-panels">
+            <div class="wk-tab-panel">Дегустационный сет из семи подач — шеф-кузнеца рулит классикой.</div>
+            <div class="wk-tab-panel">Карта: 140 позиций, сомелье на связи каждый вечер.</div>
+            <div class="wk-tab-panel">Джаз-воскресенья: live-квартет с 20:00, вход свободный для гостей.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Pagination</h3>
+        <div class="wk-pagination">
+          <a href="#" class="wk-page">‹</a>
+          <a href="#" class="wk-page wk-page--active">1</a>
+          <a href="#" class="wk-page">2</a>
+          <a href="#" class="wk-page">3</a>
+          <a href="#" class="wk-page">›</a>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Modal</h3>
+        <button type="button" class="wk-btn" data-open-modal="ad-modal">Резерв</button>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="modal" id="ad-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>Бронирование</h2>
+      <div class="wk-select" style="margin-bottom:16px;">
+        <select><option>Столик на двоих</option><option>Столик на четверых</option></select>
+      </div>
+      <label class="wk-check" style="display:flex;margin-bottom:8px;"><input type="checkbox" checked><span class="wk-check-mark"></span>Согласен с правилами заведения</label>
+      <button type="button" class="wk-btn" style="margin-top:16px;width:100%;">Подтвердить</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">© 2026 Luxe Deco · Art Deco Luxe Template</footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() { document.getElementById(btn.dataset.openModal).showModal(); });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { btn.closest('dialog').close(); });
+    });
+    document.querySelectorAll('.wk-select').forEach(function(wrap) {
+      var sel = wrap.querySelector('select');
+      wrap.addEventListener('click', function(e) {
+        if (e.target === sel) return;
+        sel.focus();
+        if (typeof sel.showPicker === 'function') sel.showPicker();
+        else sel.click();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frutiger Aero Y2K — UI Kit 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: linear-gradient(180deg, #7ec8e3 0%, #b8e6f0 45%, #d9f2c8 100%);
+      --bg-flat: #b8e6f0;
+      --surface: rgba(255, 255, 255, 0.65);
+      --text: #1a3a2a;
+      --muted: #4a6a5a;
+      --aqua: #00a8c6;
+      --aqua-deep: #007a94;
+      --lime: #8bc34a;
+      --glass-border: rgba(255, 255, 255, 0.8);
+      --radius: 16px;
+    }
+
+    body {
+      font-family: "Nunito Sans", system-ui, sans-serif;
+      background: var(--bg-flat);
+      background-image: linear-gradient(180deg, #7ec8e3 0%, #b8e6f0 45%, #d9f2c8 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    ::selection { background: var(--aqua); color: #fff; }
+
+    .header {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.5));
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 16px rgba(0, 168, 198, 0.15), inset 0 1px 0 #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--aqua-deep);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .logo::before { content: "◐ "; }
+
+    .hero {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 48px 32px 40px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.875rem, 4.5vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0, 90, 120, 0.35), 0 1px 0 rgba(255,255,255,0.4);
+    }
+
+    .hero p {
+      color: #fff;
+      max-width: 520px;
+      margin: 0 auto;
+      font-size: 1rem;
+      font-weight: 600;
+      text-shadow: 0 1px 6px rgba(0, 90, 120, 0.3);
+    }
+
+    .hero .bubble-row { margin-top: 24px; display: flex; gap: 12px; justify-content: center; }
+
+    .hero .bubble {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 28%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.25) 28%, rgba(0,168,198,0.35) 70%);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 4px 14px rgba(0, 120, 150, 0.25), inset 0 -4px 10px rgba(0,168,198,0.3);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero .bubble:nth-child(2) { animation-delay: 0.7s; width: 32px; height: 32px; }
+    .hero .bubble:nth-child(3) { animation-delay: 1.4s; width: 24px; height: 24px; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .widget-kit { max-width: 1000px; margin: 0 auto; padding: 0 32px 80px; }
+    .widget-kit > h2 {
+      font-size: 1.25rem; font-weight: 800; margin-bottom: 6px; color: #fff;
+      text-shadow: 0 2px 8px rgba(0, 90, 120, 0.3);
+    }
+    .widget-kit > p { color: #fff; margin-bottom: 28px; font-weight: 600; text-shadow: 0 1px 4px rgba(0, 90, 120, 0.25); }
+
+    .widget-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .widget-group {
+      flex: 1 1 280px;
+      max-width: 100%;
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 24px rgba(0, 110, 140, 0.12), inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .widget-group--wide { flex: 1 1 100%; }
+
+    .widget-group h3 {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--aqua-deep);
+      margin-bottom: 14px;
+    }
+
+    .wk-alert {
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: 1px solid;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .wk-alert:last-child { margin-bottom: 0; }
+    .wk-alert--success { background: rgba(139, 195, 74, 0.35); border-color: rgba(107, 152, 47, 0.4); color: #3d5c1e; }
+    .wk-alert--warning { background: rgba(255, 213, 79, 0.4); border-color: rgba(200, 150, 20, 0.4); color: #7a5c00; }
+    .wk-alert--error { background: rgba(255, 138, 128, 0.35); border-color: rgba(200, 80, 70, 0.4); color: #8c2620; }
+    .wk-alert--info { background: rgba(126, 200, 227, 0.4); border-color: rgba(20, 130, 165, 0.4); color: #0c4a5c; }
+
+    .wk-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .wk-badge {
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.55));
+      color: var(--aqua-deep);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 2px 8px rgba(0, 130, 160, 0.15), inset 0 1px 0 #fff;
+    }
+
+    .wk-badge--lime {
+      background: linear-gradient(180deg, #aed581, #8bc34a);
+      color: #fff;
+      border-color: rgba(107, 152, 47, 0.5);
+      text-shadow: 0 1px 2px rgba(60, 90, 20, 0.4);
+    }
+
+    .wk-input, .wk-textarea {
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.75);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      color: var(--text);
+      outline: none;
+      box-shadow: inset 0 2px 6px rgba(0, 110, 140, 0.08);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .wk-textarea { border-radius: var(--radius); }
+
+    .wk-input::placeholder, .wk-textarea::placeholder { color: var(--muted); }
+    .wk-input:focus, .wk-textarea:focus { border-color: var(--aqua); box-shadow: 0 0 0 3px rgba(0, 168, 198, 0.2); }
+
+    .wk-textarea { min-height: 80px; resize: vertical; margin-top: 8px; }
+
+    .wk-select { position: relative; }
+
+    .wk-select select {
+      width: 100%;
+      padding: 12px 40px 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.75);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      color-scheme: light;
+      box-shadow: inset 0 2px 6px rgba(0, 110, 140, 0.08);
+    }
+
+    .wk-select select option { background: #fff; color: var(--text); }
+
+    .wk-select::after {
+      content: "▾";
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--aqua-deep);
+      pointer-events: none;
+    }
+
+    .wk-check-group, .wk-radio-group { display: flex; flex-direction: column; gap: 10px; }
+
+    .wk-check, .wk-radio {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.9375rem;
+    }
+
+    .wk-check input, .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .wk-check-orb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.5));
+      box-shadow: inset 0 -2px 4px rgba(0, 140, 170, 0.2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      transition: background 0.2s;
+    }
+
+    .wk-check input:checked + .wk-check-orb {
+      background: linear-gradient(180deg, #4fc3d8, var(--aqua));
+      border-color: var(--aqua-deep);
+      text-shadow: 0 1px 2px rgba(0, 80, 100, 0.5);
+    }
+
+    .wk-check input:checked + .wk-check-orb::after { content: "✓"; }
+
+    .wk-radio-orb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.5));
+      position: relative;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .wk-radio input:checked + .wk-radio-orb {
+      background: linear-gradient(180deg, #a5d68a, var(--lime));
+      border-color: rgba(107, 152, 47, 0.6);
+    }
+
+    .wk-radio input:checked + .wk-radio-orb::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(60, 90, 20, 0.4);
+    }
+
+    .wk-toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: 0.9375rem; }
+
+    .wk-toggle {
+      position: relative;
+      width: 48px;
+      height: 26px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(0, 120, 148, 0.3), rgba(0, 120, 148, 0.15));
+      border: 1px solid var(--glass-border);
+      box-shadow: inset 0 2px 5px rgba(0, 100, 130, 0.2);
+    }
+
+    .wk-toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+
+    .wk-toggle-dot {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 28%, #fff 0%, #dff2f8 45%, #9fd4e4 100%);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 2px 6px rgba(0, 100, 130, 0.3);
+      transition: left 0.2s, background 0.2s;
+    }
+
+    .wk-toggle input:checked ~ .wk-toggle-dot {
+      left: calc(100% - 24px);
+      background: radial-gradient(circle at 32% 28%, #fff 0%, #d4edaa 45%, var(--lime) 100%);
+      border-color: rgba(107, 152, 47, 0.6);
+    }
+
+    .wk-range {
+      width: 100%;
+      height: 10px;
+      appearance: none;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(0, 120, 148, 0.25), rgba(0, 120, 148, 0.1));
+      border: 1px solid var(--glass-border);
+      box-shadow: inset 0 2px 4px rgba(0, 100, 130, 0.15);
+      outline: none;
+    }
+
+    .wk-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 28%, #fff 0%, #c8ecf4 40%, var(--aqua) 100%);
+      border: 1px solid var(--aqua-deep);
+      box-shadow: 0 2px 8px rgba(0, 130, 160, 0.35);
+      cursor: pointer;
+    }
+
+    .wk-range::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--aqua-deep);
+      background: var(--aqua);
+      cursor: pointer;
+    }
+
+    .wk-progress {
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid var(--glass-border);
+      box-shadow: inset 0 2px 5px rgba(0, 100, 130, 0.15);
+      overflow: hidden;
+    }
+
+    .wk-progress-fill {
+      height: 100%;
+      width: 58%;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #b5e08c, var(--lime));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 10px rgba(139, 195, 74, 0.5);
+    }
+
+    .wk-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .wk-tab-labels {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .wk-tab-labels label {
+      padding: 9px 20px;
+      border-radius: 999px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--aqua-deep);
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.45));
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 2px 6px rgba(0, 130, 160, 0.1), inset 0 1px 0 #fff;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    #fa-tab1:checked ~ .wk-tab-labels label[for="fa-tab1"],
+    #fa-tab2:checked ~ .wk-tab-labels label[for="fa-tab2"],
+    #fa-tab3:checked ~ .wk-tab-labels label[for="fa-tab3"] {
+      background: linear-gradient(180deg, #3ab5cf, var(--aqua));
+      color: #fff;
+      border-color: var(--aqua-deep);
+      text-shadow: 0 1px 2px rgba(0, 80, 100, 0.4);
+    }
+
+    .wk-tab-panel { display: none; font-size: 0.875rem; color: var(--text); line-height: 1.65; }
+
+    #fa-tab1:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    #fa-tab2:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    #fa-tab3:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) { display: block; }
+
+    .wk-pagination { display: flex; gap: 6px; }
+
+    .wk-page {
+      min-width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.8125rem;
+      text-decoration: none;
+      color: var(--aqua-deep);
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.5));
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 2px 6px rgba(0, 130, 160, 0.12), inset 0 1px 0 #fff;
+    }
+
+    .wk-page--active {
+      background: linear-gradient(180deg, #3ab5cf, var(--aqua));
+      color: #fff;
+      border-color: var(--aqua-deep);
+      text-shadow: 0 1px 2px rgba(0, 80, 100, 0.4);
+    }
+
+    .wk-tooltip-wrap { position: relative; display: inline-block; }
+
+    .wk-tooltip-trigger {
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.55));
+      border: 1px solid var(--glass-border);
+      color: var(--aqua-deep);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.875rem;
+      cursor: help;
+      box-shadow: 0 2px 8px rgba(0, 130, 160, 0.12), inset 0 1px 0 #fff;
+    }
+
+    .wk-tooltip-wrap::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 14px;
+      background: rgba(20, 60, 80, 0.92);
+      color: #fff;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 10;
+    }
+
+    .wk-tooltip-wrap:hover::after { opacity: 1; }
+
+    .wk-btn {
+      padding: 11px 24px;
+      border-radius: 999px;
+      border: 1px solid var(--aqua-deep);
+      background: linear-gradient(180deg, #3ab5cf, var(--aqua));
+      color: #fff;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 0.875rem;
+      cursor: pointer;
+      text-shadow: 0 1px 2px rgba(0, 80, 100, 0.4);
+      box-shadow: 0 4px 14px rgba(0, 140, 170, 0.3), inset 0 1px 0 rgba(255,255,255,0.5);
+      transition: filter 0.2s;
+    }
+
+    .wk-btn:hover { filter: brightness(1.08); }
+
+    .wk-btn--ghost {
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.5));
+      color: var(--aqua-deep);
+      border: 1px solid var(--glass-border);
+      text-shadow: none;
+      box-shadow: 0 2px 8px rgba(0, 130, 160, 0.12), inset 0 1px 0 #fff;
+    }
+
+    .wk-btn--ghost:hover { filter: none; background: #fff; }
+
+    .modal::backdrop { background: rgba(20, 90, 115, 0.45); backdrop-filter: blur(4px); }
+
+    .modal {
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 0;
+      max-width: 420px;
+      width: calc(100% - 32px);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 24px 64px rgba(0, 90, 115, 0.3), inset 0 1px 0 #fff;
+    }
+
+    .modal-inner { padding: 28px; position: relative; }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.6));
+      color: var(--aqua-deep);
+      cursor: pointer;
+      font-size: 1.125rem;
+      box-shadow: 0 2px 6px rgba(0, 130, 160, 0.15);
+    }
+
+    .modal h2 { font-size: 1.125rem; font-weight: 800; margin-bottom: 16px; color: var(--aqua-deep); }
+
+    .footer {
+      text-align: center;
+      padding: 28px;
+      color: #fff;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-shadow: 0 1px 6px rgba(0, 90, 120, 0.3);
+    }
+
+  /* Mobile adaptation */
+  @media (max-width: 768px) {
+    .header { flex-wrap: wrap; gap: 12px; padding: 16px 20px; }
+    .hero { padding: 32px 20px 28px; }
+    .widget-kit { padding: 0 20px 64px; }
+    .footer { padding: 20px; text-align: center; }
+    .widget-grid { gap: 14px; }
+    .widget-group { flex: 1 1 100%; }
+    .wk-badges { gap: 6px; }
+    .wk-tab-labels { flex-wrap: wrap; }
+    .modal { width: calc(100% - 24px); }
+  }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">AquaFlow</div>
+    <a href="#" class="wk-btn wk-btn--ghost">Войти</a>
+  </header>
+
+  <section class="hero">
+    <h1>Прозрачность и свет 2000-х</h1>
+    <p>Глянцевые пузыри, аква-градиенты и стеклянные поверхности — оптимизм эпохи до кризиса. Для organic-tech брендов, экосервисов и всех, кто скучает по Windows Vista.</p>
+    <div class="bubble-row"><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div></div>
+  </section>
+
+  <section class="widget-kit">
+    <h2>Widget Kit</h2>
+    <p>Компоненты в аква-палитре</p>
+
+    <div class="widget-grid">
+      <div class="widget-group widget-group--wide">
+        <h3>Alerts</h3>
+        <div class="wk-alert wk-alert--success">Вода чиста — фильтр обновлён</div>
+        <div class="wk-alert wk-alert--warning">Влажность 85% — включить осушение?</div>
+        <div class="wk-alert wk-alert--error">Утечка обнаружена в секторе B</div>
+        <div class="wk-alert wk-alert--info">Расписание полива обновлено</div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Badges</h3>
+        <div class="wk-badges">
+          <span class="wk-badge">Eco</span>
+          <span class="wk-badge wk-badge--lime">Pure</span>
+          <span class="wk-badge">A+</span>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Tooltip</h3>
+        <div class="wk-tooltip-wrap" data-tip="Фильтр меняется раз в 6 месяцев">
+          <button type="button" class="wk-tooltip-trigger">О фильтре</button>
+        </div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Inputs</h3>
+        <input type="text" class="wk-input" placeholder="Ваш email">
+        <textarea class="wk-textarea" placeholder="Сообщение..."></textarea>
+      </div>
+
+      <div class="widget-group">
+        <h3>Select</h3>
+        <div class="wk-select">
+          <select>
+            <option>Холодная вода</option>
+            <option>Тёплая вода</option>
+            <option>Обратный осмос</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Checkboxes</h3>
+        <div class="wk-check-group">
+          <label class="wk-check"><input type="checkbox" checked><span class="wk-check-orb"></span>Экорежим</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-orb"></span>Ночной режим</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-orb"></span>Уведомления</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Radio</h3>
+        <div class="wk-radio-group">
+          <label class="wk-radio"><input type="radio" name="fa-mode" checked><span class="wk-radio-orb"></span>Авто</label>
+          <label class="wk-radio"><input type="radio" name="fa-mode"><span class="wk-radio-orb"></span>Ручной</label>
+          <label class="wk-radio"><input type="radio" name="fa-mode"><span class="wk-radio-orb"></span>Отпуск</label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Toggle</h3>
+        <div class="wk-toggle-row">
+          <span>Подсветка резервуара</span>
+          <label class="wk-toggle"><input type="checkbox" checked><span class="wk-toggle-dot"></span></label>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Range</h3>
+        <input type="range" class="wk-range" min="0" max="100" value="58">
+      </div>
+
+      <div class="widget-group">
+        <h3>Progress</h3>
+        <div class="wk-progress"><div class="wk-progress-fill"></div></div>
+      </div>
+
+      <div class="widget-group widget-group--wide">
+        <h3>Tabs</h3>
+        <div class="wk-tabs">
+          <input type="radio" name="fa-tabs" id="fa-tab1" checked>
+          <input type="radio" name="fa-tabs" id="fa-tab2">
+          <input type="radio" name="fa-tabs" id="fa-tab3">
+          <div class="wk-tab-labels">
+            <label for="fa-tab1">Статус</label>
+            <label for="fa-tab2">Фильтры</label>
+            <label for="fa-tab3">История</label>
+          </div>
+          <div class="wk-tab-panels">
+            <div class="wk-tab-panel">Резервуар: 78% — качество воды отличное, TDS 42 ppm.</div>
+            <div class="wk-tab-panel">Основной фильтр: осталось 4 месяца. Предфильтр: 1 месяц.</div>
+            <div class="wk-tab-panel">Последняя замена: 12 мая. Проверок за неделю: 34.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Pagination</h3>
+        <div class="wk-pagination">
+          <a href="#" class="wk-page">‹</a>
+          <a href="#" class="wk-page wk-page--active">1</a>
+          <a href="#" class="wk-page">2</a>
+          <a href="#" class="wk-page">3</a>
+          <a href="#" class="wk-page">›</a>
+        </div>
+      </div>
+
+      <div class="widget-group">
+        <h3>Modal</h3>
+        <button type="button" class="wk-btn" data-open-modal="fa-modal">Заказать</button>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="modal" id="fa-modal">
+    <div class="modal-inner">
+      <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
+      <h2>Заказ воды</h2>
+      <div class="wk-select" style="margin-bottom:16px;">
+        <select><option>Бутыль 19 л — доставка завтра</option><option>Пакет 6×1,5 л</option></select>
+      </div>
+      <label class="wk-check" style="display:flex;margin-bottom:8px;"><input type="checkbox" checked><span class="wk-check-orb"></span>Позвонить за час</label>
+      <button type="button" class="wk-btn" style="margin-top:16px;width:100%;">Подтвердить</button>
+    </div>
+  </dialog>
+
+  <footer class="footer">© 2026 AquaFlow · Frutiger Aero Y2K Template</footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
+      btn.addEventListener('click', function() { document.getElementById(btn.dataset.openModal).showModal(); });
+    });
+    document.querySelectorAll('.modal-close-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { btn.closest('dialog').close(); });
+    });
+    document.querySelectorAll('.wk-select').forEach(function(wrap) {
+      var sel = wrap.querySelector('select');
+      wrap.addEventListener('click', function(e) {
+        if (e.target === sel) return;
+        sel.focus();
+        if (typeof sel.showPicker === 'function') sel.showPicker();
+        else sel.click();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # HTML Design Templates 2025–2026
 
-Коллекция из **15 самодостаточных UI-тем** — каждая тема это один `index.html` с встроенным CSS и Google Fonts. Без сборки, без npm, без фреймворков.
+Коллекция из **19 самодостаточных UI-тем** — каждая тема это один `index.html` с встроенным CSS и Google Fonts. Без сборки, без npm, без фреймворков.
 
 Откройте [`index.html`](index.html) в браузере — там навигация по всем темам.
 
@@ -23,10 +23,14 @@ HTMLDesign/
 ├── 12/                 # Light SaaS
 ├── 13/                 # Earth Warm
 ├── 14/                 # Corporate Strict
-└── 15/                 # AI Gradient
+├── 15/                 # AI Gradient
+├── 16/                 # Terminal CRT
+├── 17/                 # Art Deco Luxe
+├── 18/                 # Wabi-Sabi Zen
+└── 19/                 # Frutiger Aero Y2K
 ```
 
-Нумерация папок **01–15** совпадает с порядком на главной странице.
+Нумерация папок **01–19** совпадает с порядком на главной странице.
 
 ## Темы
 
@@ -47,6 +51,10 @@ HTMLDesign/
 | 13  | Earth Warm         | Terracotta / slow living  | Earth checkbox, pill tabs                                |
 | 14  | Corporate Strict   | Строгий корпоративный B2B | Navy, IBM Plex Sans, border-left alerts, square controls |
 | 15  | AI Gradient        | AI / tech 2026            | Gradient accents, glassmorphism, modern AI aesthetic     |
+| 16  | Terminal CRT       | Ретро-терминал, фосфор    | Сканлайны, glow, ASCII-префиксы `[OK]`/`[FAIL]`, cursor  |
+| 17  | Art Deco Luxe      | Золото + графит, 1920-е   | Marcellus антиква, double-border, ромбовидный range      |
+| 18  | Wabi-Sabi Zen      | Японский минимализм       | Underline всё, Noto Serif JP, «мох/глина», 999px кнопки  |
+| 19  | Frutiger Aero Y2K  | Аква-глосс 2000-х         | Пузыри, aqua/lime-градиенты, backdrop-blur, float-анимация |
 
 ## Widget Kit
 
