@@ -53,7 +53,7 @@ HTMLDesign/
 | 15  | AI Gradient        | AI / tech 2026            | Gradient accents, glassmorphism, modern AI aesthetic     |
 | 16  | Terminal CRT       | Ретро-терминал, фосфор    | Сканлайны, glow, ASCII-префиксы `[OK]`/`[FAIL]`, cursor  |
 | 17  | Art Deco Luxe      | Золото + графит, 1920-е   | Marcellus антиква, double-border, ромбовидный range      |
-| 18  | Wabi-Sabi Zen      | Японский минимализм       | Underline всё, Noto Serif JP, «мох/глина», 999px кнопки  |
+| 18  | Malachite Gold     | Малахит + золото, неоморфизм | Каплевидные орбы, морфинг blob, 3D-тени, shimmer-прогресс |
 | 19  | Frutiger Aero Y2K  | Аква-глосс 2000-х         | Пузыри, aqua/lime-градиенты, backdrop-blur, float-анимация |
 
 ## Widget Kit

@@ -3,80 +3,154 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wabi-Sabi Zen — UI Kit 2026</title>
+  <title>Malachite Gold — UI Kit 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f4f1ec;
-      --surface: #faf8f4;
-      --text: #3a3733;
-      --muted: #8c867c;
-      --ink: #56514a;
-      --moss: #7a8b6f;
-      --clay: #b08d6e;
-      --line: rgba(58, 55, 51, 0.14);
-      --radius: 3px;
+      --bg: #14171a;
+      --bg-deep: #0e1114;
+      --surface: #1c2126;
+      --surface-raised: #232a30;
+      --text: #e8e4dc;
+      --muted: #8f958f;
+      --gold: #c9a45c;
+      --gold-bright: #e6c886;
+      --gold-deep: #9a7a3c;
+      --malachite: #17806d;
+      --malachite-deep: #0d5c4e;
+      --malachite-light: #2aa38c;
+      --line: rgba(201, 164, 92, 0.22);
+      --radius: 22px;
+      --shadow-soft: 12px 12px 28px rgba(0, 0, 0, 0.45), -8px -8px 20px rgba(255, 255, 255, 0.03);
     }
 
     body {
-      font-family: "Zen Kaku Gothic New", system-ui, sans-serif;
+      font-family: "Manrope", system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.8;
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
-    ::selection { background: var(--moss); color: var(--bg); }
+    ::selection { background: var(--malachite); color: #fff; }
+
+    /* Floating ambient blobs */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .blob--malachite {
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, var(--malachite) 0%, transparent 70%);
+      top: -160px; left: -140px;
+      animation: drift 18s ease-in-out infinite;
+    }
+
+    .blob--gold {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, var(--gold-deep) 0%, transparent 70%);
+      bottom: -140px; right: -120px;
+      animation: drift 22s ease-in-out infinite reverse;
+    }
+
+    @keyframes drift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(60px, 40px) scale(1.12); }
+      66% { transform: translate(-40px, -30px) scale(0.94); }
+    }
+
+    .page { position: relative; z-index: 1; }
 
     .header {
-      max-width: 920px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 28px 32px;
+      padding: 24px 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .logo {
-      font-family: "Noto Serif JP", serif;
-      font-size: 1.125rem;
-      color: var(--ink);
-      letter-spacing: 0.35em;
+      font-family: "Playfair Display", serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+
+    .logo::after {
+      content: "";
+      display: inline-block;
+      width: 10px; height: 10px;
+      margin-left: 10px;
+      background: radial-gradient(circle at 30% 30%, var(--malachite-light), var(--malachite-deep));
+      border-radius: 60% 40% 55% 45% / 55% 60% 40% 45%;
+      box-shadow: 0 0 12px rgba(42, 163, 140, 0.5);
+      animation: morph 8s ease-in-out infinite;
+    }
+
+    @keyframes morph {
+      0%, 100% { border-radius: 60% 40% 55% 45% / 55% 60% 40% 45%; transform: rotate(0deg); }
+      50% { border-radius: 45% 55% 40% 60% / 60% 45% 55% 40%; transform: rotate(180deg); }
     }
 
     .hero {
-      max-width: 920px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 56px 32px 48px;
+      padding: 64px 32px 56px;
+      text-align: center;
     }
 
-    .hero .jp {
-      font-family: "Noto Serif JP", serif;
-      font-size: 0.9375rem;
-      color: var(--muted);
-      letter-spacing: 0.3em;
-      margin-bottom: 18px;
+    .hero .orb {
+      width: 120px; height: 120px;
+      margin: 0 auto 28px;
+      background: radial-gradient(circle at 32% 28%, rgba(42, 163, 140, 0.95) 0%, var(--malachite-deep) 45%, var(--bg-deep) 100%);
+      border-radius: 58% 42% 62% 38% / 45% 58% 42% 55%;
+      box-shadow:
+        var(--shadow-soft),
+        0 0 60px rgba(23, 128, 109, 0.35),
+        inset 0 2px 6px rgba(255, 255, 255, 0.25);
+      animation: morph 12s ease-in-out infinite;
+      position: relative;
+    }
+
+    .hero .orb::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1.5px solid rgba(201, 164, 92, 0.45);
+      border-radius: inherit;
     }
 
     .hero h1 {
-      font-family: "Noto Serif JP", serif;
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      margin-bottom: 18px;
-      max-width: 16ch;
-      color: var(--ink);
-      line-height: 1.4;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 4.5vw, 2.875rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      background: linear-gradient(105deg, var(--gold-bright) 20%, var(--gold) 45%, var(--malachite-light) 75%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .hero p { color: var(--muted); max-width: 460px; font-size: 0.9375rem; }
+    .hero p { color: var(--muted); max-width: 540px; margin: 0 auto; font-size: 1rem; }
 
-    .widget-kit { max-width: 920px; margin: 0 auto; padding: 0 32px 88px; }
-    .widget-kit > h2 { font-family: "Noto Serif JP", serif; font-size: 1.0625rem; font-weight: 500; margin-bottom: 4px; color: var(--ink); letter-spacing: 0.2em; }
-    .widget-kit > p { color: var(--muted); margin-bottom: 32px; font-size: 0.875rem; }
+    .widget-kit { max-width: 1000px; margin: 0 auto; padding: 0 32px 88px; }
+    .widget-kit > h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.375rem; font-weight: 600; margin-bottom: 6px; color: var(--gold);
+    }
+    .widget-kit > p { color: var(--muted); margin-bottom: 32px; }
 
     .widget-grid {
       display: flex;
@@ -87,103 +161,117 @@
     .widget-group {
       flex: 1 1 280px;
       max-width: 100%;
-      background: var(--surface);
+      background: linear-gradient(160deg, var(--surface-raised), var(--surface));
       border-radius: var(--radius);
       padding: 26px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(201, 164, 92, 0.14);
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
+    }
+
+    .widget-group:hover {
+      transform: translateY(-4px);
+      box-shadow: 16px 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(23, 128, 109, 0.12);
     }
 
     .widget-group--wide { flex: 1 1 100%; }
 
     .widget-group h3 {
       font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
+      font-weight: 700;
       text-transform: uppercase;
-      color: var(--muted);
+      letter-spacing: 0.16em;
+      color: var(--gold);
       margin-bottom: 16px;
     }
 
     .wk-alert {
-      padding: 12px 18px;
-      border-radius: var(--radius);
+      padding: 13px 18px;
+      border-radius: 18px 18px 18px 6px;
       margin-bottom: 10px;
       font-size: 0.875rem;
-      border: none;
-      border-left: 2px solid;
-      background: transparent;
+      font-weight: 500;
+      border: 1px solid;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
     }
 
     .wk-alert:last-child { margin-bottom: 0; }
-    .wk-alert--success { border-color: var(--moss); color: var(--ink); background: rgba(122, 139, 111, 0.08); }
-    .wk-alert--warning { border-color: var(--clay); color: var(--ink); background: rgba(176, 141, 110, 0.08); }
-    .wk-alert--error { border-color: #a8695e; color: var(--ink); background: rgba(168, 105, 94, 0.08); }
-    .wk-alert--info { border-color: var(--muted); color: var(--muted); background: rgba(140, 134, 124, 0.06); }
+    .wk-alert--success { background: rgba(23, 128, 109, 0.22); border-color: rgba(42, 163, 140, 0.45); color: #7fd4c3; }
+    .wk-alert--warning { background: rgba(201, 164, 92, 0.14); border-color: rgba(201, 164, 92, 0.4); color: var(--gold-bright); }
+    .wk-alert--error { background: rgba(180, 80, 70, 0.16); border-color: rgba(210, 110, 100, 0.4); color: #eda89e; }
+    .wk-alert--info { background: rgba(143, 149, 143, 0.1); border-color: rgba(143, 149, 143, 0.3); color: var(--muted); }
 
     .wk-badges { display: flex; flex-wrap: wrap; gap: 8px; }
 
     .wk-badge {
-      padding: 4px 14px;
+      padding: 6px 16px;
       border-radius: 999px;
       font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      background: transparent;
-      color: var(--moss);
-      border: 1px solid rgba(122, 139, 111, 0.4);
+      font-weight: 700;
+      background: linear-gradient(180deg, var(--malachite-light), var(--malachite-deep));
+      color: #fff;
+      border: 1px solid rgba(42, 163, 140, 0.5);
+      box-shadow: 0 4px 12px rgba(13, 92, 78, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
     }
 
-    .wk-badge--clay {
-      color: var(--clay);
-      border-color: rgba(176, 141, 110, 0.45);
+    .wk-badge--gold {
+      background: linear-gradient(180deg, var(--gold-bright), var(--gold-deep));
+      border-color: rgba(201, 164, 92, 0.6);
+      color: #1a1509;
+      box-shadow: 0 4px 12px rgba(154, 122, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.45);
     }
 
     .wk-input, .wk-textarea {
       width: 100%;
-      padding: 12px 2px;
-      border-radius: 0;
-      border: none;
-      border-bottom: 1px solid var(--line);
-      background: transparent;
+      padding: 13px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(201, 164, 92, 0.18);
+      background: var(--bg-deep);
       font-family: inherit;
       font-size: 0.9375rem;
       color: var(--text);
       outline: none;
-      transition: border-color 0.3s;
+      box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.4), inset -3px -3px 8px rgba(255, 255, 255, 0.03);
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
 
     .wk-input::placeholder, .wk-textarea::placeholder { color: var(--muted); }
-    .wk-input:focus, .wk-textarea:focus { border-bottom-color: var(--ink); }
+    .wk-input:focus, .wk-textarea:focus {
+      border-color: var(--malachite);
+      box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.4), 0 0 0 3px rgba(23, 128, 109, 0.18);
+    }
 
-    .wk-textarea { min-height: 80px; resize: vertical; margin-top: 10px; }
+    .wk-textarea { border-radius: 22px 22px 22px 8px; min-height: 84px; resize: vertical; margin-top: 10px; }
 
     .wk-select { position: relative; }
 
     .wk-select select {
       width: 100%;
-      padding: 12px 40px 12px 2px;
-      border-radius: 0;
-      border: none;
-      border-bottom: 1px solid var(--line);
-      background: transparent;
+      padding: 13px 44px 13px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(201, 164, 92, 0.18);
+      background: var(--bg-deep);
       color: var(--text);
       font-family: inherit;
       font-size: 0.9375rem;
       appearance: none;
       cursor: pointer;
       outline: none;
-      color-scheme: light;
+      color-scheme: dark;
+      box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.4);
     }
 
     .wk-select select option { background: var(--surface); color: var(--text); }
 
     .wk-select::after {
-      content: "〳";
+      content: "";
       position: absolute;
-      right: 6px;
+      right: 20px;
       top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
+      width: 9px; height: 9px;
+      border-right: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      transform: translateY(-65%) rotate(45deg);
       pointer-events: none;
     }
 
@@ -199,56 +287,61 @@
 
     .wk-check input, .wk-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
 
-    .wk-check-ring {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 1px solid var(--muted);
+    .wk-check-orb {
+      width: 22px; height: 22px;
+      border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%;
+      background: var(--bg-deep);
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45), inset 1px 1px 2px rgba(255, 255, 255, 0.08);
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--moss);
-      font-size: 0.6875rem;
-      transition: background 0.3s, border-color 0.3s;
+      transition: border-radius 0.35s, background 0.35s;
     }
 
-    .wk-check input:checked + .wk-check-ring {
-      background: var(--moss);
-      border-color: var(--moss);
-      color: var(--bg);
-    }
-
-    .wk-check input:checked + .wk-check-ring::after { content: "●"; font-size: 0.5625rem; }
-
-    .wk-radio-dot {
-      width: 18px;
-      height: 18px;
+    .wk-check input:checked + .wk-check-orb {
+      background: radial-gradient(circle at 32% 28%, var(--malachite-light), var(--malachite-deep));
       border-radius: 50%;
-      border: 1px solid var(--muted);
+      box-shadow: 0 4px 14px rgba(23, 128, 109, 0.45);
+    }
+
+    .wk-check input:checked + .wk-check-orb::after {
+      content: "";
+      width: 6px; height: 10px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg) translateY(-1px);
+    }
+
+    .wk-radio-orb {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--bg-deep);
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45), inset 1px 1px 2px rgba(255, 255, 255, 0.08);
       position: relative;
       flex-shrink: 0;
-      transition: border-color 0.3s;
+      transition: box-shadow 0.3s;
     }
 
-    .wk-radio input:checked + .wk-radio-dot { border-color: var(--clay); }
+    .wk-radio input:checked + .wk-radio-orb { box-shadow: 0 4px 14px rgba(201, 164, 92, 0.4); }
 
-    .wk-radio input:checked + .wk-radio-dot::after {
+    .wk-radio input:checked + .wk-radio-orb::after {
       content: "";
       position: absolute;
-      inset: 4px;
+      inset: 5px;
       border-radius: 50%;
-      background: var(--clay);
+      background: radial-gradient(circle at 35% 30%, var(--gold-bright), var(--gold-deep));
     }
 
     .wk-toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: 0.9375rem; }
 
     .wk-toggle {
       position: relative;
-      width: 42px;
-      height: 22px;
+      width: 54px;
+      height: 30px;
       border-radius: 999px;
-      background: rgba(140, 134, 124, 0.25);
+      background: var(--bg-deep);
+      box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.45), inset -2px -2px 6px rgba(255, 255, 255, 0.03);
       transition: background 0.3s;
     }
 
@@ -256,129 +349,155 @@
 
     .wk-toggle-dot {
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 16px;
-      height: 16px;
+      top: 4px;
+      left: 4px;
+      width: 22px; height: 22px;
       border-radius: 50%;
-      background: var(--surface);
-      box-shadow: 0 1px 4px rgba(58, 55, 51, 0.15);
-      transition: left 0.3s;
+      background: linear-gradient(160deg, #3a4249, #262d33);
+      box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      transition: left 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s;
     }
 
-    .wk-toggle input:checked ~ .wk-toggle-dot { left: calc(100% - 19px); }
-    .wk-toggle input:checked ~ .wk-toggle-dot::before { content: ""; }
-    .wk-toggle:has(input:checked) { background: var(--moss); }
+    .wk-toggle input:checked ~ .wk-toggle-dot {
+      left: calc(100% - 26px);
+      background: radial-gradient(circle at 32% 28%, var(--malachite-light), var(--malachite-deep));
+    }
 
     .wk-range {
       width: 100%;
-      height: 1px;
+      height: 8px;
       appearance: none;
-      background: var(--line);
+      border-radius: 999px;
+      background: var(--bg-deep);
+      box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.5);
       outline: none;
     }
 
     .wk-range::-webkit-slider-thumb {
       appearance: none;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--ink);
-      border: 4px solid var(--surface);
-      box-shadow: 0 0 0 1px var(--line);
+      width: 24px; height: 24px;
+      border-radius: 45% 55% 50% 50% / 50% 45% 55% 50%;
+      background: linear-gradient(150deg, var(--gold-bright), var(--gold-deep));
+      border: 1px solid rgba(201, 164, 92, 0.6);
+      box-shadow: 0 4px 14px rgba(154, 122, 60, 0.45);
       cursor: pointer;
+      transition: border-radius 0.3s;
     }
 
+    .wk-range::-webkit-slider-thumb:hover { border-radius: 50%; }
+
     .wk-range::-moz-range-thumb {
-      width: 12px;
-      height: 12px;
+      width: 24px; height: 24px;
       border-radius: 50%;
-      border: none;
-      background: var(--ink);
+      border: 1px solid rgba(201, 164, 92, 0.6);
+      background: linear-gradient(150deg, var(--gold-bright), var(--gold-deep));
       cursor: pointer;
     }
 
     .wk-progress {
-      height: 2px;
-      background: rgba(140, 134, 124, 0.2);
+      height: 12px;
+      border-radius: 999px;
+      background: var(--bg-deep);
+      box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.5);
       overflow: hidden;
     }
 
     .wk-progress-fill {
       height: 100%;
       width: 58%;
-      background: var(--moss);
-      transition: width 0.5s;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--malachite-deep), var(--malachite-light) 55%, var(--gold));
+      background-size: 200% 100%;
+      animation: shimmer 3.5s ease-in-out infinite;
+      box-shadow: 0 0 14px rgba(42, 163, 140, 0.4);
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 0; }
+      50% { background-position: 100% 0; }
     }
 
     .wk-tabs input { position: absolute; opacity: 0; pointer-events: none; }
 
     .wk-tab-labels {
       display: flex;
-      gap: 28px;
-      margin-bottom: 18px;
+      gap: 8px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
 
     .wk-tab-labels label {
-      padding: 4px 0;
-      font-size: 0.875rem;
-      letter-spacing: 0.12em;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 0.8125rem;
+      font-weight: 700;
       cursor: pointer;
       color: var(--muted);
-      border-bottom: 1px solid transparent;
-      transition: color 0.3s, border-color 0.3s;
+      background: var(--bg-deep);
+      border: 1px solid rgba(201, 164, 92, 0.16);
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+      transition: color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s;
     }
 
-    #wz-tab1:checked ~ .wk-tab-labels label[for="wz-tab1"],
-    #wz-tab2:checked ~ .wk-tab-labels label[for="wz-tab2"],
-    #wz-tab3:checked ~ .wk-tab-labels label[for="wz-tab3"] {
-      color: var(--ink);
-      border-bottom-color: var(--ink);
+    .wk-tab-labels label:hover { transform: translateY(-2px); color: var(--text); }
+
+    #mg-tab1:checked ~ .wk-tab-labels label[for="mg-tab1"],
+    #mg-tab2:checked ~ .wk-tab-labels label[for="mg-tab2"],
+    #mg-tab3:checked ~ .wk-tab-labels label[for="mg-tab3"] {
+      background: linear-gradient(180deg, var(--malachite-light), var(--malachite-deep));
+      color: #fff;
+      border-color: rgba(42, 163, 140, 0.55);
+      box-shadow: 0 6px 18px rgba(13, 92, 78, 0.45);
+      transform: translateY(-2px);
     }
 
-    .wk-tab-panel { display: none; font-size: 0.875rem; color: var(--muted); line-height: 1.9; }
+    .wk-tab-panel { display: none; font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
 
-    #wz-tab1:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
-    #wz-tab2:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
-    #wz-tab3:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) { display: block; }
+    #mg-tab1:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(1),
+    #mg-tab2:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(2),
+    #mg-tab3:checked ~ .wk-tab-panels .wk-tab-panel:nth-child(3) { display: block; }
 
-    .wk-pagination { display: flex; gap: 10px; }
+    .wk-pagination { display: flex; gap: 8px; }
 
     .wk-page {
-      min-width: 36px;
-      height: 36px;
+      min-width: 42px;
+      height: 42px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
+      font-weight: 700;
       font-size: 0.875rem;
       text-decoration: none;
       color: var(--muted);
-      border: 1px solid transparent;
-      transition: color 0.3s, border-color 0.3s;
+      background: linear-gradient(160deg, var(--surface-raised), var(--bg-deep));
+      border: 1px solid rgba(201, 164, 92, 0.16);
+      box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.45), -2px -2px 6px rgba(255, 255, 255, 0.03);
+      transition: color 0.3s, transform 0.3s, box-shadow 0.3s;
     }
 
-    .wk-page:hover { color: var(--ink); }
+    .wk-page:hover { color: var(--gold-bright); transform: translateY(-3px); }
 
     .wk-page--active {
-      color: var(--bg);
-      background: var(--ink);
-      border-color: var(--ink);
+      background: linear-gradient(160deg, var(--gold-bright), var(--gold-deep));
+      color: #1a1509;
+      border-color: rgba(201, 164, 92, 0.6);
+      box-shadow: 0 6px 18px rgba(154, 122, 60, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.4);
     }
 
     .wk-tooltip-wrap { position: relative; display: inline-block; }
 
     .wk-tooltip-trigger {
-      padding: 10px 22px;
+      padding: 11px 24px;
       border-radius: 999px;
-      background: transparent;
-      border: 1px solid var(--line);
-      color: var(--ink);
+      background: linear-gradient(160deg, var(--surface-raised), var(--bg-deep));
+      border: 1px solid rgba(201, 164, 92, 0.2);
+      color: var(--gold);
       font-family: inherit;
-      letter-spacing: 0.08em;
+      font-weight: 700;
       font-size: 0.875rem;
       cursor: help;
+      box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.45);
     }
 
     .wk-tooltip-wrap::after {
@@ -387,159 +506,181 @@
       bottom: calc(100% + 10px);
       left: 50%;
       transform: translateX(-50%);
-      padding: 8px 16px;
-      background: var(--ink);
-      color: var(--bg);
-      border-radius: 2px;
+      padding: 9px 16px;
+      background: linear-gradient(160deg, var(--malachite-light), var(--malachite-deep));
+      color: #fff;
+      border-radius: 14px 14px 14px 4px;
       font-size: 0.75rem;
-      letter-spacing: 0.05em;
+      font-weight: 600;
       white-space: nowrap;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s;
+      transition: opacity 0.3s, transform 0.3s;
+      box-shadow: 0 8px 24px rgba(13, 92, 78, 0.45);
       z-index: 10;
     }
 
-    .wk-tooltip-wrap:hover::after { opacity: 1; }
+    .wk-tooltip-wrap:hover::after { opacity: 1; transform: translateX(-50%) translateY(-4px); }
 
     .wk-btn {
-      padding: 12px 32px;
+      padding: 13px 28px;
       border-radius: 999px;
-      border: 1px solid var(--ink);
-      background: var(--ink);
-      color: var(--bg);
+      border: 1px solid rgba(42, 163, 140, 0.55);
+      background: linear-gradient(180deg, var(--malachite-light), var(--malachite-deep));
+      color: #fff;
       font-family: inherit;
-      letter-spacing: 0.14em;
+      font-weight: 800;
       font-size: 0.875rem;
       cursor: pointer;
-      transition: background 0.3s, color 0.3s;
+      box-shadow: 0 8px 22px rgba(13, 92, 78, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s, filter 0.3s;
     }
 
-    .wk-btn:hover { background: transparent; color: var(--ink); }
+    .wk-btn:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.1);
+      box-shadow: 0 12px 30px rgba(13, 92, 78, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .wk-btn:active { transform: translateY(-1px); }
+
+    .wk-btn--gold {
+      background: linear-gradient(180deg, var(--gold-bright), var(--gold-deep));
+      border-color: rgba(201, 164, 92, 0.6);
+      color: #1a1509;
+      box-shadow: 0 8px 22px rgba(154, 122, 60, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
 
     .wk-btn--ghost {
-      background: transparent;
-      color: var(--ink);
-      border-color: var(--line);
+      background: var(--bg-deep);
+      color: var(--gold);
+      border: 1px solid rgba(201, 164, 92, 0.25);
+      box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.45);
     }
 
-    .wk-btn--ghost:hover { border-color: var(--ink); }
+    .wk-btn--ghost:hover { box-shadow: 5px 5px 14px rgba(0, 0, 0, 0.55), 0 0 16px rgba(201, 164, 92, 0.15); }
 
-    .modal::backdrop { background: rgba(58, 55, 51, 0.35); }
+    .modal::backdrop { background: rgba(10, 13, 15, 0.7); backdrop-filter: blur(6px); }
 
     .modal {
-      border: none;
-      border-radius: var(--radius);
+      border: 1px solid rgba(201, 164, 92, 0.3);
+      border-radius: 26px 26px 26px 10px;
       padding: 0;
-      max-width: 400px;
+      max-width: 430px;
       width: calc(100% - 32px);
-      background: var(--surface);
-      box-shadow: 0 24px 64px rgba(58, 55, 51, 0.14);
+      background: linear-gradient(165deg, var(--surface-raised), var(--surface));
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 50px rgba(23, 128, 109, 0.15);
     }
 
-    .modal-inner { padding: 32px; position: relative; }
+    .modal-inner { padding: 30px; position: relative; }
 
     .modal-close {
       position: absolute;
       top: 16px;
       right: 16px;
-      width: 30px;
-      height: 30px;
+      width: 34px; height: 34px;
       border-radius: 50%;
-      border: none;
-      background: transparent;
+      border: 1px solid rgba(201, 164, 92, 0.25);
+      background: var(--bg-deep);
       color: var(--muted);
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 1.125rem;
+      box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.45);
+      transition: color 0.3s, border-color 0.3s;
     }
 
-    .modal-close:hover { color: var(--ink); }
+    .modal-close:hover { color: var(--gold-bright); border-color: var(--gold); }
 
     .modal h2 {
-      font-family: "Noto Serif JP", serif;
-      font-size: 1.0625rem;
-      font-weight: 500;
+      font-family: "Playfair Display", serif;
+      font-size: 1.25rem;
+      font-weight: 600;
       margin-bottom: 18px;
-      letter-spacing: 0.12em;
-      color: var(--ink);
+      color: var(--gold);
     }
 
     .footer {
       text-align: center;
       padding: 32px;
       color: var(--muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
+      font-size: 0.8125rem;
+      border-top: 1px solid rgba(201, 164, 92, 0.12);
     }
 
   /* Mobile adaptation */
   @media (max-width: 768px) {
-    .header { flex-wrap: wrap; gap: 12px; padding: 18px 20px; }
-    .hero { padding: 40px 20px 32px; }
+    .header { flex-wrap: wrap; gap: 12px; padding: 16px 20px; }
+    .hero { padding: 44px 20px 36px; }
+    .hero .orb { width: 92px; height: 92px; }
     .widget-kit { padding: 0 20px 64px; }
     .footer { padding: 20px; text-align: center; }
     .widget-grid { gap: 16px; }
-    .widget-group { flex: 1 1 100%; }
+    .widget-group { flex: 1 1 100%; padding: 20px; }
     .wk-badges { gap: 6px; }
-    .wk-tab-labels { flex-wrap: wrap; gap: 16px; }
+    .wk-tab-labels { flex-wrap: wrap; }
     .modal { width: calc(100% - 24px); }
+    .blob { filter: blur(60px); opacity: 0.25; }
   }
   </style>
 </head>
 <body>
+  <div class="blob blob--malachite"></div>
+  <div class="blob blob--gold"></div>
+
+  <div class="page">
   <header class="header">
-    <div class="logo">侘 寂</div>
-    <a href="#" class="wk-btn wk-btn--ghost">войти</a>
+    <div class="logo">Malachite &amp; Gold</div>
+    <a href="#" class="wk-btn wk-btn--ghost">Войти</a>
   </header>
 
   <section class="hero">
-    <p class="jp">侘寂 — красота несовершенства</p>
-    <h1>Тишина, тушь и воздух</h1>
-    <p>Японский минимализм: тёплый белый, след туши, асимметрия и много пустого пространства. Для чайных домов, галерей, спа и всех, кто говорит тихо.</p>
+    <div class="orb"></div>
+    <h1>Глубина камня, вес металла</h1>
+    <p>Объёмные формы, мягкие тени и живые метаморфозы: малахит и золото на графите. Для премиум-брендов, финансовых сервисов и всех, кто ценит основательность.</p>
   </section>
 
   <section class="widget-kit">
     <h2>Widget Kit</h2>
-    <p>компоненты в палитре туши и мха</p>
+    <p>Компоненты в палитре малахита и золота</p>
 
     <div class="widget-grid">
       <div class="widget-group widget-group--wide">
         <h3>Alerts</h3>
-        <div class="wk-alert wk-alert--success">Чай заварен — три минуты до готовности</div>
-        <div class="wk-alert wk-alert--warning">Последняя чашка из этой партии</div>
-        <div class="wk-alert wk-alert--error">Печь остыла — нужно время</div>
-        <div class="wk-alert wk-alert--info">В саду цветёт слива — короткий сезон</div>
+        <div class="wk-alert wk-alert--success">Сделка подтверждена — средства зачислены</div>
+        <div class="wk-alert wk-alert--warning">Курс изменился — проверьте условия</div>
+        <div class="wk-alert wk-alert--error">Платёж отклонён банком</div>
+        <div class="wk-alert wk-alert--info">Отчёт за квартал доступен в кабинете</div>
       </div>
 
       <div class="widget-group">
         <h3>Badges</h3>
         <div class="wk-badges">
-          <span class="wk-badge">сезонное</span>
-          <span class="wk-badge wk-badge--clay">ручная работа</span>
-          <span class="wk-badge">лимит</span>
+          <span class="wk-badge">Verified</span>
+          <span class="wk-badge wk-badge--gold">Premium</span>
+          <span class="wk-badge">Elite</span>
         </div>
       </div>
 
       <div class="widget-group">
         <h3>Tooltip</h3>
-        <div class="wk-tooltip-wrap" data-tip="Чайник: глиняный, обжиг 1280°">
-          <button type="button" class="wk-tooltip-trigger">о посуде</button>
+        <div class="wk-tooltip-wrap" data-tip="Комиссия 0,3% — для статуса Premium">
+          <button type="button" class="wk-tooltip-trigger">Тарифы</button>
         </div>
       </div>
 
       <div class="widget-group widget-group--wide">
         <h3>Inputs</h3>
-        <input type="text" class="wk-input" placeholder="ваше имя">
-        <textarea class="wk-textarea" placeholder="несколько слов о себе..."></textarea>
+        <input type="text" class="wk-input" placeholder="Номер договора">
+        <textarea class="wk-textarea" placeholder="Комментарий к операции..."></textarea>
       </div>
 
       <div class="widget-group">
         <h3>Select</h3>
         <div class="wk-select">
           <select>
-            <option>сенча</option>
-            <option>гёкуро</option>
-            <option>хо-дзича</option>
+            <option>Стандартный счёт</option>
+            <option>Металлический счёт</option>
+            <option>Инвестпортфель</option>
           </select>
         </div>
       </div>
@@ -547,25 +688,25 @@
       <div class="widget-group">
         <h3>Checkboxes</h3>
         <div class="wk-check-group">
-          <label class="wk-check"><input type="checkbox" checked><span class="wk-check-ring"></span>тихий зал</label>
-          <label class="wk-check"><input type="checkbox"><span class="wk-check-ring"></span>сад с видом</label>
-          <label class="wk-check"><input type="checkbox"><span class="wk-check-ring"></span>церемония целиком</label>
+          <label class="wk-check"><input type="checkbox" checked><span class="wk-check-orb"></span>Доверительное управление</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-orb"></span>Страхование вклада</label>
+          <label class="wk-check"><input type="checkbox"><span class="wk-check-orb"></span>Персональный аналитик</label>
         </div>
       </div>
 
       <div class="widget-group">
         <h3>Radio</h3>
         <div class="wk-radio-group">
-          <label class="wk-radio"><input type="radio" name="wz-seat" checked><span class="wk-radio-dot"></span>у окна</label>
-          <label class="wk-radio"><input type="radio" name="wz-seat"><span class="wk-radio-dot"></span>татами</label>
-          <label class="wk-radio"><input type="radio" name="wz-seat"><span class="wk-radio-dot"></span>кресло</label>
+          <label class="wk-radio"><input type="radio" name="mg-plan" checked><span class="wk-radio-orb"></span>Золотой</label>
+          <label class="wk-radio"><input type="radio" name="mg-plan"><span class="wk-radio-orb"></span>Малахитовый</label>
+          <label class="wk-radio"><input type="radio" name="mg-plan"><span class="wk-radio-orb"></span>Графитовый</label>
         </div>
       </div>
 
       <div class="widget-group">
         <h3>Toggle</h3>
         <div class="wk-toggle-row">
-          <span>напоминание</span>
+          <span>Уведомления об операциях</span>
           <label class="wk-toggle"><input type="checkbox" checked><span class="wk-toggle-dot"></span></label>
         </div>
       </div>
@@ -583,18 +724,18 @@
       <div class="widget-group widget-group--wide">
         <h3>Tabs</h3>
         <div class="wk-tabs">
-          <input type="radio" name="wz-tabs" id="wz-tab1" checked>
-          <input type="radio" name="wz-tabs" id="wz-tab2">
-          <input type="radio" name="wz-tabs" id="wz-tab3">
+          <input type="radio" name="mg-tabs" id="mg-tab1" checked>
+          <input type="radio" name="mg-tabs" id="mg-tab2">
+          <input type="radio" name="mg-tabs" id="mg-tab3">
           <div class="wk-tab-labels">
-            <label for="wz-tab1">чай</label>
-            <label for="wz-tab2">дом</label>
-            <label for="wz-tab3">путь</label>
+            <label for="mg-tab1">Портфель</label>
+            <label for="mg-tab2">Металлы</label>
+            <label for="mg-tab3">Отчёты</label>
           </div>
           <div class="wk-tab-panels">
-            <div class="wk-tab-panel">Сенча этого сезона — листья с плантации в Удзи, собраны вручную в мае.</div>
-            <div class="wk-tab-panel">Дом на склоне холма: соломенная крыша, глинобитные стены, вода из родника.</div>
-            <div class="wk-tab-panel">Путь мастера: сорок лет практики, каждый день — первый.</div>
+            <div class="wk-tab-panel">Портфель: доходность +12,4% за квартал, риск-профиль умеренный.</div>
+            <div class="wk-tab-panel">Драгметаллы: золото 2 640 $/oz, серебро 31,2 $/oz — обновлено сегодня.</div>
+            <div class="wk-tab-panel">Отчёты: 14 документов, декларация готова к подписанию.</div>
           </div>
         </div>
       </div>
@@ -612,24 +753,25 @@
 
       <div class="widget-group">
         <h3>Modal</h3>
-        <button type="button" class="wk-btn" data-open-modal="wz-modal">записаться</button>
+        <button type="button" class="wk-btn" data-open-modal="mg-modal">Открыть счёт</button>
       </div>
     </div>
   </section>
 
-  <dialog class="modal" id="wz-modal">
+  <dialog class="modal" id="mg-modal">
     <div class="modal-inner">
       <button type="button" class="modal-close modal-close-btn" aria-label="Закрыть">×</button>
-      <h2>Запись на церемонию</h2>
+      <h2>Открытие счёта</h2>
       <div class="wk-select" style="margin-bottom:16px;">
-        <select><option>суббота, 10:00</option><option>воскресенье, 16:00</option></select>
+        <select><option>Золотой тариф — 0,1% комиссия</option><option>Малахитовый тариф — 0,3%</option></select>
       </div>
-      <label class="wk-check"><input type="checkbox" checked><span class="wk-check-ring"></span>приду с открытым сердцем</label>
-      <button type="button" class="wk-btn" style="margin-top:18px;width:100%;">подтвердить</button>
+      <label class="wk-check" style="display:flex;margin-bottom:8px;"><input type="checkbox" checked><span class="wk-check-orb"></span>Согласен с условиями договора</label>
+      <button type="button" class="wk-btn wk-btn--gold" style="margin-top:18px;width:100%;">Подтвердить</button>
     </div>
   </dialog>
 
-  <footer class="footer">© 2026 侘寂 · Wabi-Sabi Zen Template</footer>
+  <footer class="footer">© 2026 Malachite &amp; Gold · Template 18</footer>
+  </div>
 
   <script>
     document.querySelectorAll('[data-open-modal]').forEach(function(btn) {
